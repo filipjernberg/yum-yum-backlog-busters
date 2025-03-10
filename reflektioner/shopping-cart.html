@@ -14,14 +14,16 @@
       <div class="logo--small">
         <!-- ändra till white mode när orderbekräftelsen dyker upp -->
         <img src="./resources/logo_outline_dark_yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-
-        <!-- ingen liten varukorg i övre hörnet på denna sida -->
       </div>
+
+      <!-- Varukorgen, såhär syns den som tom -->
       <section id="cartContainer" class="cart-container">
         <h2 class="cart__title">Din beställning</h2>
-        <h4 class="cart__subtitle">tidigare beställningar ></h4>
+        <a id="linkOrders" class="link" href="./orders.html">ORDERHISTORIK ></a>
         <p class="cart__paragraph">din varukorg är tom</p>
       </section>
+
+      <!-- Om beställning genomförs blir följande synligt -->
       <section id="orderConfirmation" class="order-confirmation">
         <img src="BILD PÅ TAKEAWAY" alt="Din order är bekräftad, bild på takeaway" />
         <h1 class="heading-one">DINA WONTONS TILLAGAS!</h1>
@@ -31,8 +33,8 @@
         <p class="order__paragraph">#hjf68jeu88</p>
         <!-- random sifferkombination som sparas? -->
 
-        <button id="newOrder" class="button button--dark">GÖR EN NY BESTÄLLNING</button>
-        <button id="seeReceipt" class="button button--light-outline">SE KVITTO</button>
+        <a href="./food-menu.html"><button id="newOrder" class="button button--dark">GÖR EN NY BESTÄLLNING</button></a>
+        <a href="./orders.html"><button id="seeReceipt" class="button button--light-outline">SE KVITTO</button></a>
       </section>
     </section>
     <footer id="tabBar" class="tab-bar">
