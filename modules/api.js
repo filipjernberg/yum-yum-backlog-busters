@@ -1,8 +1,6 @@
-async function fetchMenu() {
+export async function fetchMenu() {
   try {
-    const response = await fetch(
-      "https://santosnr6.github.io/Data/yumyumproducts.json"
-    );
+    const response = await fetch("https://santosnr6.github.io/Data/yumyumproducts.json");
     if (!response.ok) {
       throw new Error(`Fetch error: ${response.status}`);
     }
@@ -16,11 +14,9 @@ async function fetchMenu() {
   }
 }
 
-async function fetchUsers() {
+export async function fetchUsers() {
   try {
-    const response = await fetch(
-      "https://santosnr6.github.io/Data/yumyumusers.json"
-    );
+    const response = await fetch("https://santosnr6.github.io/Data/yumyumusers.json");
     if (!response.ok) {
       throw new Error(`Fetch error: ${response.status}`);
     }
@@ -33,5 +29,3 @@ async function fetchUsers() {
     return [];
   }
 }
-
-export { fetchMenu, fetchUsers };

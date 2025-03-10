@@ -20,10 +20,4 @@ function clearLocalStorage() {
   localStorage.clear();
 }
 
-export {
-  setLocalStorage,
-  getFromLocalStorage,
-  addToLocalStorage,
-  removeFromLocalStorage,
-  clearLocalStorage,
-};
+export { setLocalStorage, getFromLocalStorage, addToLocalStorage, removeFromLocalStorage, clearLocalStorage };
