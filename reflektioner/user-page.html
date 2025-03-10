@@ -19,17 +19,42 @@
       <section id="userContainer" class="user-container">
         <h1 id="userTitle" class="heading-one">Hej gäst!</h1>
         <form id="loginForm" class="login-form">
-        <figure> <!-- ikon för användare--></figure>
-        <label>
-          <input id="username" class="input-field" placeholder="Användarnamn" name="username" type="text" required>
-        </label>
+          <figure><!-- ikon för användare--></figure>
+          <label>
+            <input
+              id="username"
+              class="input-field"
+              placeholder="Användarnamn"
+              name="username"
+              type="text"
+              aria-label="Användarnamn"
+              required
+            />
+          </label>
 
+          <figure><!-- ikon för lösenord--></figure>
+          <label>
+            <input
+              id="userPassword"
+              class="input-field"
+              placeholder="Lösenord"
+              name="password"
+              type="password"
+              aria-label="lösenord"
+              required
+            />
+          </label>
+          <button class="button button--black">Logga in</button>
+        </form>
+      </section>
+    </section>
 
-        <figure> <!-- ikon för lösenord--></figure>
-        <label>
-          <input id="userPassword" class="input-field" placeholder="Lösenord" name="password" type="password" required>
-        </label>
-        <button class="button button--black">Logga in</button>
-      </form>
+    <footer id="tabBar" class="tab-bar">
+      <!-- Annan class beroende på ikon -->
+      <figure id="cutlerySymbol" class="cutlery-symbol"></figure>
+      <figure id="truckSymbol" class="truck-symbol"></figure>
+      <figure id="userSymbol" class="user-symbol"></figure>
+      <figure id="receiptSymbol" class="receipt-symbol"></figure>
+    </footer>
   </body>
 </html>
