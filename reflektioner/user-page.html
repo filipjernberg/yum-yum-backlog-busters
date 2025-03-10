@@ -7,19 +7,13 @@
     <script type="module" src="./script.js"></script>
     <link rel="stylesheet" href="./style.css" />
     <!-- Använda fontawesome? -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   </head>
   <body>
     <!-- Gästmode, inte inloggad. Då syns wrapperGuest -->
     <section id="wrapperGuest" class="wrapper">
       <div class="logo--small">
-        <img
-          src="./resources/logo_outline_dark_yygs.svg"
-          alt="Yum Yum Gimmie Sum logotyp"
-        />
+        <img src="./resources/logo_outline_dark_yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
       </div>
 
       <section id="userContainer" class="user-container">
@@ -50,9 +44,7 @@
               required
             />
           </label>
-          <button id="loginSubmit" class="button button--black">
-            Logga in
-          </button>
+          <button id="loginSubmit" class="button button--dark">Logga in</button>
         </form>
       </section>
       <p class="user__paragraph">Glömt lösenord?</p>
@@ -65,10 +57,7 @@
 
     <section id="wrapperRegister" class="wrapper">
       <div class="logo--small">
-        <img
-          src="./resources/logo_outline_dark_yygs.svg"
-          alt="Yum Yum Gimmie Sum logotyp"
-        />
+        <img src="./resources/logo_outline_dark_yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
       </div>
 
       <section id="userContainer" class="user-container">
@@ -123,9 +112,7 @@
               required
             />
           </label>
-          <button id="registerSubmit" class="button button--black">
-            Registrera
-          </button>
+          <button id="registerSubmit" class="button button--dark">Registrera</button>
         </form>
       </section>
       <p class="user__paragraph">har du redan ett konto?</p>
@@ -135,10 +122,7 @@
     <!-- Om inloggad, då syns wrapperProfile -->
     <section id="wrapperProfile" class="wrapper">
       <div class="logo--small">
-        <img
-          src="./resources/logo_outline_dark_yygs.svg"
-          alt="Yum Yum Gimmie Sum logotyp"
-        />
+        <img src="./resources/logo_outline_dark_yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
       </div>
       <div class="profile">
         <figure class="profile__circle">
@@ -218,18 +202,12 @@
       <a class="user__link" href="">KONTAKTA OSS ></a>
 
       <!-- Egentligen vill man kanske ha button inuti form, men nu har vi logga ut i anslutning och andra länkar innan -->
-      <button id="changeSubmit" class="button button--black">
-        Spara ändringar
-      </button>
-      <button id="logout" class="button button--black">Logga ut</button>
+      <button id="changeSubmit" class="button button--dark">Spara ändringar</button>
+      <button id="logout" class="button button--dark">Logga ut</button>
     </section>
 
     <footer id="tabBar" class="tab-bar">
       <!-- Annan class beroende på ikon -->
-      <figure id="cutlerySymbol" class="cutlery-symbol"></figure>
-      <figure id="truckSymbol" class="truck-symbol"></figure>
-      <figure id="userSymbol" class="user-symbol"></figure>
-      <figure id="receiptSymbol" class="receipt-symbol"></figure>
     </footer>
   </body>
 </html>

@@ -7,26 +7,36 @@
     <script type="module" src="./script.js"></script>
     <link rel="stylesheet" href="./style.css" />
     <!-- Använda fontawesome? -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   </head>
   <body>
     <section id="wrapperCart" class="wrapper">
       <div class="logo--small">
-        <img
-          src="./resources/logo_outline_dark_yygs.svg"
-          alt="Yum Yum Gimmie Sum logotyp"
-        />
+        <!-- ändra till white mode när orderbekräftelsen dyker upp -->
+        <img src="./resources/logo_outline_dark_yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+
+        <!-- ingen liten varukorg i övre hörnet på denna sida -->
       </div>
+      <section id="cartContainer" class="cart-container">
+        <h2 class="cart__title">Din beställning</h2>
+        <h4 class="cart__subtitle">tidigare beställningar ></h4>
+        <p class="cart__paragraph">din varukorg är tom</p>
+      </section>
+      <section id="orderConfirmation" class="order-confirmation">
+        <img src="BILD PÅ TAKEAWAY" alt="Din order är bekräftad, bild på takeaway" />
+        <h1 class="heading-one">DINA WONTONS TILLAGAS!</h1>
+        <div class="order__box">
+          <p class="order__paragraph">Tid kvar: [TID]</p>
+        </div>
+        <p class="order__paragraph">#hjf68jeu88</p>
+        <!-- random sifferkombination som sparas? -->
+
+        <button id="newOrder" class="button button--dark">GÖR EN NY BESTÄLLNING</button>
+        <button id="seeReceipt" class="button button--light-outline">SE KVITTO</button>
+      </section>
     </section>
     <footer id="tabBar" class="tab-bar">
       <!-- Annan class beroende på ikon -->
-      <figure id="cutlerySymbol" class="cutlery-symbol"></figure>
-      <figure id="truckSymbol" class="truck-symbol"></figure>
-      <figure id="userSymbol" class="user-symbol"></figure>
-      <figure id="receiptSymbol" class="receipt-symbol"></figure>
     </footer>
   </body>
 </html>
