@@ -11,10 +11,8 @@
   </head>
   <body>
     <section id="wrapperCart" class="wrapper">
-      <div class="logo--small">
-        <!-- ändra till white mode när orderbekräftelsen dyker upp -->
-        <img src="./resources/logo_outline_dark_yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-      </div>
+      <!-- ändra till white mode när orderbekräftelsen dyker upp -->
+      <img class="logo--small" src="./resources/logo_outline_dark_yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
 
       <!-- Varukorgen, såhär syns den som tom -->
       <section id="cartContainer" class="cart-container">
@@ -35,7 +33,13 @@
         <!-- random sifferkombination som sparas? -->
 
         <a href="./food-menu.html"><button id="newOrder" class="button button--dark">GÖR EN NY BESTÄLLNING</button></a>
-        <a href="./orders.html"><button id="seeReceipt" class="button button--light-outline">SE KVITTO</button></a>
+        <button id="seeReceipt" class="button button--light-outline">SE KVITTO</button>
+
+        <!-- button leder till order__reciept section som visar kvittot -->
+        <section class="order__receipt">
+          <!-- kod för att visa kvitto -->
+          <a href="./food-menu.html"><button id="newOrder" class="button button--dark">GÖR EN NY BESTÄLLNING</button></a>
+        </section>
       </section>
     </section>
     <footer id="tabBar" class="tab-bar">
