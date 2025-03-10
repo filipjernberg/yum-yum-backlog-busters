@@ -13,6 +13,70 @@
     />
   </head>
   <body>
+    <section id="wrapper" class="wrapper">
+      <div class="logo logo--dark"></div>
+
+      <section id="userContainer" class="user-container">
+        <h1 id="createAccountTitle" class="heading-one">Hej gäst!</h1>
+        <form id="registerForm" class="register-form">
+          <figure><!-- ikon för användare--></figure>
+          <label>
+            <input
+              id="registerUsername"
+              class="input-field"
+              placeholder="Användarnamn"
+              name="username"
+              type="text"
+              aria-label="Användarnamn"
+              required
+            />
+          </label>
+          <figure><!-- ikon för email--></figure>
+          <label>
+            <input
+              id="registerMail"
+              class="input-field"
+              placeholder="Mailadress"
+              name="mailadress"
+              type="email"
+              aria-label="Mejladress"
+              required
+            />
+          </label>
+
+          <figure><!-- ikon för lösenord--></figure>
+          <label>
+            <input
+              id="registerPassword"
+              class="input-field"
+              placeholder="Lösenord"
+              name="password"
+              type="password"
+              aria-label="lösenord"
+              required
+            />
+          </label>
+          <figure><!-- ikon för lösenord--></figure>
+          <label>
+            <input
+              id="registerPassword"
+              class="input-field"
+              placeholder="Upprepa lösenord"
+              name="password"
+              type="password"
+              aria-label="lösenord"
+              required
+            />
+          </label>
+          <button id="registerSubmit" class="button button--black">
+            Registrera
+          </button>
+        </form>
+      </section>
+      <p class="user__paragraph">har du redan ett konto?</p>
+      <a class="user__link" href="./register-user.html">Logga in</a>
+    </section>
+
     <footer id="tabBar" class="tab-bar">
       <!-- Annan class beroende på ikon -->
       <figure id="cutlerySymbol" class="cutlery-symbol"></figure>

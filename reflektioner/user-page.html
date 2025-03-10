@@ -22,7 +22,7 @@
           <figure><!-- ikon för användare--></figure>
           <label>
             <input
-              id="username"
+              id="loginUsername"
               class="input-field"
               placeholder="Användarnamn"
               name="username"
@@ -35,7 +35,7 @@
           <figure><!-- ikon för lösenord--></figure>
           <label>
             <input
-              id="userPassword"
+              id="loginPassword"
               class="input-field"
               placeholder="Lösenord"
               name="password"
@@ -44,7 +44,9 @@
               required
             />
           </label>
-          <button class="button button--black">Logga in</button>
+          <button id="loginSubmit" class="button button--black">
+            Logga in
+          </button>
         </form>
       </section>
       <p class="user__paragraph">Glömt lösenord?</p>
