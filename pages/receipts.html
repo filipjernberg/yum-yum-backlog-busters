@@ -1,62 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yum Yum Gimmie Sum</title>
-    <script type="module" src="./script.js"></script>
-    <link rel="stylesheet" href="./style.css" />
-    <!-- Använda fontawesome? -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  </head>
-  <body>
-    <section id="wrapperOrders" class="wrapper">
-      <img class="logo--small" src="./resources/logo_outline_dark_yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-      <button id="cart" class="cart">
-        <!-- ikon -->
-        <!-- position absolute på cart-alert -->
-        <p id="cartAlert" class="cart__alert">1</p>
-        <section id="cartModal" class="cart__modal">
-          <img class="" src="./resources/logo_color_yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-          <h2 class="section__title">Din beställning</h2>
-          <h4 class="section__subtitle">tidigare beställningar ></h4>
-          <p class="section__paragraph">din varukorg är tom</p>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Yum Yum Gimmie Sum</title>
+        <script type="module" src="../scripts/script.js"></script>
+        <link rel="stylesheet" href="../styles/style.css" />
+        <!-- Använda fontawesome? -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    </head>
+    <body>
+        <section id="wrapperOrders" class="wrapper">
+            <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+            <button id="cart" class="cart">
+                <!-- ikon -->
+                <!-- position absolute på cart-alert -->
+                <p id="cartAlert" class="cart__alert">1</p>
+                <section id="cartModal" class="cart__modal">
+                    <img class="" src="./resources/logo_color_yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+                    <h2 class="section__title">Din beställning</h2>
+                    <h4 class="section__subtitle">tidigare beställningar ></h4>
+                    <p class="section__paragraph">din varukorg är tom</p>
+                </section>
+            </button>
+
+            <h2 class="section__title">PÅGÅENDE BESTÄLLNING</h2>
+            <p class="section__paragraph">du har inga pågående beställningar</p>
+            <!-- Plats för skapande av pågående beställning -->
+            <section id="newReceiptContainer" class="receipt__container"></section>
+
+            <h2 class="section__title">TIDIGARE BESTÄLLNINGAR</h2>
+            <p class="section__paragraph">du har inga tidigare beställningar</p>
+            <!-- Plats för skapande av tidigare beställning -->
+            <!-- en ny section per kvitto? -->
         </section>
-      </button>
 
-      <h2 class="section__title">PÅGÅENDE BESTÄLLNING</h2>
-      <p class="section__paragraph">du har inga pågående beställningar</p>
-      <!-- Plats för skapande av pågående beställning -->
-      <section id="newReceiptContainer" class="receipt__container"></section>
+        <!-- Om beställning genomförs blir följande synligt -->
+        <section id="orderConfirmation" class="order-confirmation">
+            <img class="order__img" src="BILD PÅ TAKEAWAY" alt="Din order är bekräftad, bild på takeaway" />
+            <h1 class="heading-one heading-one--light">DINA WONTONS TILLAGAS!</h1>
+            <div class="order__box">
+                <p class="order__paragraph">Tid kvar: [TID]</p>
+            </div>
+            <p class="order__paragraph">#hjf68jeu88</p>
+            <!-- random sifferkombination som sparas? -->
 
-      <h2 class="section__title">TIDIGARE BESTÄLLNINGAR</h2>
-      <p class="section__paragraph">du har inga tidigare beställningar</p>
-      <!-- Plats för skapande av tidigare beställning -->
-      <!-- en ny section per kvitto? -->
-    </section>
+            <a href="./food-menu.html"><button id="newOrder" class="button button--dark">GÖR EN NY BESTÄLLNING</button></a>
+            <button id="seeReceipt" class="button button--light-outline">SE KVITTO</button>
 
-    <!-- Om beställning genomförs blir följande synligt -->
-    <section id="orderConfirmation" class="order-confirmation">
-      <img class="order__img" src="BILD PÅ TAKEAWAY" alt="Din order är bekräftad, bild på takeaway" />
-      <h1 class="heading-one heading-one--light">DINA WONTONS TILLAGAS!</h1>
-      <div class="order__box">
-        <p class="order__paragraph">Tid kvar: [TID]</p>
-      </div>
-      <p class="order__paragraph">#hjf68jeu88</p>
-      <!-- random sifferkombination som sparas? -->
+            <!-- button leder till order__receipt section som visar kvittot -->
+            <section class="order__receipt">
+                <!-- kod för att visa enskilt kvitto -->
+                <a href="./food-menu.html"><button id="newOrder" class="button button--dark">GÖR EN NY BESTÄLLNING</button></a>
+            </section>
+        </section>
 
-      <a href="./food-menu.html"><button id="newOrder" class="button button--dark">GÖR EN NY BESTÄLLNING</button></a>
-      <button id="seeReceipt" class="button button--light-outline">SE KVITTO</button>
-
-      <!-- button leder till order__receipt section som visar kvittot -->
-      <section class="order__receipt">
-        <!-- kod för att visa enskilt kvitto -->
-        <a href="./food-menu.html"><button id="newOrder" class="button button--dark">GÖR EN NY BESTÄLLNING</button></a>
-      </section>
-    </section>
-
-    <footer id="tabBar" class="tab-bar">
-      <!-- Annan class beroende på ikon -->
-    </footer>
-  </body>
+        <footer id="tabBar" class="tab-bar">
+            <!-- Annan class beroende på ikon -->
+        </footer>
+    </body>
 </html>
