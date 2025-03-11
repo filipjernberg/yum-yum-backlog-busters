@@ -13,11 +13,11 @@
     --red: #df4a4a;
 
     /* Fonts */
-    --font-fira-sans-h1: bold 32pt/38pt "Fira Sans", sans-serif; /* Page Heading */
-    --font-fira-sans-h2: bold 24pt/29pt "Fira Sans", sans-serif; /* Modul & Button Heading */
-    --font-fira-sans-h3: bold 16pt/19pt "Fira Sans", sans-serif; /* Content Heading */
-    --font-fira-sans-h4: medium 14pt/18pt "Fira Sans", sans-serif; /* Content Sub-Heading */
-    --font-fira-sans-h5: bold 12pt/14pt "Fira Sans", sans-serif; /* Icon Heading */
+    --font-fira-sans-h1: 700 32pt/38pt "Fira Sans", sans-serif; /* Page Heading */
+    --font-fira-sans-h2: 700 24pt/29pt "Fira Sans", sans-serif; /* Modul & Button Heading */
+    --font-fira-sans-h3: 700 16pt/19pt "Fira Sans", sans-serif; /* Content Heading */
+    --font-fira-sans-h4: 500 14pt/18pt "Fira Sans", sans-serif; /* Content Sub-Heading */
+    --font-fira-sans-h5: 700 9pt/12pt "Fira Sans", sans-serif; /* Icon Heading */
     --font-fira-sans-text: 12pt/14pt "Fira Sans", sans-serif; /* Text */
 }
 
@@ -98,7 +98,7 @@ h3 {
 
 h4 {
     font: var(--font-fira-sans-h4);
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.05rem;
 }
 
 h5 {
@@ -157,4 +157,35 @@ button:hover {
 
 /* === Icon Styling  === */
 i {
+}
+
+/* === List Styling  === */
+.list-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+
+    padding: 2rem;
+}
+
+.list-item__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+.list-item__hr {
+    flex: 1;
+    border: unset;
+    border-bottom: 2px dashed var(--dark-grey);
+}
+
+.list-item__quantity-button {
+    width: 100px;
+    font: var(--font-fira-sans-h5);
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
 }
