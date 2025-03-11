@@ -28,6 +28,7 @@ function handleCurrentPage() {
 
       const confirmationSectionref = getElement(`#wrapperOrderConfirmation`);
       const orderWrapperRef = getElement(`#wrapperOrders`);
+      const body = getElement(`body`);
       if (confirmationSectionref) {
         addClasses(confirmationSectionref, [`d-none`]);
       }
@@ -36,6 +37,8 @@ function handleCurrentPage() {
       if (params.get(`showConfirmation`) === `true`) {
         removeClasses(confirmationSectionref, [`d-none`]);
         addClasses(orderWrapperRef, [`d-none`]);
+        body.style.backgroundColor = `#605858`;
+        // Ovan är bara test. behöver komma åt variabelnamn från css
       }
       break;
     case "/pages/user-page.html":

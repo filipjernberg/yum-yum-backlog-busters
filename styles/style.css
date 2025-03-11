@@ -76,7 +76,7 @@
 } */
 
 .wrapper {
-  background-color: var(--off-white);
+  /* background-color: var(--off-white); */
   padding: 2rem;
   padding-bottom: 8rem;
 }
@@ -176,6 +176,9 @@ button:hover {
   text-align: center;
   padding: 2rem;
 }
+.heading-one--light {
+  color: var(--off-white);
+}
 
 .map__container {
   display: flex;
@@ -214,6 +217,11 @@ button:hover {
 
 /* === Icon Styling  === */
 i {
+}
+
+/* === Order Styling  === */
+.order__paragraph {
+  text-align: center;
 }
 
 /* === Tab bar  === */
