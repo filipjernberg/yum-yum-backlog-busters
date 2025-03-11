@@ -1,75 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../styles/style.css" />
-        <link rel="stylesheet" href="../styles/foodtruck.css" />
-        <title>Map</title>
-    </head>
-    <body>
-        <section id="wrapper" class="wrapper">
-            <header class="map__header">
-                <div class="logo--small">
-                    <img src="../resources/logo_outline_dark_yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-                </div>
-                <button id="cart" class="cart">
-                    <!-- ikon -->
-                    <figure id="cartAlert" class="cart__alert">1</figure>
-                </button>
-            </header>
-
-            <section id="map" class="map">
-                <h1 id="mapTitle" class="heading-one">Var är vi just nu?</h1>
-                <div class="map__container">
-                    <img
-                        class="map__img"
-                        src="https://maps.googleapis.com/maps/api/staticmap?center=59.402706146240234,13.5118408203125&zoom=13&size=600x400&maptype=roadmap&markers=color:red%7Clabel:F%7C59.402706146240234,13.5118408203125&key=AIzaSyCENAhRrTexr7mgBbyzgQCKYOVi1DGnZrM"
-                        alt="Karta över foodtrucks"
-                    />
-
-                    <figure id="truckOne" class="map__truck"></figure>
-                    <figure id="truckTwo" class="map__truck"></figure>
-                    <figure id="truckThree" class="map__truck"></figure>
-                </div>
-                <section id="addressField" class="field__adress">
-                    <h3 class="field__title">Adresser:</h3>
-                    <p id="adress__truck-one" class="field__paragraph">Wontonvägen 12</p>
-                    <p id="adress__truck-two" class="field__paragraph">Sashimigatan 8</p>
-                    <p id="adress__truck-three" class="field__paragraph">Sjögrästorget 1</p>
-                </section>
-                <section id="openHoursField" class="field__open-hours">
-                    <h3 class="field__title">Öppettider:</h3>
-                    <p class="field__paragraph">Tisdag - torsdag: 11.00 - 21.00</p>
-                    <p class="field__paragraph">Fredag - lördag: 11.00 - 23.00</p>
-                    <p class="field__paragraph">Söndag - måndag: stängt</p>
-                </section>
-                <section id="contactField" class="field__contact">
-                    <h3 class="field__title">Kontakt</h3>
-                    <i class="fa-regular fa-envelope" aria-label="mailadress"></i>
-                    <p class="field__paragraph">YumYum@GimmeSum.nu</p>
-                    <i class="fa-regular fa-phone" aria-label="Telefonnummer"></i>
-                    <p class="field__paragraph">072-222-22-22</p>
-                </section>
-            </section>
-            <section id="aboutUs" class="about">
-                <h1 id="headingOne" class="heading-one heading-one--light">Om Yum Yum Gimmie Sum</h1>
-                <img src="" alt="" class="about__img" />
-                <h2 class="heading-two">Allt började med en itusågad ätpinne</h2>
-                <p class="about-us__paragraph">
-                    Blablabla om vår historia. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
-                    interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per
-                </p>
-
-                <section class="about-us__section about-us__section--horisontal">
-                    <i class="fa-brands fa-square-instagram"></i>
-                    <i class="fa-brands fa-square-facebook"></i>
-                </section>
-            </section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yum Yum Gimmie Sum</title>
+    <script type="module" src="./script.js"></script>
+    <link rel="stylesheet" href="../styles/style.css" />
+    <!-- Använda fontawesome? -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  </head>
+  <body>
+    <section id="wrapperMap" class="wrapper">
+      <img class="logo--small" src="../resources/logo-outline-white-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+      <button id="cart" class="cart">
+        <!-- ikon -->
+        <p id="cartAlert" class="cart__alert">1</p>
+        <section id="cartModal" class="cart__modal">
+          <img class="" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+          <h2 class="cart__title">Din beställning</h2>
+          <h4 class="cart__subtitle">tidigare beställningar ></h4>
+          <p id="cartParagraph" class="cart__paragraph">din varukorg är tom</p>
         </section>
+      </button>
 
-        <footer id="tabBar" class="tab-bar">
-            <!-- Annan class beroende på ikon -->
-        </footer>
-    </body>
+      <section id="map" class="map">
+        <h1 id="mapTitle" class="heading-one heading-one--light">Karta</h1>
+        <div class="map">
+          <img src="BILD" alt="Karta över trucks" />
+          <img id="truckOne" src="" alt="Foodtruck 1"></figure>
+    
+          <img id="truckTwo" src="" alt="Foodtruck 2"></figure>
+
+          <img id="truckThree" src="" alt="Foodtruck 3"></figure>
+
+          <!-- Box som styrs utifrån våra trucks och location från lista? skrivs som textContent? -->
+          <div id="truckInfoBox" class="truck-info-box"></div>
+        </div>
+        <section id="addressField" class="field__adress">
+          <h3 class="field__title">Adresser:</h3>
+          <p id="adressTruckOne" class="field__paragraph">blabla</p>
+          <p id="adressTruckTwo" class="field__paragraph">blabla</p>
+          <p id="adressTruckThree" class="field__paragraph">blabla</p>
+        </section>
+        <section id="openHoursField" class="field__open-hours">
+          <h3 class="field__title">Öppettider:</h3>
+          <p class="field__paragraph">blabla</p>
+          <p class="field__paragraph">blabla</p>
+        </section>
+        <section id="contactField" class="field__contact">
+          <h3 class="field__title">Kontakt</h3>
+          <p class="field__paragraph">blabla</p>
+          <p class="field__paragraph">blabla</p>
+          <p class="field__paragraph">blabla</p>
+        </section>
+      </section>
+      <section id="aboutUs" class="about">
+        <h1 id="headingOne" class="heading-one heading-one--light">Om Yum Yum Gimmie Sum</h1>
+        <img src="" alt="" class="about__img" />
+        <h2 class="heading-two">Allt började med en itusågad ätpinne</h2>
+        <p class="about-us__paragraph">
+          Blablabla om vår historia. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac
+          aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per
+        </p>
+        <section class="about-us__section">
+          <h4 class="heading-four">ÖPPETTIDER</h4>
+          <p class="about-us__paragraph">Tisdag - torsdag: 11.00 - 21.00</p>
+          <p class="about-us__paragraph">Fredag - lördag: 11.00 - 23.00</p>
+          <p class="about-us__paragraph">Söndag - måndag: stängt</p>
+        </section>
+        <section class="about-us__section">
+          <h4 class="heading-four">KONTAKT</h4>
+          <i class="fa-regular fa-envelope" aria-label="mailadress"></i>
+          <p class="about-us__paragraph">helstbarapositivrespons@gmail.com</p>
+          <i class="fa-regular fa-phone" aria-label="Telefonnummer"></i>
+          <p class="about-us__paragraph">070 - 1232548</p>
+        </section>
+        <section class="about-us__section about-us__section--horisontal">
+          <i class="fa-brands fa-square-instagram"></i>
+          <i class="fa-brands fa-square-facebook"></i>
+        </section>
+      </section>
+    </section>
+
+    <footer id="tabBar" class="tab-bar">
+      <!-- Annan class beroende på ikon -->
+      <nav class="tab-bar__navigation">
+        <ul>
+          <li class="tab-bar__list-item">
+            <a href="./food-menu.html" class="tab-bar__link"
+              ><img class="tab-bar__icon" src="../resources/icons/menu-unfilled-w300.svg" alt="Gå till matmenyn"
+            /></a>
+          </li>
+          <li class="tab-bar__list-item">
+            <a href="./map.html" class="tab-bar__link"
+              ><img class="tab-bar__icon" src="../resources/icons/foodtruck-filled.svg" alt="Hitta närmaste food truck"
+            /></a>
+          </li>
+          <li class="tab-bar__list-item">
+            <a href="./user-page.html" class="tab-bar__link"
+              ><img class="tab-bar__icon" src="../resources/icons/user-unfilled-w300.svg" alt="Logga in/mina användaruppgifter"
+            /></a>
+          </li>
+          <li class="tab-bar__list-item">
+            <a href="./receipts.html" class="tab-bar__link"
+              ><img class="tab-bar__icon" src="../resources/icons/receipt-unfilled-w300.svg" alt="Visa kvitto"
+            /></a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
 </html>

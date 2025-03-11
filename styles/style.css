@@ -1,192 +1,282 @@
 /* ==== Font Import ====*/
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"); /* Fira Sans */
 
-
 /* ==== Variables ====*/
 :root {
-    /* Colors */
-    --off-white: #eeeeee;
-    --light-grey: #c2c1c1;
-    --medium-grey: #605858;
-    --dark-grey: #353131;
-    --dark-green: #3b644e;
-    --light-green: #8ed8bf;
-    --red: #df4a4a;
+  /* Colors */
+  --off-white: #eeeeee;
+  --light-grey: #c2c1c1;
+  --medium-grey: #605858;
+  --dark-grey: #353131;
+  --dark-green: #3b644e;
+  --light-green: #8ed8bf;
+  --red: #df4a4a;
 
-    /* Fonts */
-    --font-fira-sans-h1: 700 32pt/38pt "Fira Sans", sans-serif; /* Page Heading */
-    --font-fira-sans-h2: 700 24pt/29pt "Fira Sans", sans-serif; /* Modul & Button Heading */
-    --font-fira-sans-h3: 700 16pt/19pt "Fira Sans", sans-serif; /* Content Heading */
-    --font-fira-sans-h4: 500 14pt/18pt "Fira Sans", sans-serif; /* Content Sub-Heading */
-    --font-fira-sans-h5: 700 9pt/12pt "Fira Sans", sans-serif; /* Icon Heading */
-    --font-fira-sans-text: 12pt/14pt "Fira Sans", sans-serif; /* Text */
+  /* Fonts */
+  --font-fira-sans-h1: 700 32pt/38pt "Fira Sans", sans-serif; /* Page Heading */
+  --font-fira-sans-h2: 700 24pt/29pt "Fira Sans", sans-serif; /* Modul & Button Heading */
+  --font-fira-sans-h3: 700 16pt/19pt "Fira Sans", sans-serif; /* Content Heading */
+  --font-fira-sans-h4: 500 14pt/18pt "Fira Sans", sans-serif; /* Content Sub-Heading */
+  --font-fira-sans-h5: 700 9pt/12pt "Fira Sans", sans-serif; /* Icon Heading */
+  --font-fira-sans-text: 12pt/14pt "Fira Sans", sans-serif; /* Text */
 }
 
 /* ==== Reset & Normalize ==== */
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 /* === Utility Classes === */
 .d-none {
-    display: none;
+  display: none;
 }
 
 .wrap {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-    white-space: nowrap;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
 }
 
 /* === Basic Styling  === */
 .page {
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: 100vh;
 }
 
 .page--light {
-    background-color: var(--off-white);
+  background-color: var(--off-white);
 }
 
 .page--dark {
-    background-color: var(--dark-grey);
+  background-color: var(--dark-grey);
 }
 
 .page--background-image {
-    background-image: url(../resources/background-palm-leaves-yygs.avif);
-    background-repeat: repeat;
-    background-size: 350px;
-    background-blend-mode: multiply;
+  background-image: url(../resources/background-palm-leaves-yygs.avif);
+  background-repeat: repeat;
+  background-size: 350px;
+  background-blend-mode: multiply;
 
-    background-color: var(--light-green);
+  background-color: var(--light-green);
 }
 
-.body__wrapper {
-    padding: 2rem;
+/* .body__wrapper {
+} */
+
+.wrapper {
+  background-color: var(--off-white);
+  padding: 2rem;
+  padding-bottom: 8rem;
 }
 
 h1 {
-    font: var(--font-fira-sans-h1);
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
+  font: var(--font-fira-sans-h1);
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
 
-    filter: drop-shadow(2px 2px 0px #00000030);
+  filter: drop-shadow(2px 2px 0px #00000030);
 }
 
 h2 {
-    font: var(--font-fira-sans-h2);
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
+  font: var(--font-fira-sans-h2);
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
 }
 
 h3 {
-    font: var(--font-fira-sans-h3);
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
+  font: var(--font-fira-sans-h3);
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
 }
 
 h4 {
-    font: var(--font-fira-sans-h4);
-    letter-spacing: 0.05rem;
+  font: var(--font-fira-sans-h4);
+  letter-spacing: 0.05rem;
 }
 
 h5 {
-    font: var(--font-fira-sans-h5);
-    letter-spacing: 0.1rem;
+  font: var(--font-fira-sans-h5);
+  letter-spacing: 0.1rem;
 }
 
 p {
-    font: var(--font-fira-sans-text);
+  font: var(--font-fira-sans-text);
 }
 
 /* === Button Styling  === */
 button {
-    width: 100%;
-    padding: 2rem 3rem;
-    border-radius: 0.5rem;
-    border-style: unset;
+  width: 100%;
+  padding: 2rem 3rem;
+  border-radius: 0.5rem;
+  border-style: unset;
 
-    font: var(--font-fira-sans-h2);
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
+  font: var(--font-fira-sans-h2);
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    color: var(--off-white);
-    background-color: var(--dark-grey);
+  color: var(--off-white);
+  background-color: var(--dark-grey);
 
-    transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 button:hover {
-    background-color: var(--off-white);
-    color: var(--dark-grey);
+  background-color: var(--off-white);
+  color: var(--dark-grey);
 }
 
 .button--light {
-    color: var(--dark-grey);
-    background-color: var(--off-white);
+  color: var(--dark-grey);
+  background-color: var(--off-white);
 }
 
 .button--dark {
-    color: var(--off-white);
-    background-color: var(--dark-grey);
+  color: var(--off-white);
+  background-color: var(--dark-grey);
 }
 
 .button--green {
-    color: var(--off-white);
-    background-color: var(--dark-green);
+  color: var(--off-white);
+  background-color: var(--dark-green);
 }
 
 .button--light-outline {
-    border: 2px solid var(--off-white);
-    color: var(--off-white);
-    background-color: transparent;
+  border: 2px solid var(--off-white);
+  color: var(--off-white);
+  background-color: transparent;
+}
+
+/* === Map Styling  === */
+.map__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.cart {
+  max-width: 20%;
+}
+
+.heading-one {
+  text-align: center;
+  padding: 2rem;
+}
+
+.map__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.map__img {
+  width: 100%;
+}
+
+.field-title {
+  font: var(--font-fira-sans-h3);
+}
+
+.field__paragraph {
+  font: var(--font-fira-sans-text);
+}
+
+.field__adress {
+  padding: 2rem;
+}
+
+.field__open-hours {
+  padding: 2rem;
+}
+
+.field__contact {
+  padding: 2rem;
+}
+
+.about-us__paragraph {
+  padding: 2rem;
 }
 
 /* === Icon Styling  === */
 i {
 }
 
+/* === Tab bar  === */
+.tab-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-grey);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.tab-bar__navigation {
+}
+
+.tab-bar__list-item {
+  list-style: none;
+  display: inline;
+}
+
+.tab-bar__link {
+  padding: 1rem 1.5rem;
+  display: inline-block;
+}
+
+.tab-bar__icon {
+  cursor: pointer;
+  height: 35px;
+}
+
+/* .wrapper {
+  padding-bottom: 8rem;
+} */
+
 /* === List Styling  === */
 .list-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
 
-    padding: 2rem;
+  padding: 2rem;
 }
 
 .list-item__row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
 }
 
 .list-item__hr {
-    flex: 1;
-    border: unset;
-    border-bottom: 2px dashed var(--dark-grey);
+  flex: 1;
+  border: unset;
+  border-bottom: 2px dashed var(--dark-grey);
 }
 
 .list-item__quantity-button {
-    width: 100px;
-    font: var(--font-fira-sans-h5);
-    padding: 0.5rem 1rem;
-    border-radius: 100px;
+  width: 100px;
+  font: var(--font-fira-sans-h5);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
 }
