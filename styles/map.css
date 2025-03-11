@@ -52,7 +52,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 0rem 2rem;
 }
 
 .map__img {
@@ -68,17 +68,47 @@
 }
 
 .field__adress {
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .field__open-hours {
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .field__contact {
-    padding: 2rem;
+    padding: 1rem;
+}
+
+.field__end {
+    border: none;
+    height: 2px;
+    background-color: var(--dark-grey); 
+    margin: 50px auto; 
+    width: 75%; 
+}
+
+/*ABOUT US*/
+
+.about {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0rem 2rem;
+}
+
+.heading-two {
+    text-align: center;
+    /* padding: 2rem; */
 }
 
 .about-us__paragraph {
-    padding: 2rem;
+    /* padding: 2rem; */
+}
+
+.about__img {
+    align-self: center;
+    width: 200px;  /* Anpassa storleken efter behov */
+    height: 200px; /* Viktigt att ha samma värde som width */
+    border-radius: 50%;
+    object-fit: cover; /* Ser till att bilden fyller ut formen snyggt */
 }
