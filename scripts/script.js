@@ -15,7 +15,7 @@ function handleCurrentPage() {
     case "/pages/index.html":
       //Page specific code goes here
       break;
-    case "/Pages/food-menu.html":
+    case "/pages/food-menu.html":
       setupOrderButton();
       getMenu();
 
