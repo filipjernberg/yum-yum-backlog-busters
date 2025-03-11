@@ -22,7 +22,7 @@
     --font-fira-sans-text: 12pt/14pt "Fira Sans", sans-serif; /* Text */
 }
 
-* {
+/* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -81,15 +81,15 @@
 
 .field__end {
     border: none;
-  height: 3px;
-  background: linear-gradient(to right, transparent, #888, transparent);
-  margin: 50px auto;
-  width: 80%;
+    height: 3px;
+    background: linear-gradient(to right, transparent, #888, transparent);
+    margin: 50px auto;
+    width: 80%;
 }
 
 /*ABOUT US*/
 
-.about {
+/*.about {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -98,17 +98,12 @@
 
 .heading-two {
     text-align: center;
-    /* padding: 2rem; */
-}
-
-.about-us__paragraph {
-    /* padding: 2rem; */
 }
 
 .about__img {
     align-self: center;
-    width: 200px;  /* Anpassa storleken efter behov */
-    height: 200px; /* Viktigt att ha samma värde som width */
+    width: 200px;  
+    height: 200px; 
     border-radius: 50%;
-    object-fit: cover; /* Ser till att bilden fyller ut formen snyggt */
-}
+    object-fit: cover; 
+}*/

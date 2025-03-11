@@ -4,20 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yum Yum Gimmie Sum</title>
-    <script type="module" src="./script.js"></script>
-    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="../scripts/script.js"></script>
+    <link rel="stylesheet" href="../styles/style.css" />
     <!-- Använda fontawesome? -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   </head>
   <body>
     <section id="wrapperOrders" class="wrapper">
-      <img class="logo--small" src="./resources/logo_outline_dark_yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+      <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
       <button id="cart" class="cart">
         <!-- ikon -->
         <!-- position absolute på cart-alert -->
         <p id="cartAlert" class="cart__alert">1</p>
         <section id="cartModal" class="cart__modal">
-          <img class="" src="./resources/logo_color_yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+          <img class="" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
           <h2 class="section__title">Din beställning</h2>
           <h4 class="section__subtitle">tidigare beställningar ></h4>
           <p class="section__paragraph">din varukorg är tom</p>
@@ -57,6 +57,30 @@
 
     <footer id="tabBar" class="tab-bar">
       <!-- Annan class beroende på ikon -->
+      <nav class="tab-bar__navigation">
+        <ul>
+          <li class="tab-bar__list-item">
+            <a href="./food-menu.html" class="tab-bar__link"
+              ><img class="tab-bar__icon" src="../resources/icons/menu-unfilled-w300.svg" alt="Gå till matmenyn"
+            /></a>
+          </li>
+          <li class="tab-bar__list-item">
+            <a href="./map.html" class="tab-bar__link"
+              ><img class="tab-bar__icon" src="../resources/icons/foodtruck-unfilled-w300.svg" alt="Hitta närmaste food truck"
+            /></a>
+          </li>
+          <li class="tab-bar__list-item">
+            <a href="./user-page.html" class="tab-bar__link"
+              ><img class="tab-bar__icon" src="../resources/icons/user-unfilled-w300.svg" alt="Logga in/mina användaruppgifter"
+            /></a>
+          </li>
+          <li class="tab-bar__list-item">
+            <a href="./receipts.html" class="tab-bar__link"
+              ><img class="tab-bar__icon" src="../resources/icons/receipt-filled.svg" alt="Visa kvitto"
+            /></a>
+          </li>
+        </ul>
+      </nav>
     </footer>
   </body>
 </html>
