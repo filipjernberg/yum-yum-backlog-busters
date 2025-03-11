@@ -204,6 +204,58 @@ button:hover {
     background-color: transparent;
 }
 
+/* === Map Styling  === */
+.map__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.cart {
+    max-width: 20%;
+}
+
+.heading-one {
+    text-align: center;
+    padding: 2rem;
+}
+
+.map__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.map__img {
+    width: 100%;
+}
+
+.field-title {
+    font: var(--font-fira-sans-h3);
+}
+
+.field__paragraph {
+    font: var(--font-fira-sans-text);
+}
+
+.field__adress {
+    padding: 2rem;
+}
+
+.field__open-hours {
+    padding: 2rem;
+}
+
+.field__contact {
+    padding: 2rem;
+}
+
+.about-us__paragraph {
+    padding: 2rem;
+}
+
 /* === Icon Styling  === */
 i {
 }
@@ -212,6 +264,36 @@ i {
 .logo--small {
     width: 64px;
     align-self: flex-start;
+}
+
+/* === Tab bar  === */
+.tab-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-grey);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.tab-bar__navigation {
+}
+
+.tab-bar__list-item {
+    list-style: none;
+    display: inline;
+}
+
+.tab-bar__link {
+    padding: 1rem 1.5rem;
+    display: inline-block;
+}
+
+.tab-bar__icon {
+    cursor: pointer;
+    height: 35px;
 }
 
 /* === List Styling  === */
