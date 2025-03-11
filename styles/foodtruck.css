@@ -28,6 +28,20 @@
     padding: 0;
 }
 
+.wrapper {
+    background-color: var(--off-white);
+}
+
+.map__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cart {
+    max-width: 20%;
+}
+
 .heading-one {
     text-align: center;
     padding: 2rem;
@@ -38,6 +52,18 @@
     justify-content: center;
     align-items: center;
     padding: 2rem;
+}
+
+.map__img {
+    width: 100%;
+}
+
+.field-title {
+    font: var(--font-fira-sans-h3);
+}
+
+.field__paragraph {
+    font: var(--font-fira-sans-text);
 }
 
 .field__adress {
