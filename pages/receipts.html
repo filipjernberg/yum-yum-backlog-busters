@@ -36,7 +36,7 @@
     </section>
 
     <!-- Om beställning genomförs blir följande synligt -->
-    <section id="orderConfirmation" class="order-confirmation">
+    <section id="wrapperOrderConfirmation" class="order-confirmation d-none">
       <img class="order__img" src="BILD PÅ TAKEAWAY" alt="Din order är bekräftad, bild på takeaway" />
       <h1 class="heading-one heading-one--light">DINA WONTONS TILLAGAS!</h1>
       <div class="order__box">
@@ -49,7 +49,7 @@
       <button id="seeReceipt" class="button button--light-outline">SE KVITTO</button>
 
       <!-- button leder till order__receipt section som visar kvittot -->
-      <section class="order__receipt">
+      <section id="orderReceipt" class="order__receipt d-none">
         <!-- kod för att visa enskilt kvitto -->
         <a href="./food-menu.html"><button id="newOrder" class="button button--dark">GÖR EN NY BESTÄLLNING</button></a>
       </section>
