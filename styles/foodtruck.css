@@ -1,0 +1,84 @@
+/* ==== Font Import ====*/
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"); /* Fira Sans */
+
+
+/* ==== Variables ====*/
+:root {
+    /* Colors */
+    --off-white: #eeeeee;
+    --light-grey: #c2c1c1;
+    --medium-grey: #605858;
+    --dark-grey: #353131;
+    --dark-green: #3b644e;
+    --light-green: #8ed8bf;
+    --red: #df4a4a;
+
+    /* Fonts */
+    --font-fira-sans-h1: bold 32pt/38pt "Fira Sans", sans-serif; /* Page Heading */
+    --font-fira-sans-h2: bold 24pt/29pt "Fira Sans", sans-serif; /* Modul & Button Heading */
+    --font-fira-sans-h3: bold 16pt/19pt "Fira Sans", sans-serif; /* Content Heading */
+    --font-fira-sans-h4: medium 14pt/18pt "Fira Sans", sans-serif; /* Content Sub-Heading */
+    --font-fira-sans-h5: bold 12pt/14pt "Fira Sans", sans-serif; /* Icon Heading */
+    --font-fira-sans-text: 12pt/14pt "Fira Sans", sans-serif; /* Text */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    background-color: var(--off-white);
+}
+
+.map__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.cart {
+    max-width: 20%;
+}
+
+.heading-one {
+    text-align: center;
+    padding: 2rem;
+}
+
+.map__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.map__img {
+    width: 100%;
+}
+
+.field-title {
+    font: var(--font-fira-sans-h3);
+}
+
+.field__paragraph {
+    font: var(--font-fira-sans-text);
+}
+
+.field__adress {
+    padding: 2rem;
+}
+
+.field__open-hours {
+    padding: 2rem;
+}
+
+.field__contact {
+    padding: 2rem;
+}
+
+.about-us__paragraph {
+    padding: 2rem;
+}
