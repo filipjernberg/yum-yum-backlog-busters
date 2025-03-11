@@ -11,22 +11,25 @@
   </head>
 
   <!-- landingpage -->
-  <body>
-    <section class="wrapper">
-      <img class="logo--big" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-
-      <button id="menu" class="button button--dark">Beställ mat</button>
+  <body class="page page--background-image">
+    <section class="index__wrapper wrapper">
+      <img class="index__logo logo--big" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+      <!-- 
+      <button id="menu" class="button button--dark">Beställ mat</button> -->
+      <a href="food-menu.html" class="page__button button--dark page__button--link">Beställ mat</a>
     </section>
-    <footer class="location__container">
-      <p class="location__paragraph">Avstånd</p>
+    <footer class="index__wrapper location__container">
       <section class="location__places">
-        <figure class="location__arrow"></figure>
+        <img src="../resources/icons/arrow-left-w300.svg" alt="Backa till föregående food truck-adress" />
+        <p class="location__paragraph">Avstånd</p>
+        <img src="../resources/icons/arrow-right-w300.svg" alt="Gå till nästa food truck-adress" />
+
         <!-- 
           <p class="location__paragraph">Plats 1</p>
           <p class="location__paragraph">Plats 2</p>
           <p class="location__paragraph">Plats 3</p>
            -->
-        <figure class="location__arrow"></figure>
+        <!-- <figure class="location__arrow"></figure> -->
       </section>
     </footer>
   </body>
