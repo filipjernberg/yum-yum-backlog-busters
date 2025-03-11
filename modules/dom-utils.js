@@ -1,14 +1,7 @@
-export function createElement(
-  tag,
-  classNames = [],
-  attributes = {},
-  textContent = ``
-) {
+export function createElement(tag, classNames = [], attributes = {}, textContent = ``) {
   const element = document.createElement(tag);
   if (classNames.length) element.classList.add(...classNames);
-  Object.entries(attributes).forEach(([key, value]) =>
-    element.setAttribute(key, value)
-  );
+  Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
   element.textContent = textContent;
   return element;
 }
