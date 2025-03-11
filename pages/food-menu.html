@@ -9,30 +9,30 @@
         <!-- Använda fontawesome? -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     </head>
-    <body>
+    <body class="page page--background-image">
         <section id="wrapper" class="wrapper">
             <img class="logo--small" src="../resources/logo-outline-white-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
 
             <button id="cart" class="cart">
                 <!-- ikon -->
-                <p id="cartAlert" class="cart__alert">1</p>
-                <section id="cartModal" class="cart__modal">
+                <h5 id="cartAlert" class="alert">1</h5>
+                <section id="cartModal" class="cart__modal d-none">
+                    <!--Temp d-none until done. -->
                     <img class="" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
                     <h2 class="cart__title">Din beställning</h2>
                     <h4 class="cart__subtitle">tidigare beställningar ></h4>
                     <p class="cart__paragraph">din varukorg är tom</p>
                 </section>
             </button>
-            <h1 id="menuTitle" class="heading-one heading-one--light">Meny</h1>
-            <!-- Add this in javascript instead
+            <section class="content content--dark" id="content">
+                <!-- Add this in javascript instead
             <section id="menuTypes" class="menu__types">
                 <button id="menuType" class="button button--light">alla</button>
                 <button id="menuType" class="button button--light">wontons</button>
                 <button id="menuType" class="button button--light">dryck</button>
                 <button id="menuType" class="button button--light">dip</button>
             </section> -->
-            <ul id="menuListItems" class="menu__list-items">
-                <!--  
+                    <!--  
         <li id="menuItem" class="menu__item">
           <h2 id="menuItemTitle" class="menu__item-title">KARLSTAD</h2>
           <p id="menuItemParagraph" class="menu__item-paragraph">dots</p>
@@ -45,7 +45,8 @@
           </div>
         </li>
         -->
-            </ul>
+                </ul>
+            </section>
         </section>
 
         <footer id="tabBar" class="tab-bar">
