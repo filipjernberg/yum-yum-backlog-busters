@@ -9,6 +9,8 @@ handleCurrentPage();
 //-----------------------------------------------
 
 function handleCurrentPage() {
+  const params = new URLSearchParams(window.location.search);
+
   switch (window.location.pathname) {
     case "/":
       break;
@@ -35,7 +37,6 @@ function handleCurrentPage() {
         confirmationSectionref.style.display = `none`;
       }
 
-      const params = new URLSearchParams(window.location.search);
       if (params.get(`showConfirmation`) === `true`) {
         confirmationSectionref.style.display = `flex`;
         addClasses(orderWrapperRef, [`d-none`]);
