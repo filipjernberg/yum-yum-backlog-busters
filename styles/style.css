@@ -81,12 +81,17 @@
   width: 100%;
   /* max-height: 100vh; */
   padding: 2rem;
+}
 
+.wrapper__flex {
   display: flex;
-  gap: 2rem;
+
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.wrapper__flex--gap {
+  gap: 2rem;
 }
 
 .content {
@@ -123,12 +128,6 @@
 
   border-radius: 1rem;
   background-color: var(--red);
-}
-
-.wrapper--flex {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 h1 {
@@ -168,20 +167,17 @@ p {
 /* === Button Styling  === */
 
 .button {
-  /* förslag på ändringar
-
-    padding: 1.3rem 2rem; 
-    font: var(--font-fira-sans-h3); 
-    margin-bottom: 0.5rem;
-    */
+  /* Tidigare inställningar*/
+  /* padding: 2rem 3rem; */
+  /* font: var(--font-fira-sans-h2); */
 
   width: 100%;
-
-  padding: 2rem 3rem;
+  margin-bottom: 0.5rem;
+  padding: 1.3rem 2rem;
   border-radius: 0.5rem;
   border-style: unset;
 
-  font: var(--font-fira-sans-h2);
+  font: var(--font-fira-sans-h3);
   text-transform: uppercase;
   letter-spacing: 0.1rem;
 
@@ -316,13 +312,13 @@ i {
 /* === Order Styling  === */
 
 .order__img {
-  margin-top: 2rem;
-  max-width: 16rem;
+  max-width: 13rem;
 }
 
 .order__paragraph {
   text-align: center;
   color: var(--off-white);
+  font-size: var(--font-fira-sans-text);
 }
 
 .order__paragraph--margin {

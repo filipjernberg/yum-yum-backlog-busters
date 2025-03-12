@@ -45,7 +45,7 @@ function handleCurrentPage() {
         // DOM funktion för att ändra style?
       }
       if (params.get(`showSingleReceipt`) === `true`) {
-        addClasses(receiptwrapperRef, [`wrapper--flex`]);
+        addClasses(receiptwrapperRef, [`wrapper__flex`]);
         addClasses(orderWrapperRef, [`d-none`]);
         body.style.backgroundColor = `#605858`;
       }
