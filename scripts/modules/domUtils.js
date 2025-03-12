@@ -45,16 +45,16 @@ function createListItem(item) {
     const rowOne = createElement("div", ["list-item__row"]);
     const rowTwo = createElement("div", ["list-item__row"]);
 
-    const dishName = createElement("h2", ["list-item__h2"], {}, item.name);
-    const dottedLine = createElement("hr", ["list-item__hr"], {});
-    const dishPrice = createElement("h2", ["list-item__h2"], {}, item.price + " SEK");
+    const itemName = createElement("h2", ["text-light"], {}, item.name);
+    const dottedLine = createElement("hr", ["list-item__hr", "text-light"], {});
+    const itemPrice = createElement("h2", ["text-light"], {}, item.price + " SEK");
 
     //Only for food menu. Needs work for receipts etc.
-    const dishInfo = createElement("h4", ["list-item__h4"], {}, item.ingredients);
+    const itemInfo = createElement("h4", ["text-light"], {}, item.ingredients?.length ? item.ingredients.join(", ") : "");
     const quantityButton = createElement("button", ["list-item__quantity-button"], {}, "Add");
 
-    appendChildren(rowOne, dishName, dottedLine, dishPrice);
-    appendChildren(rowTwo, dishInfo, quantityButton);
+    appendChildren(rowOne, itemName, dottedLine, itemPrice);
+    appendChildren(rowTwo, itemInfo, quantityButton);
     appendChildren(listItem, rowOne, rowTwo);
 
     return listItem;
@@ -62,7 +62,6 @@ function createListItem(item) {
 //-----------------------------------------------
 
 //Food Menu
-function createFoodMenu(list) {}
 
 function checkType() {
     //check item.type to sort by dish, dip or drink etc.
@@ -72,3 +71,4 @@ function filterButtons() {
     //create buttons for food menu filtering
 }
 //-----------------------------------------------
+// h1 id="menuTitle" class="heading-one heading-one--light">Meny</h1
