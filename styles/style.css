@@ -134,7 +134,7 @@ button {
   transition: all 0.3s ease-in-out;
 }
 
-.page__button {
+.button {
   width: 100%;
   padding: 2rem 3rem;
   border-radius: 0.5rem;
@@ -142,6 +142,7 @@ button {
 
   font: var(--font-fira-sans-h2);
   text-transform: uppercase;
+  text-decoration: none;
   text-align: center;
   letter-spacing: 0.1rem;
 
@@ -151,10 +152,6 @@ button {
   background-color: var(--dark-grey);
 
   transition: all 0.3s ease-in-out;
-}
-
-.page__button--link {
-  text-decoration: none;
 }
 
 button:hover {
@@ -194,9 +191,18 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: red;
 }
 .index__logo {
   width: 30%;
+}
+
+.index__footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: blue;
 }
 
 /* === Map Styling  === */
