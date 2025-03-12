@@ -1,5 +1,5 @@
 //Import
-import { createList, createElement, appendChildren } from "./modules/domUtils.js";
+import { createList, createScrollList, createElement, appendChildren } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
 //-----------------------------------------------
 
@@ -31,12 +31,17 @@ function handleCurrentPage() {
     }
 }
 //-----------------------------------------------
-
-async function createContent(heading, array) {
-    const contentHeading = createElement("h1", ["text-light"], {}, heading);
-    const contentList = createElement("ul", [], { id: "listItems" });
-
-    appendChildren(content, contentHeading, contentList);
-
-    createList(await array, listItems);
+async function createContent(heading, list) {
+    const contentHeading = createElement("h1", [], {}, heading);
+    const scrollList = await createScrollList(await list);
+    appendChildren(content, contentHeading, scrollList);
 }
+
+// async function createContent(heading, array) {
+//     const contentHeading = createElement("h1", [], {}, heading);
+//     const contentList = createElement("ul", [], { id: "listItems" });
+
+//     appendChildren(content, contentHeading, contentList);
+
+//     createList(await array, listItems);
+// }
