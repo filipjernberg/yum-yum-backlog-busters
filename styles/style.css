@@ -129,6 +129,7 @@ p {
   /* ändra till h3?  */
 
   width: 100%;
+  margin-bottom: 0.5rem;
   /* padding: 2rem 3rem; */
   border-radius: 0.5rem;
   border-style: unset;

@@ -48,12 +48,14 @@
 
       <a href="./food-menu.html" class="button button--dark">GÖR EN NY BESTÄLLNING</a>
       <button id="seeReceipt" class="button button--light-outline">SE KVITTO</button>
+    </section>
 
+    <!-- Om kund vill se sitt kvitto blir följande synligt -->
+    <section id="wrapperSingleReceipt" class="wrapper d-none">
       <!-- button leder till order__receipt section som visar kvittot -->
-      <section id="orderReceipt" class="order__receipt d-none">
-        <!-- kod för att visa enskilt kvitto -->
-        <a href="./food-menu.html"><button id="newOrder" class="button button--dark">GÖR EN NY BESTÄLLNING</button></a>
-      </section>
+      <section id="orderReceipt" class="order__receipt"></section>
+      <!-- kod för att visa enskilt kvitto -->
+      <a href="./food-menu.html" class="button button--dark">GÖR EN NY BESTÄLLNING</a>
     </section>
 
     <footer id="tabBar" class="tab-bar">

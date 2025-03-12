@@ -13,11 +13,24 @@ export function setupOrderButton() {
   });
 }
 
-export function setupNewOrderButton() {
-  console.log(`new order please`);
-  const newOrderBtn = getElement(`#newOrder`);
-  newOrderBtn.addEventListener(`click`, function () {
-    console.log(`Klickade på gör ny beställning`);
-    window.location.href = "../pages/food-menu.html";
+export function setupSingleReceipt() {
+  console.log(`singlereceipt function`);
+
+  const singleReceiptBtn = getElement(`#seeReceipt`);
+  console.log(singleReceiptBtn);
+
+  singleReceiptBtn.addEventListener(`click`, function () {
+    console.log(`Klick på visa kvitto`);
+
+    window.location.href = "../pages/receipts.html?showSingleReceipt=true";
   });
 }
+
+// export function setupNewOrderButton() {
+//   console.log(`new order please`);
+//   const newOrderBtn = getElement(`#newOrder`);
+//   newOrderBtn.addEventListener(`click`, function () {
+//     console.log(`Klickade på gör ny beställning`);
+//     window.location.href = "../pages/food-menu.html";
+//   });
+// }

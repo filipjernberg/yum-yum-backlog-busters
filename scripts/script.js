@@ -1,7 +1,7 @@
 //Import
 import { createList, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
-import { setupOrderButton } from "./modules/eventHandlers.js";
+import { setupOrderButton, setupSingleReceipt } from "./modules/eventHandlers.js";
 //-----------------------------------------------
 
 //Run
@@ -25,20 +25,28 @@ function handleCurrentPage() {
       break;
     case "/pages/receipts.html":
       //Page specific code goes here
+      setupSingleReceipt();
 
       const confirmationSectionref = getElement(`#wrapperOrderConfirmation`);
       const orderWrapperRef = getElement(`#wrapperOrders`);
+      const receiptwrapperRef = getElement(`#wrapperSingleReceipt`);
       const body = getElement(`body`);
       if (confirmationSectionref) {
-        addClasses(confirmationSectionref, [`d-none`]);
+        confirmationSectionref.style.display = `none`;
       }
 
       const params = new URLSearchParams(window.location.search);
       if (params.get(`showConfirmation`) === `true`) {
-        removeClasses(confirmationSectionref, [`d-none`]);
+        confirmationSectionref.style.display = `flex`;
         addClasses(orderWrapperRef, [`d-none`]);
         body.style.backgroundColor = `#605858`;
         // Ovan är bara test. behöver komma åt variabelnamn från css
+        // DOM funktion för att ändra style?
+      }
+      if (params.get(`showSingleReceipt`) === `true`) {
+        addClasses(receiptwrapperRef, [`wrapper--flex`]);
+        addClasses(orderWrapperRef, [`d-none`]);
+        body.style.backgroundColor = `#605858`;
       }
       break;
     case "/pages/user-page.html":
