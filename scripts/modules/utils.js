@@ -1,4 +1,5 @@
 import { getElements } from "./domUtils.js";
+import { getIntFromLocalStorage } from "./localStorageUtils.js";
 
 export function timer() {
   console.log(`hej`);
@@ -8,7 +9,10 @@ export function timer() {
 
   const countdownRefs = getElements(`.countdown`);
 
+  let timeLeft = getIntFromLocalStorage(id, duration);
+
   startCountdown(
+    timeLeft,
     duration,
     id,
     (timeLeft) => {
