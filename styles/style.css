@@ -49,6 +49,11 @@
   white-space: nowrap;
 }
 
+.text-light {
+  color: var(--off-white);
+  border-bottom: var(--off-white);
+}
+
 /* === Basic Styling  === */
 .page {
   width: 100%;
@@ -60,7 +65,7 @@
 }
 
 .page--dark {
-  background-color: var(--dark-grey);
+  background-color: var(--medium-grey);
 }
 
 .page--background-image {
@@ -72,13 +77,52 @@
   background-color: var(--light-green);
 }
 
-/* .body__wrapper {
-} */
-
 .wrapper {
-  /* background-color: var(--off-white); */
+  width: 100%;
+  /* max-height: 100vh; */
   padding: 2rem;
-  padding-bottom: 8rem;
+
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  width: 100%;
+  height: auto;
+  padding: 2rem;
+  margin-bottom: 6rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  overflow: scroll;
+
+  border-radius: 0.5rem;
+}
+
+.content--dark {
+  background-color: var(--medium-grey);
+}
+
+.alert {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 0.1rem;
+  height: 0.1rem;
+  padding: 1rem;
+
+  border-radius: 1rem;
+  background-color: var(--red);
 }
 
 .wrapper--flex {
@@ -137,7 +181,7 @@ p {
   border-radius: 0.5rem;
   border-style: unset;
 
-  font: var(--font-fira-sans-h3);
+  font: var(--font-fira-sans-h2);
   text-transform: uppercase;
   letter-spacing: 0.1rem;
 
@@ -178,16 +222,6 @@ button:hover {
 }
 
 /* === Map Styling  === */
-.map__header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 2rem;
-}
-
-.cart {
-  max-width: 20%;
-}
 
 .heading-one {
   text-align: center;
@@ -203,6 +237,7 @@ button:hover {
 
 .map__container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 2rem;
@@ -221,30 +256,61 @@ button:hover {
 }
 
 .field__adress {
-  padding: 2rem;
+  padding: 2rem 0rem;
 }
 
 .field__open-hours {
-  padding: 2rem;
+  padding: 0rem 0rem 2rem 0rem;
 }
 
-.field__contact {
-  padding: 2rem;
+.field__end {
+  border: none;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #888, transparent);
+  width: 100%;
 }
 
-.about-us__paragraph {
-  padding: 2rem;
+/*ABOUT US*/
+
+.about {
+  background-color: var(--off-white);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0rem 2rem;
+}
+
+.heading-two {
+  text-align: center;
+}
+
+.about__img {
+  align-self: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.about-us__section {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-brands {
+  margin-bottom: 5rem;
 }
 
 /* === Icon Styling  === */
 i {
 }
 
+/* === Logo Styling  === */
 .logo--small {
-  max-width: 4rem;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
+  width: 64px;
+  align-self: flex-start;
 }
 
 /* === Order Styling  === */
@@ -300,10 +366,6 @@ i {
   height: 35px;
 }
 
-/* .wrapper {
-  padding-bottom: 8rem;
-} */
-
 /* === List Styling  === */
 .list-item {
   display: flex;
@@ -311,7 +373,7 @@ i {
   justify-content: space-between;
   gap: 0.5rem;
 
-  padding: 2rem;
+  padding: 1rem 0;
 }
 
 .list-item__row {
@@ -325,12 +387,24 @@ i {
 .list-item__hr {
   flex: 1;
   border: unset;
-  border-bottom: 2px dashed var(--dark-grey);
+  border-bottom: 2px dashed;
 }
 
 .list-item__quantity-button {
   width: 100px;
+  flex-shrink: 0;
   font: var(--font-fira-sans-h5);
   padding: 0.5rem 1rem;
   border-radius: 100px;
+}
+
+/* === Cart Styling  === */
+.cart {
+  width: 64px;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  margin: 2rem;
 }

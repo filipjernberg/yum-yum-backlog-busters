@@ -1,5 +1,5 @@
 //Import
-import { createList, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
+import { createList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
 import { setupOrderButton, setupSingleReceipt } from "./modules/eventHandlers.js";
 //-----------------------------------------------
@@ -19,7 +19,7 @@ function handleCurrentPage() {
       break;
     case "/pages/food-menu.html":
       setupOrderButton();
-      getMenu();
+      createContent("Meny", fetchMenu());
 
       break;
     case "/pages/map.html":
@@ -59,12 +59,11 @@ function handleCurrentPage() {
 }
 //-----------------------------------------------
 
-//Test function for printing menu
-async function getMenu() {
-  try {
-    const menuData = await fetchMenu();
-    createList(menuData, menuListItems);
-  } catch (error) {
-    console.error("Error fetching menu", error);
-  }
+async function createContent(heading, array) {
+  const contentHeading = createElement("h1", ["text-light"], {}, heading);
+  const contentList = createElement("ul", [], { id: "listItems" });
+
+  appendChildren(content, contentHeading, contentList);
+
+  createList(await array, listItems);
 }
