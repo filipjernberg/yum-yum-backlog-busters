@@ -25,12 +25,3 @@ export function setupSingleReceipt() {
     window.location.href = "../pages/receipts.html?showSingleReceipt=true";
   });
 }
-
-// export function setupNewOrderButton() {
-//   console.log(`new order please`);
-//   const newOrderBtn = getElement(`#newOrder`);
-//   newOrderBtn.addEventListener(`click`, function () {
-//     console.log(`Klickade på gör ny beställning`);
-//     window.location.href = "../pages/food-menu.html";
-//   });
-// }
