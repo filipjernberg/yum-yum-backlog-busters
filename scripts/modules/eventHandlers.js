@@ -1,6 +1,6 @@
 import { getElement } from "./domUtils.js";
 
-// Beställ knapp på mfood-menu.html
+// Beställ knapp på food-menu.html
 export function setupOrderButton() {
   console.log(`hej`);
 
@@ -13,6 +13,7 @@ export function setupOrderButton() {
   });
 }
 
+//Visa enskilt kvitto
 export function setupSingleReceipt() {
   console.log(`singlereceipt function`);
 
