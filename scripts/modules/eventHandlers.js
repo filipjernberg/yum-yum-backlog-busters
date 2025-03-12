@@ -1,4 +1,5 @@
 import { getElement } from "./domUtils.js";
+import { timer } from "./utils.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {
@@ -9,6 +10,7 @@ export function setupOrderButton() {
 
   addOrderBtn.addEventListener(`click`, function () {
     console.log(`Klick på beställning`);
+    timer();
     window.location.href = "../pages/receipts.html?showConfirmation=true";
   });
 }
