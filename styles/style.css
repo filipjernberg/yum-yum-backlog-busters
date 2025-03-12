@@ -85,11 +85,15 @@
 
 .wrapper__flex {
   display: flex;
-
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+.wrapper--height100 {
+  height: 100%;
+}
+
 .wrapper__flex--gap {
   gap: 2rem;
 }
@@ -218,6 +222,12 @@ button:hover {
 }
 
 /* === Map Styling  === */
+.map__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2rem;
+}
 
 .heading-one {
   text-align: center;
@@ -288,7 +298,7 @@ button:hover {
   object-fit: cover;
 }
 
-.about-us__section {
+.about__section {
   display: flex;
   gap: 2rem;
   justify-content: center;
@@ -304,6 +314,10 @@ i {
 }
 
 /* === Logo Styling  === */
+.logo--big {
+  width: 200px;
+}
+
 .logo--small {
   width: 64px;
   align-self: flex-start;
@@ -333,7 +347,7 @@ i {
 }
 
 /* === Tab bar  === */
-.tab-bar {
+.footer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -344,10 +358,14 @@ i {
   width: 100%;
 }
 
-.tab-bar__navigation {
+.tab-bar--transparant-bg {
+  opacity: 80%;
 }
 
-.tab-bar__list-item {
+.footer__navigation {
+}
+
+.footer__list-item {
   list-style: none;
   display: inline;
 }
@@ -355,11 +373,21 @@ i {
 .tab-bar__link {
   padding: 1rem 1.5rem;
   display: inline-block;
+  text-decoration: none;
+  color: var(--dark-grey);
 }
 
-.tab-bar__icon {
+.footer__icon {
   cursor: pointer;
   height: 35px;
+}
+
+.footer__location-list {
+  list-style: none;
+}
+
+.footer__location-list-item {
+  list-style: none;
 }
 
 /* === List Styling  === */
