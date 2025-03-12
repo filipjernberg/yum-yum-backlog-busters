@@ -15,7 +15,7 @@ export function timer() {
       const minutes = Math.floor(timeLeft / 60);
       const seconds = timeLeft % 60;
 
-      countdownRefs.forEach((count) => (count.textContent = `Tid : ${minutes}m ${seconds}s`));
+      countdownRefs.forEach((count) => (count.textContent = `Klar om ${minutes}m ${seconds}s`));
     },
     () => {
       countdownRefs.forEach((count) => (count.textContent = `Maten är redo!`));
