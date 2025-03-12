@@ -13,11 +13,11 @@
   --red: #df4a4a;
 
   /* Fonts */
-  --font-fira-sans-h1: 700 32pt/38pt "Fira Sans", sans-serif; /* Page Heading */
-  --font-fira-sans-h2: 700 24pt/29pt "Fira Sans", sans-serif; /* Modul & Button Heading */
-  --font-fira-sans-h3: 700 16pt/19pt "Fira Sans", sans-serif; /* Content Heading */
-  --font-fira-sans-h4: 500 14pt/18pt "Fira Sans", sans-serif; /* Content Sub-Heading */
-  --font-fira-sans-h5: 700 9pt/12pt "Fira Sans", sans-serif; /* Icon Heading */
+  --font-fira-sans-h1: 700 24pt/30pt "Fira Sans", sans-serif; /* Page Heading */
+  --font-fira-sans-h2: 700 16pt/20pt "Fira Sans", sans-serif; /* Modul & Button Heading */
+  --font-fira-sans-h3: 700 12pt/15pt "Fira Sans", sans-serif; /* Content Heading */
+  --font-fira-sans-h4: 500 9pt/12pt "Fira Sans", sans-serif; /* Content Sub-Heading */
+  --font-fira-sans-h5: 700 8pt/10pt "Fira Sans", sans-serif; /* Icon Heading */
   --font-fira-sans-text: 12pt/14pt "Fira Sans", sans-serif; /* Text */
 }
 
@@ -81,6 +81,12 @@
   padding-bottom: 8rem;
 }
 
+.wrapper--flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 h1 {
   font: var(--font-fira-sans-h1);
   text-transform: uppercase;
@@ -116,18 +122,25 @@ p {
 }
 
 /* === Button Styling  === */
-button {
+
+.button {
+  /*     förslag på ändring */
+  padding: 1.3rem 2rem;
+  /* ändra till h3?  */
+
   width: 100%;
-  padding: 2rem 3rem;
+  /* padding: 2rem 3rem; */
   border-radius: 0.5rem;
   border-style: unset;
 
-  font: var(--font-fira-sans-h2);
+  font: var(--font-fira-sans-h3);
   text-transform: uppercase;
   letter-spacing: 0.1rem;
 
   cursor: pointer;
 
+  text-align: center;
+  text-decoration: none;
   color: var(--off-white);
   background-color: var(--dark-grey);
 
@@ -174,8 +187,12 @@ button:hover {
 
 .heading-one {
   text-align: center;
+}
+
+.heading-one--padding {
   padding: 2rem;
 }
+
 .heading-one--light {
   color: var(--off-white);
 }
@@ -219,9 +236,34 @@ button:hover {
 i {
 }
 
+.logo--small {
+  max-width: 4rem;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
 /* === Order Styling  === */
+
+.order__img {
+  margin-top: 2rem;
+  max-width: 16rem;
+}
+
 .order__paragraph {
   text-align: center;
+  color: var(--off-white);
+}
+
+.order__paragraph--margin {
+  margin-bottom: 1.2rem;
+}
+
+.order__box {
+  background-color: var(--dark-green);
+  width: fit-content;
+  margin: 0.5rem 0;
+  padding: 0.5rem 1.3rem;
 }
 
 /* === Tab bar  === */
