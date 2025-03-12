@@ -1,5 +1,5 @@
 import { getElements } from "./domUtils.js";
-import { getIntFromLocalStorage } from "./localStorageUtils.js";
+import { getIntFromLocalStorage, removeFromLocalStorage } from "./localStorageUtils.js";
 
 export function timer() {
   console.log(`hej`);
@@ -13,7 +13,6 @@ export function timer() {
 
   startCountdown(
     timeLeft,
-    duration,
     id,
     (timeLeft) => {
       const minutes = Math.floor(timeLeft / 60);
@@ -23,6 +22,7 @@ export function timer() {
     },
     () => {
       countdownRefs.forEach((count) => (count.textContent = `Maten är redo!`));
+      removeFromLocalStorage(id);
     }
   );
 }
