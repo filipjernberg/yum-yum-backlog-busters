@@ -85,7 +85,6 @@
 
 .wrapper__flex {
   display: flex;
-  gap: 2rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -93,6 +92,10 @@
 
 .wrapper--height100 {
   height: 100%;
+}
+
+.wrapper__flex--gap {
+  gap: 2rem;
 }
 
 .content {
@@ -166,38 +169,26 @@ p {
 }
 
 /* === Button Styling  === */
-button {
-  width: 100%;
-  padding: 2rem 3rem;
-  border-radius: 0.5rem;
-  border-style: unset;
-
-  font: var(--font-fira-sans-h2);
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-
-  cursor: pointer;
-
-  color: var(--off-white);
-  background-color: var(--dark-grey);
-
-  transition: all 0.3s ease-in-out;
-}
 
 .button {
+  /* Tidigare inställningar*/
+  /* padding: 2rem 3rem; */
+  /* font: var(--font-fira-sans-h2); */
+
   width: 100%;
-  padding: 2rem 3rem;
+  margin-bottom: 0.5rem;
+  padding: 1.3rem 2rem;
   border-radius: 0.5rem;
   border-style: unset;
 
-  font: var(--font-fira-sans-h2);
+  font: var(--font-fira-sans-h3);
   text-transform: uppercase;
-  text-decoration: none;
-  text-align: center;
   letter-spacing: 0.1rem;
 
   cursor: pointer;
 
+  text-align: center;
+  text-decoration: none;
   color: var(--off-white);
   background-color: var(--dark-grey);
 
@@ -229,11 +220,6 @@ button:hover {
   color: var(--off-white);
   background-color: transparent;
 }
-/* === Index Styling  === */
-
-.index__wrapper {
-  height: 100%;
-}
 
 /* === Map Styling  === */
 .map__header {
@@ -243,24 +229,16 @@ button:hover {
   padding: 2rem;
 }
 
-.cart {
-  max-width: 20%;
-}
-
 .heading-one {
   text-align: center;
+}
+
+.heading-one--padding {
   padding: 2rem;
 }
 
-.map__container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-.heading-one {
-  text-align: center;
+.heading-one--light {
+  color: var(--off-white);
 }
 
 .map__container {
@@ -343,6 +321,29 @@ i {
 .logo--small {
   width: 64px;
   align-self: flex-start;
+}
+
+/* === Order Styling  === */
+
+.order__img {
+  max-width: 13rem;
+}
+
+.order__paragraph {
+  text-align: center;
+  color: var(--off-white);
+  font-size: var(--font-fira-sans-text);
+}
+
+.order__paragraph--margin {
+  margin-bottom: 1.2rem;
+}
+
+.order__box {
+  background-color: var(--dark-green);
+  width: fit-content;
+  margin: 0.5rem 0;
+  padding: 0.5rem 1.3rem;
 }
 
 /* === Tab bar  === */
