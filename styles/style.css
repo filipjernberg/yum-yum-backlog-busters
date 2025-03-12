@@ -298,7 +298,7 @@ button:hover {
   object-fit: cover;
 }
 
-.about-us__section {
+.about__section {
   display: flex;
   gap: 2rem;
   justify-content: center;
@@ -347,7 +347,7 @@ i {
 }
 
 /* === Tab bar  === */
-.tab-bar {
+.footer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -362,10 +362,10 @@ i {
   opacity: 80%;
 }
 
-.tab-bar__navigation {
+.footer__navigation {
 }
 
-.tab-bar__list-item {
+.footer__list-item {
   list-style: none;
   display: inline;
 }
@@ -377,7 +377,7 @@ i {
   color: var(--dark-grey);
 }
 
-.tab-bar__icon {
+.footer__icon {
   cursor: pointer;
   height: 35px;
 }
