@@ -161,20 +161,9 @@ button:hover {
 }
 
 /* === Map Styling  === */
-.map__header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 2rem;
-}
-
-.cart {
-    max-width: 20%;
-}
 
 .heading-one {
     text-align: center;
-    padding: 2rem;
 }
 
 .map__container {
@@ -195,11 +184,19 @@ button:hover {
     font: var(--font-fira-sans-text);
 }
 
+.field__adress {
+    padding: 2rem 0rem;
+}
+
+.field__open-hours {
+    padding: 0rem 0rem 2rem 0rem;
+}
+
 .field__end {
     border: none;
     height: 3px;
     background: linear-gradient(to right, transparent, #888, transparent);
-    width: 80%;
+    width: 100%;
 }
 
 /*ABOUT US*/
