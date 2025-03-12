@@ -1,6 +1,8 @@
-import { getElements } from "./domUtils";
+import { getElements } from "./domUtils.js";
 
 export function timer() {
+  console.log(`hej`);
+
   const duration = 10 * 60; //10 minuter
   const id = `timer-${Date.now()}`;
 
@@ -21,4 +23,20 @@ export function timer() {
   );
 }
 
-function startCountdown(duration, id, updateCallback, finishCallback) {}
+export function startCountdown(duration, id, updateCallback, finishCallback) {
+  let timeLeft = duration;
+  const timers = {};
+
+  timers[id] = setInterval(() => {
+    timeLeft--;
+
+    if (timeLeft >= 0) {
+      updateCallback(timeLeft);
+    }
+    if (timeLeft === 0) {
+      clearInterval(timers[id]);
+      delete timers[id];
+      finishCallback();
+    }
+  }, 1000);
+}

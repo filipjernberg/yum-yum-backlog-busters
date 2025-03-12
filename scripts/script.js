@@ -2,6 +2,7 @@
 import { createList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
 import { setupOrderButton, setupSingleReceipt } from "./modules/eventHandlers.js";
+import { timer } from "./modules/utils.js";
 //-----------------------------------------------
 
 //Run
@@ -38,6 +39,7 @@ function handleCurrentPage() {
       }
 
       if (params.get(`showConfirmation`) === `true`) {
+        timer();
         confirmationSectionref.style.display = `flex`;
         addClasses(orderWrapperRef, [`d-none`]);
         body.style.backgroundColor = `#605858`;
