@@ -13,11 +13,11 @@
   --red: #df4a4a;
 
   /* Fonts */
-  --font-fira-sans-h1: 700 32pt/38pt "Fira Sans", sans-serif; /* Page Heading */
-  --font-fira-sans-h2: 700 24pt/29pt "Fira Sans", sans-serif; /* Modul & Button Heading */
-  --font-fira-sans-h3: 700 16pt/19pt "Fira Sans", sans-serif; /* Content Heading */
-  --font-fira-sans-h4: 500 14pt/18pt "Fira Sans", sans-serif; /* Content Sub-Heading */
-  --font-fira-sans-h5: 700 9pt/12pt "Fira Sans", sans-serif; /* Icon Heading */
+  --font-fira-sans-h1: 700 24pt/30pt "Fira Sans", sans-serif; /* Page Heading */
+  --font-fira-sans-h2: 700 16pt/20pt "Fira Sans", sans-serif; /* Modul & Button Heading */
+  --font-fira-sans-h3: 700 12pt/15pt "Fira Sans", sans-serif; /* Content Heading */
+  --font-fira-sans-h4: 500 9pt/12pt "Fira Sans", sans-serif; /* Content Sub-Heading */
+  --font-fira-sans-h5: 700 8pt/10pt "Fira Sans", sans-serif; /* Icon Heading */
   --font-fira-sans-text: 12pt/14pt "Fira Sans", sans-serif; /* Text */
 }
 
@@ -232,13 +232,11 @@ button:hover {
 }
 
 .index__wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: red;
+  height: 100%;
 }
+
 .index__logo {
-  width: 30%;
+  width: 50%;
 }
 
 .index__footer {
@@ -321,6 +319,10 @@ i {
   left: 0;
   bottom: 0;
   width: 100%;
+}
+
+.tab-bar--transparant-bg {
+  opacity: 70%;
 }
 
 .tab-bar__navigation {
