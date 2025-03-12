@@ -13,11 +13,11 @@
     --red: #df4a4a;
 
     /* Fonts */
-    --font-fira-sans-h1: 700 32pt/38pt "Fira Sans", sans-serif; /* Page Heading */
-    --font-fira-sans-h2: 700 24pt/29pt "Fira Sans", sans-serif; /* Modul & Button Heading */
-    --font-fira-sans-h3: 700 16pt/19pt "Fira Sans", sans-serif; /* Content Heading */
-    --font-fira-sans-h4: 500 14pt/18pt "Fira Sans", sans-serif; /* Content Sub-Heading */
-    --font-fira-sans-h5: 700 9pt/12pt "Fira Sans", sans-serif; /* Icon Heading */
+    --font-fira-sans-h1: 700 24pt/30pt "Fira Sans", sans-serif; /* Page Heading */
+    --font-fira-sans-h2: 700 16pt/20pt "Fira Sans", sans-serif; /* Modul & Button Heading */
+    --font-fira-sans-h3: 700 12pt/15pt "Fira Sans", sans-serif; /* Content Heading */
+    --font-fira-sans-h4: 500 9pt/12pt "Fira Sans", sans-serif; /* Content Sub-Heading */
+    --font-fira-sans-h5: 700 8pt/10pt "Fira Sans", sans-serif; /* Icon Heading */
     --font-fira-sans-text: 12pt/14pt "Fira Sans", sans-serif; /* Text */
 }
 
@@ -79,32 +79,41 @@
 
 .wrapper {
     width: 100%;
-    /* max-height: 100vh; */
-    padding: 2rem;
+    max-height: 100vh;
+    padding: 1rem;
+}
 
+.wrapper__flex {
     display: flex;
-    gap: 2rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.wrapper--height100 {
+    height: 100%;
+}
+
+.wrapper__flex--gap {
+    gap: 2rem;
+}
+
 .content {
     width: 100%;
     height: auto;
-    padding: 2rem;
     margin-bottom: 6rem;
 
     display: flex;
     flex-direction: column;
     gap: 2rem;
 
-    overflow: scroll;
+    overflow: hidden;
 
     border-radius: 0.5rem;
 }
 
 .content--dark {
+    color: var(--off-white);
     background-color: var(--medium-grey);
 }
 
@@ -160,7 +169,12 @@ p {
 }
 
 /* === Button Styling  === */
-button {
+
+.button {
+    /* Tidigare inställningar*/
+    /* padding: 2rem 3rem; */
+    /* font: var(--font-fira-sans-h2); */
+
     width: 100%;
     padding: 2rem 3rem;
     border-radius: 0.5rem;
@@ -168,17 +182,21 @@ button {
 
     font: var(--font-fira-sans-h2);
     text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
     letter-spacing: 0.1rem;
 
     cursor: pointer;
 
+    text-align: center;
+    text-decoration: none;
     color: var(--off-white);
     background-color: var(--dark-grey);
 
     transition: all 0.3s ease-in-out;
 }
 
-button:hover {
+.button:hover {
     background-color: var(--off-white);
     color: var(--dark-grey);
 }
@@ -204,12 +222,66 @@ button:hover {
     background-color: transparent;
 }
 
+/* === Scroll Container === */
+.scroll-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 3rem 0;
+
+    overflow: hidden;
+}
+
+.scroll-container__button-up {
+    position: absolute;
+    top: 0;
+    height: 3rem;
+    width: 100%;
+    border-style: unset;
+    background: var(--medium-grey);
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: #353131;
+}
+
+.scroll-container__button-down {
+    position: absolute;
+    bottom: 0;
+    height: 3rem;
+    width: 100%;
+    border-style: unset;
+    background: var(--medium-grey);
+    cursor: pointer;
+    z-index: 2;
+}
+
+.scroll-container__icon {
+    height: 100%;
+    color: red;
+    fill: red;
+}
+
 /* === Map Styling  === */
-
-
+.map__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem;
+}
 
 .heading-one {
     text-align: center;
+}
+
+.heading-one--padding {
+    padding: 2rem;
+}
+
+.heading-one--light {
+    color: var(--off-white);
 }
 
 .map__container {
@@ -263,13 +335,13 @@ button:hover {
 
 .about__img {
     align-self: center;
-    width: 200px;  
-    height: 200px; 
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    object-fit: cover; 
+    object-fit: cover;
 }
 
-.about-us__section {
+.about__section {
     display: flex;
     gap: 2rem;
     justify-content: center;
@@ -285,13 +357,40 @@ i {
 }
 
 /* === Logo Styling  === */
+.logo--big {
+    width: 200px;
+}
+
 .logo--small {
     width: 64px;
     align-self: flex-start;
 }
 
+/* === Order Styling  === */
+
+.order__img {
+    max-width: 13rem;
+}
+
+.order__paragraph {
+    text-align: center;
+    color: var(--off-white);
+    font-size: var(--font-fira-sans-text);
+}
+
+.order__paragraph--margin {
+    margin-bottom: 1.2rem;
+}
+
+.order__box {
+    background-color: var(--dark-green);
+    width: fit-content;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1.3rem;
+}
+
 /* === Tab bar  === */
-.tab-bar {
+.footer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -302,10 +401,14 @@ i {
     width: 100%;
 }
 
-.tab-bar__navigation {
+.tab-bar--transparant-bg {
+    opacity: 80%;
 }
 
-.tab-bar__list-item {
+.footer__navigation {
+}
+
+.footer__list-item {
     list-style: none;
     display: inline;
 }
@@ -313,21 +416,46 @@ i {
 .tab-bar__link {
     padding: 1rem 1.5rem;
     display: inline-block;
+    text-decoration: none;
+    color: var(--dark-grey);
 }
 
-.tab-bar__icon {
+.footer__icon {
     cursor: pointer;
     height: 35px;
 }
 
+.footer__location-list {
+    list-style: none;
+}
+
+.footer__location-list-item {
+    list-style: none;
+}
+
 /* === List Styling  === */
+.list-section {
+    width: 100%;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.list-section::-webkit-scrollbar {
+    display: none;
+}
+
 .list-item {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 0.5rem;
+    gap: 0.2rem;
+    padding-top: 1rem;
 
-    padding: 1rem 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.list-item:hover {
+    background-color: var(--light-grey);
 }
 
 .list-item__row {
@@ -336,19 +464,29 @@ i {
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
+    padding-inline: 1rem;
 }
 
 .list-item__hr {
     flex: 1;
     border: unset;
-    border-bottom: 2px dashed;
+    border-bottom: 0.15rem dashed;
+    opacity: 0.4;
+}
+
+.list-item__hr--divider {
+    margin-top: 1rem;
+    border-bottom: 0.15rem dotted;
+    opacity: 0.1;
 }
 
 .list-item__quantity-button {
-    width: 100px;
+    width: 90px;
     flex-shrink: 0;
+    align-self: center;
     font: var(--font-fira-sans-h5);
     padding: 0.5rem 1rem;
+    margin-right: -0.3rem;
     border-radius: 100px;
 }
 

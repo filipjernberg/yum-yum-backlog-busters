@@ -33,29 +33,51 @@ export function getElements(selector) {
 //-----------------------------------------------
 
 //List Utilities
-export async function createList(list, section) {
+export async function createScrollList(list) {
+  const scrollContainer = createElement("div", ["scroll-container"]);
+
+  const scrollUp = createElement("button", ["scroll-container__button-up"], { id: "scrollButtonUp" });
+  const scrollUpIcon = createElement("img", ["scroll-container__icon"], { src: "../resources/icons/arrow-up-w300.svg" });
+
+  const scrollDown = createElement("button", ["scroll-container__button-down"], { id: "scrollButtonDown" });
+  const scrollDownIcon = createElement("img", ["scroll-container__icon"], { src: "../resources/icons/arrow-down-w300.svg" });
+
+  const listContainer = await createList(list);
+
+  appendChildren(scrollUp, scrollUpIcon);
+  appendChildren(scrollDown, scrollDownIcon);
+  appendChildren(scrollContainer, scrollUp, listContainer, scrollDown);
+
+  return scrollContainer;
+}
+
+export async function createList(list) {
+  const listSection = createElement("ul", ["list-section"]);
   list.forEach((item) => {
     const listItem = createListItem(item);
-    section.appendChild(listItem);
+    listSection.appendChild(listItem);
   });
+
+  return listSection;
 }
 
 function createListItem(item) {
-  const listItem = createElement("div", ["list-item"], { "data-id": item.id });
+  const listItem = createElement("ol", ["list-item"], { "data-id": item.id });
   const rowOne = createElement("div", ["list-item__row"]);
   const rowTwo = createElement("div", ["list-item__row"]);
 
-  const itemName = createElement("h2", ["text-light"], {}, item.name);
-  const dottedLine = createElement("hr", ["list-item__hr", "text-light"], {});
-  const itemPrice = createElement("h2", ["text-light"], {}, item.price + " SEK");
+  const itemName = createElement("h2", [], {}, item.name);
+  const dottedLine = createElement("hr", ["list-item__hr"], {});
+  const itemPrice = createElement("h2", [], {}, item.price + " SEK");
 
   //Only for food menu. Needs work for receipts etc.
-  const itemInfo = createElement("h4", ["text-light"], {}, item.ingredients?.length ? item.ingredients.join(", ") : "");
-  const quantityButton = createElement("button", ["list-item__quantity-button"], {}, "Add");
+  const itemInfo = createElement("h4", [], {}, item.ingredients?.length ? item.ingredients.join(", ") : "");
+  const quantityButton = createElement("button", ["button", "list-item__quantity-button"], {}, "Add");
+  const dottedLineDivider = createElement("hr", ["list-item__hr", "list-item__hr--divider"], {});
 
   appendChildren(rowOne, itemName, dottedLine, itemPrice);
   appendChildren(rowTwo, itemInfo, quantityButton);
-  appendChildren(listItem, rowOne, rowTwo);
+  appendChildren(listItem, rowOne, rowTwo, dottedLineDivider);
 
   return listItem;
 }
