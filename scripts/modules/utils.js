@@ -1,18 +1,20 @@
 import { getElements, getElement, addClasses } from "./domUtils.js";
-import { getIntFromLocalStorage, removeFromLocalStorage } from "./localStorageUtils.js";
+import { getFromLocalStorage, removeFromLocalStorage, setLocalStorage } from "./localStorageUtils.js";
 
-export function timer() {
-  console.log(`hej`);
+export function startTimer(duration = 10 * 60) {
+  console.log(`timer startad`);
 
-  const duration = 10 * 60; //10 minuter
-  const id = `timer-${Date.now()}`;
-
+  const id = `#${Date.now()}`;
   const countdownRefs = getElements(`.countdown`);
 
-  let timeLeft = getIntFromLocalStorage(id, duration);
+  let activeTimers = getFromLocalStorage(`activeTimers`);
+  activeTimers.push({ id, timeLeft: duration });
+  setLocalStorage(`activeTimers`, activeTimers);
+
+  getConfirmationNumber(id);
 
   startCountdown(
-    timeLeft,
+    duration,
     id,
     (timeLeft) => {
       const minutes = Math.floor(timeLeft / 60);
@@ -22,11 +24,12 @@ export function timer() {
     },
     () => {
       countdownRefs.forEach((count) => (count.textContent = `Maten är redo!`));
-      removeFromLocalStorage(id);
+      removeFromLocalStorage(`activeTimers`, id);
     }
   );
 }
 
+//Startar nedräkningen
 export function startCountdown(duration, id, updateCallback, finishCallback) {
   let timeLeft = duration;
   const timers = {};
@@ -60,7 +63,7 @@ export function checkParams(params) {
   }
 
   if (params.get(`showConfirmation`) === `true`) {
-    timer();
+    startTimer();
     confirmationSectionref.style.display = `flex`;
     addClasses(orderWrapperRef, [`d-none`]);
     body.style.backgroundColor = `#605858`;
@@ -72,4 +75,8 @@ export function checkParams(params) {
     addClasses(orderWrapperRef, [`d-none`]);
     body.style.backgroundColor = `#605858`;
   }
+}
+
+export function getConfirmationNumber(number) {
+  getElement(`#confirmationNumber`).textContent = number;
 }
