@@ -1,8 +1,10 @@
 //Import
-import { createList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
+import { createList, createScrollList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
-import { setupOrderButton, setupSingleReceipt } from "./modules/eventHandlers.js";
+import { addToCartListener, latestOrder } from "./modules/cart.js";
+import { setupOrderButton, setupSingleReceipt, removeOrderButton } from "./modules/eventHandlers.js";
 import { checkParams, getParams } from "./modules/utils.js";
+import { createReceipt } from "./modules/receipts.js";
 //-----------------------------------------------
 
 //Run
@@ -19,6 +21,8 @@ function handleCurrentPage() {
     case "/pages/food-menu.html":
       setupOrderButton();
       createContent("Meny", fetchMenu());
+      addToCartListener();
+      removeOrderButton();
 
       break;
     case "/pages/map.html":
@@ -37,12 +41,8 @@ function handleCurrentPage() {
   }
 }
 //-----------------------------------------------
-
-async function createContent(heading, array) {
-  const contentHeading = createElement("h1", ["text-light"], {}, heading);
-  const contentList = createElement("ul", [], { id: "listItems" });
-
-  appendChildren(content, contentHeading, contentList);
-
-  createList(await array, listItems);
+async function createContent(heading, list) {
+  const contentHeading = createElement("h1", [], {}, heading);
+  const scrollList = await createScrollList(await list, "menu");
+  appendChildren(content, contentHeading, scrollList);
 }

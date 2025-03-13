@@ -33,32 +33,71 @@ export function getElements(selector) {
 //-----------------------------------------------
 
 //List Utilities
-export async function createList(list, section) {
-  list.forEach((item) => {
-    const listItem = createListItem(item);
-    section.appendChild(listItem);
-  });
+export async function createScrollList(list, type) {
+  const scrollContainer = createElement("div", ["scroll-container"]);
+
+  const scrollUp = createElement("button", ["scroll-container__button-up"], { id: "scrollButtonUp" });
+  const scrollUpIcon = createElement("img", ["scroll-container__icon"], { src: "../resources/icons/arrow-up-w300.svg" });
+
+  const scrollDown = createElement("button", ["scroll-container__button-down"], { id: "scrollButtonDown" });
+  const scrollDownIcon = createElement("img", ["scroll-container__icon"], { src: "../resources/icons/arrow-down-w300.svg" });
+
+  const listContainer = await createList(list, type);
+
+  appendChildren(scrollUp, scrollUpIcon);
+  appendChildren(scrollDown, scrollDownIcon);
+  appendChildren(scrollContainer, scrollUp, listContainer, scrollDown);
+
+  return scrollContainer;
 }
 
-function createListItem(item) {
-  const listItem = createElement("div", ["list-item"]);
+export async function createList(list, type) {
+  const listSection = createElement("ul", ["list-section"]);
+  list.forEach((item) => {
+    const listItem = createListItem(item, type);
+    listSection.appendChild(listItem);
+  });
+
+  return listSection;
+}
+
+function createListItem(item, mode) {
+  const listItem = createElement("li", ["list-item", `list-item--${mode}`], { "data-id": item.id });
   const rowOne = createElement("div", ["list-item__row"]);
   const rowTwo = createElement("div", ["list-item__row"]);
 
-  const itemName = createElement("h2", ["text-light"], {}, item.name);
-  const dottedLine = createElement("hr", ["list-item__hr", "text-light"], {});
-  const itemPrice = createElement("h2", ["text-light"], {}, item.price + " SEK");
+  let itemName, itemPrice, itemInfo, quantityButton;
 
-  //Only for food menu. Needs work for receipts etc.
-  const itemInfo = createElement("h4", ["text-light"], {}, item.ingredients?.length ? item.ingredients.join(", ") : "");
-  const quantityButton = createElement("button", ["list-item__quantity-button"], {}, "Add");
+  switch (mode) {
+    case "menu":
+      itemName = createElement("h2", ["list-item__name"], {}, item.name);
+      itemPrice = createElement("h2", ["list-item__price"], {}, `${item.price} SEK`);
+      itemInfo = createElement("h4", ["list-item__info"], {}, item.ingredients?.length ? item.ingredients.join(", ") : "");
+      quantityButton = createElement("button", ["button", "list-item__quantity-button"], {}, "Add");
+      break;
+
+    case "receipt":
+      itemName = createElement("h3", ["list-item__name", "list-item__name--small"], {}, item.name);
+      itemPrice = createElement("h3", ["list-item__price", "list-item__price--small"], {}, `${item.price} SEK`);
+      itemInfo = createElement("h4", ["list-item__info", "list-item__info--small"], {}, `Antal: ${item.quantity || 1}`);
+      break;
+  }
+
+  const dottedLine = createElement("hr", ["list-item__hr"], {});
+  const dottedLineDivider = createElement("hr", ["list-item__hr", "list-item__hr--divider"], {});
 
   appendChildren(rowOne, itemName, dottedLine, itemPrice);
-  appendChildren(rowTwo, itemInfo, quantityButton);
-  appendChildren(listItem, rowOne, rowTwo);
+  appendChildren(rowTwo, itemInfo);
+  if (mode === "menu") {
+    appendChildren(rowTwo, quantityButton);
+    appendChildren(listItem, rowOne, rowTwo, dottedLineDivider);
+  } else {
+    appendChildren(listItem, rowOne, rowTwo);
+  }
 
   return listItem;
 }
+
 //-----------------------------------------------
 
 //Food Menu
