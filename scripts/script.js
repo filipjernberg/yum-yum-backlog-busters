@@ -2,7 +2,7 @@
 import { createList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
 import { setupOrderButton, setupSingleReceipt } from "./modules/eventHandlers.js";
-import { checkParams, getParams, timer } from "./modules/utils.js";
+import { checkParams, getParams } from "./modules/utils.js";
 //-----------------------------------------------
 
 //Run
