@@ -25,7 +25,6 @@ export function checkParams(params) {
 
 export function handleOrderConfirmation(confirmationSectionRef, orderWrapperRef, body) {
   startTimer(`#timerConfirmation`);
-  // confirmationSectionRef.style.display = `flex`;
   addClasses(confirmationSectionRef, [`flex`]);
   addClasses(orderWrapperRef, [`d-none`]);
   removeClasses(orderWrapperRef, ["flex"]);
@@ -39,20 +38,23 @@ function handleSingleReceipt(receiptWrapperRef, orderWrapperRef, body) {
   removeClasses(orderWrapperRef, ["flex"]);
   styleElement(body, `backgroundColor`, `#605858`);
 
-  const startTime = getFromLocalStorage(`startTime`);
-  if (startTime) startCountdown(startTime, `#timerForReceipt`);
+  const userData = getFromLocalStorage(`user`);
+  if (userData && userData.length > 0) {
+    const latestUser = userData[userData.length - 1]; // Hämta senaste beställningen
+    if (latestUser.startTime) startCountdown(latestUser.startTime, `#timerForReceipt`);
+  }
 }
 
 export function startTimer(timerElementId) {
   const startTime = Date.now();
-  setLocalStorage(`startTime`, startTime);
+  // setLocalStorage(`startTime`, startTime);
   getConfirmationNumber(startTime);
   startCountdown(startTime, timerElementId);
 }
 
 export function startCountdown(startTime, timerElementId) {
   const countdownElement = getElement(timerElementId);
-  // const startTime = getFromLocalStorage(`startTime`);
+
   const duration = 10 * 60 * 1000;
 
   const timerInterval = setInterval(() => {
@@ -81,7 +83,7 @@ export function generateConfirmationNumber() {
 
 export function saveUserData(timerElementId) {
   const confirmationNumber = generateConfirmationNumber();
-  const startTime = Date.now(); // Tidsstämpel när användaren skapar beställningen
+  const startTime = Date.now();
 
   const userData = {
     confirmationNumber: confirmationNumber,
@@ -103,7 +105,10 @@ export function getUserData() {
 
   if (userData && userData.length > 0) {
     console.log("UserData retrieved:", userData);
-    startCountdown(userData[userData.length - 1].startTime);
+    const latestUser = userData[userData.length - 1];
+    if (latestUser.startTime) {
+      startCountdown(latestUser.startTime, `#timerForReceipt`);
+    }
   } else {
     console.log("No user data found");
   }
