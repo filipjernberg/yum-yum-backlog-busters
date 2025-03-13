@@ -62,7 +62,7 @@ export async function createList(list) {
 }
 
 function createListItem(item) {
-    const listItem = createElement("ol", ["list-item"], { "data-id": item.id });
+    const listItem = createElement("li", ["list-item"], { "data-id": item.id });
     const rowOne = createElement("div", ["list-item__row"]);
     const rowTwo = createElement("div", ["list-item__row"]);
 
