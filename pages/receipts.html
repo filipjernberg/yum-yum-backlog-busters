@@ -44,9 +44,9 @@
       <img class="order__img" src="../resources/boxtop.png" alt="Din order är bekräftad, bild på takeaway" />
       <h1 class="heading-one heading-one--light">DINA WONTONS TILLAGAS!</h1>
       <div class="order__box">
-        <p class="order__paragraph">Tid kvar: [TID]</p>
+        <p id="timerConfirmation" class="countdown order__paragraph"></p>
       </div>
-      <p class="order__paragraph order__paragraph--margin">#hjf68jeu88</p>
+      <p id="confirmationNumber" class="order__paragraph order__paragraph--margin"></p>
       <!-- random sifferkombination som sparas? -->
 
       <a href="./food-menu.html" class="button button--dark">GÖR EN NY BESTÄLLNING</a>
@@ -56,6 +56,9 @@
     <!-- Om kund vill se sitt kvitto blir följande synligt -->
     <section id="wrapperSingleReceipt" class="wrapper d-none">
       <!-- button leder till order__receipt section som visar kvittot -->
+      <div class="order__box">
+        <p id="timerForReceipt" class="countdown order__paragraph"></p>
+      </div>
       <section id="orderReceipt" class="order__receipt"></section>
       <!-- kod för att visa enskilt kvitto -->
       <a href="./food-menu.html" class="button button--dark">GÖR EN NY BESTÄLLNING</a>

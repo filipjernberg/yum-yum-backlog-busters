@@ -1,4 +1,5 @@
 import { getElement } from "./domUtils.js";
+import { saveUserData } from "./utils.js";
 import { getFromLocalStorage, setLocalStorage, removeFromLocalStorage, clearLocalStorage } from "./localStorageUtils.js";
 
 // Beställ knapp på food-menu.html
