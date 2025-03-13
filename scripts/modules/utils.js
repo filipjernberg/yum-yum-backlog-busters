@@ -75,12 +75,6 @@ export function generateConfirmationNumber() {
   return Math.floor(Math.random() * 1000000);
 }
 
-export function submitOrder(orderDetails) {
-  const confirmationNumber = generateConfirmationNumber();
-}
-
-//---
-
 export function saveUserData(timerElementId) {
   const confirmationNumber = generateConfirmationNumber();
   const startTime = Date.now(); // Tidsstämpel när användaren skapar beställningen
@@ -105,7 +99,7 @@ export function getUserData() {
 
   if (userData && userData.length > 0) {
     console.log("UserData retrieved:", userData);
-    startCountdown(userData[userData.length - 1].startTime, timerElementId);
+    startCountdown(userData[userData.length - 1].startTime);
   } else {
     console.log("No user data found");
   }
