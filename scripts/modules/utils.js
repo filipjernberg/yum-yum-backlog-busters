@@ -1,5 +1,5 @@
 import { getElement, addClasses, styleElement } from "./domUtils.js";
-import { getFromLocalStorage, removeFromLocalStorage, setLocalStorage } from "./localStorageUtils.js";
+import { getFromLocalStorage, setLocalStorage } from "./localStorageUtils.js";
 
 export function getParams() {
   return new URLSearchParams(window.location.search);
@@ -30,6 +30,7 @@ export function handleOrderConfirmation(confirmationSectionRef, orderWrapperRef,
   styleElement(body, `backgroundColor`, `#605858`);
   saveUserData(`#timerConfirmation`);
 }
+
 function handleSingleReceipt(receiptWrapperRef, orderWrapperRef, body) {
   addClasses(receiptWrapperRef, [`flex`]);
   addClasses(orderWrapperRef, [`d-none`]);
