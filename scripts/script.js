@@ -2,7 +2,8 @@
 import { createList, createScrollList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
 import { addToCartListener } from "./modules/cart.js";
-import { setupOrderButton, setupSingleReceipt } from "./modules/eventHandlers.js";
+import { setupOrderButton, setupSingleReceipt, removeOrderButton } from "./modules/eventHandlers.js";
+import { createReceipt } from "./modules/receipts.js";
 //-----------------------------------------------
 
 //Run
@@ -22,6 +23,7 @@ function handleCurrentPage() {
             setupOrderButton();
             createContent("Meny", fetchMenu());
             addToCartListener();
+            removeOrderButton();
 
             break;
         case "/pages/map.html":
@@ -29,6 +31,7 @@ function handleCurrentPage() {
             break;
         case "/pages/receipts.html":
             //Page specific code goes here
+            createReceipt();
             setupSingleReceipt();
 
             const confirmationSectionref = getElement(`#wrapperOrderConfirmation`);
@@ -62,6 +65,6 @@ function handleCurrentPage() {
 //-----------------------------------------------
 async function createContent(heading, list) {
     const contentHeading = createElement("h1", [], {}, heading);
-    const scrollList = await createScrollList(await list);
+    const scrollList = await createScrollList(await list, "menu");
     appendChildren(content, contentHeading, scrollList);
 }

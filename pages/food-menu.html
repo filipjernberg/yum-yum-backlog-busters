@@ -11,10 +11,9 @@
     </head>
     <body class="page page--background-image">
         <section id="wrapper" class="wrapper flex">
+            <header class="header">
             <img class="logo--small" src="../resources/logo-outline-white-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-
-            <button id="cart" class="cart button"></button>
-                <!-- ikon -->
+            <button id="cart" class="cart button button--light button--small" aria-label="Shopping cart button"><img src="../resources/icons/shopping-bag-w300.svg" aria-hidden="true" class="footer__icon"></button></header>
                 <h5 id="cartAlert" class="alert">0</h5>
                 <section id="cartModal" class="cart__modal d-none">
                     <!--Temp d-none until done. -->
@@ -23,8 +22,10 @@
                     <h4 class="cart__subtitle">tidigare beställningar ></h4>
                     <p class="cart__paragraph">din varukorg är tom</p>
                     <!-- tillfällig button -->
-                    <button class="button" id="addOrder">beställ order</button>
+
                 </section>
+                <button class="button" id="addOrder">beställ order</button>
+                <button class="button" id="removeOrder">töm varukorgen</button>
             </button>
             <section class="content content--dark" id="content"></section>
         </section>
