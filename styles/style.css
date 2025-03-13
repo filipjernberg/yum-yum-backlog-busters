@@ -271,29 +271,6 @@ p {
   bottom: 0;
 }
 
-/* .scroll-container__button-up {
-  position: absolute;
-  top: 0;
-  height: 3rem;
-  width: 100%;
-  border-style: unset;
-  background: var(--medium-grey);
-  cursor: pointer;
-  z-index: 2;
-  box-shadow: #353131;
-}
-
-.scroll-container__button-down {
-  position: absolute;
-  bottom: 0;
-  height: 3rem;
-  width: 100%;
-  border-style: unset;
-  background: var(--medium-grey);
-  cursor: pointer;
-  z-index: 2;
-} */
-
 .scroll-container__icon {
   height: 100%;
   color: red;
