@@ -1,4 +1,4 @@
-import { getElement, addClasses, styleElement } from "./domUtils.js";
+import { getElement, addClasses, styleElement, removeClasses } from "./domUtils.js";
 import { getFromLocalStorage, setLocalStorage } from "./localStorageUtils.js";
 
 export function getParams() {
@@ -12,7 +12,7 @@ export function checkParams(params) {
   const body = getElement(`body`);
 
   if (confirmationSectionRef) {
-    confirmationSectionRef.style.display = `none`;
+    removeClasses(confirmationSectionRef, ["flex"]);
   }
 
   if (params.get(`showConfirmation`) === `true`) {
@@ -25,8 +25,10 @@ export function checkParams(params) {
 
 export function handleOrderConfirmation(confirmationSectionRef, orderWrapperRef, body) {
   startTimer(`#timerConfirmation`);
-  confirmationSectionRef.style.display = `flex`;
+  // confirmationSectionRef.style.display = `flex`;
+  addClasses(confirmationSectionRef, [`flex`]);
   addClasses(orderWrapperRef, [`d-none`]);
+  removeClasses(orderWrapperRef, ["flex"]);
   styleElement(body, `backgroundColor`, `#605858`);
   saveUserData(`#timerConfirmation`);
 }
@@ -34,6 +36,7 @@ export function handleOrderConfirmation(confirmationSectionRef, orderWrapperRef,
 function handleSingleReceipt(receiptWrapperRef, orderWrapperRef, body) {
   addClasses(receiptWrapperRef, [`flex`]);
   addClasses(orderWrapperRef, [`d-none`]);
+  removeClasses(orderWrapperRef, ["flex"]);
   styleElement(body, `backgroundColor`, `#605858`);
 
   const startTime = getFromLocalStorage(`startTime`);
