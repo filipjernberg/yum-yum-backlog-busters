@@ -1,8 +1,8 @@
 //Import
 import { createList, createScrollList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
+import { setupOrderButton, setupSingleReceipt, setupScrollBtn, removeOrderButton } from "./modules/eventHandlers.js";
 import { addToCartListener, latestOrder } from "./modules/cart.js";
-import { setupOrderButton, setupSingleReceipt, removeOrderButton } from "./modules/eventHandlers.js";
 import { checkParams, getParams } from "./modules/utils.js";
 import { createReceipt } from "./modules/receipts.js";
 //-----------------------------------------------
@@ -45,4 +45,5 @@ async function createContent(heading, list) {
   const contentHeading = createElement("h1", [], {}, heading);
   const scrollList = await createScrollList(await list, "menu");
   appendChildren(content, contentHeading, scrollList);
+  setupScrollBtn();
 }

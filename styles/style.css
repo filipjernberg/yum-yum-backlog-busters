@@ -100,6 +100,9 @@
 .wrapper__flex--gap {
   gap: 2rem;
 }
+.wrapper__flex--gap-4rem {
+  gap: 4rem;
+}
 
 .header {
   width: 100%;
@@ -252,9 +255,8 @@ p {
   overflow: hidden;
 }
 
-.scroll-container__button-up {
+.scroll-container__button {
   position: absolute;
-  top: 0;
   height: 3rem;
   width: 100%;
   border-style: unset;
@@ -264,15 +266,11 @@ p {
   box-shadow: #353131;
 }
 
-.scroll-container__button-down {
-  position: absolute;
+.scroll-container__button--up {
+  top: 0;
+}
+.scroll-container__button--down {
   bottom: 0;
-  height: 3rem;
-  width: 100%;
-  border-style: unset;
-  background: var(--medium-grey);
-  cursor: pointer;
-  z-index: 2;
 }
 
 .scroll-container__icon {
@@ -488,6 +486,7 @@ i {
   width: 100%;
   overflow: auto;
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 
 .list-section::-webkit-scrollbar {

@@ -1,4 +1,4 @@
-import { getElement } from "./domUtils.js";
+import { getElement, getElements } from "./domUtils.js";
 import { saveUserData } from "./utils.js";
 import { getFromLocalStorage, setLocalStorage, removeFromLocalStorage, clearLocalStorage } from "./localStorageUtils.js";
 
@@ -49,5 +49,34 @@ export function setupSingleReceipt() {
     console.log(`Klick på visa kvitto`);
 
     window.location.href = "../pages/receipts.html?showSingleReceipt=true";
+  });
+}
+
+//Scrollknappar menylista
+export function setupScrollBtn() {
+  const buttons = getElements(`.scroll-container__button`);
+
+  buttons.forEach((button) => {
+    button.addEventListener(`click`, (event) => {
+      upOrDown(event);
+    });
+  });
+}
+
+//Tryckte anv. på upp- eller nedknappen?
+function upOrDown(event) {
+  if (event.currentTarget.id === `scrollButtonUp`) {
+    scrollList(-100);
+  } else if (event.currentTarget.id === `scrollButtonDown`) {
+    scrollList(100);
+  }
+}
+
+function scrollList(scrollpixels) {
+  const scrollDiv = getElement(`.list-section`);
+
+  scrollDiv.scrollBy({
+    top: scrollpixels,
+    behavior: "smooth",
   });
 }
