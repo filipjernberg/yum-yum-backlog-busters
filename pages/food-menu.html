@@ -1,29 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yum Yum Gimmie Sum</title>
-    <script type="module" src="../scripts/script.js"></script>
-    <link rel="stylesheet" href="../styles/style.css" />
-    <!-- Använda fontawesome? -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  </head>
-  <body class="page page--background-image">
-    <section id="wrapper" class="wrapper">
-      <img class="logo--small" src="../resources/logo-outline-white-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-      <button id="cart" class="cart button"></button>
-      <!-- ikon -->
-      <h5 id="cartAlert" class="alert">1</h5>
-      <section id="cartModal" class="cart__modal d-none">
-        <!--Temp d-none until done. -->
-        <img class="" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-        <h2 class="cart__title">Din beställning</h2>
-        <h4 class="cart__subtitle">tidigare beställningar ></h4>
-        <p class="cart__paragraph">din varukorg är tom</p>
-        <!-- tillfällig button -->
-        <button class="button" id="addOrder">beställ order</button>
-      </section>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Yum Yum Gimmie Sum</title>
+        <script type="module" src="../scripts/script.js"></script>
+        <link rel="stylesheet" href="../styles/style.css" />
+        <!-- Använda fontawesome? -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    </head>
+    <body class="page page--background-image">
+        <section id="wrapper" class="wrapper">
+            <img class="logo--small" src="../resources/logo-outline-white-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+
+            <button id="cart" class="cart button">
+                <!-- ikon -->
+                <h5 id="cartAlert" class="alert">0</h5>
+                <section id="cartModal" class="cart__modal d-none">
+                    <!--Temp d-none until done. -->
+                    <img class="" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+                    <h2 class="cart__title">Din beställning</h2>
+                    <h4 class="cart__subtitle">tidigare beställningar ></h4>
+                    <p class="cart__paragraph">din varukorg är tom</p>
+                              <!-- tillfällig button -->
+          <button class="button" id="addOrder">beställ order</button>
+                </section>
+            </button>
+            <section class="content content--dark" id="content">
+                <!-- Add this in javascript instead
+            <section id="menuTypes" class="menu__types">
+                <button id="menuType" class="button button--light">alla</button>
+                <button id="menuType" class="button button--light">wontons</button>
+                <button id="menuType" class="button button--light">dryck</button>
+                <button id="menuType" class="button button--light">dip</button>
+            </section> -->
+                    <!--  
+        <li id="menuItem" class="menu__item">
+          <h2 id="menuItemTitle" class="menu__item-title">KARLSTAD</h2>
+          <p id="menuItemParagraph" class="menu__item-paragraph">dots</p>
+          <h2 id="menuItemTitle" class="menu__item-title">9SEK</h2>
+          <p id="menuItemParagraph" class="menu__item-paragraph">dots</p>
+          <div class="quantity">
+            <button id="quantityDecrease" class="quantity__change">-</button> 
+            <p class="quantity__number">0</p>
+            <button id="quantity__add" class="quantity__change">+</button>
+          </div>
+        </li>
+        -->
+                </ul>
+            </section>
+        </section>
 
       <section class="content content--dark" id="content"></section>
     </section>
