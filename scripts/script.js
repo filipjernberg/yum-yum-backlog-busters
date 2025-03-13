@@ -1,6 +1,7 @@
 //Import
 import { createList, createScrollList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
+import { addToCartListener } from "./modules/cart.js";
 import { setupOrderButton, setupSingleReceipt } from "./modules/eventHandlers.js";
 //-----------------------------------------------
 
@@ -20,6 +21,8 @@ function handleCurrentPage() {
         case "/pages/food-menu.html":
             setupOrderButton();
             createContent("Meny", fetchMenu());
+            addToCartListener();
+
             break;
         case "/pages/map.html":
             //Page specific code goes here
