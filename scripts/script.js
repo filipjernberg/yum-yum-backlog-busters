@@ -66,12 +66,3 @@ async function createContent(heading, list) {
   const scrollList = await createScrollList(await list);
   appendChildren(content, contentHeading, scrollList);
 }
-
-// async function createContent(heading, array) {
-//     const contentHeading = createElement("h1", [], {}, heading);
-//     const contentList = createElement("ul", [], { id: "listItems" });
-
-//     appendChildren(content, contentHeading, contentList);
-
-//     createList(await array, listItems);
-// }
