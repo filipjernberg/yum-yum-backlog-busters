@@ -73,7 +73,6 @@ function upOrDown(event) {
 
 function scrollList(scrollpixels) {
   const scrollDiv = getElement(`.list-section`);
-  console.log(scrollDiv.scrollHeight, scrollDiv.clientHeight);
 
   scrollDiv.scrollBy({
     top: scrollpixels,

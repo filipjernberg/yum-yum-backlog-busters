@@ -1,10 +1,8 @@
 //Import
 import { createList, createScrollList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
-import { addToCartListener } from "./modules/cart.js";
 import { setupOrderButton, setupSingleReceipt, setupScrollBtn, removeOrderButton } from "./modules/eventHandlers.js";
 import { addToCartListener, latestOrder } from "./modules/cart.js";
-import { setupOrderButton, setupSingleReceipt, removeOrderButton } from "./modules/eventHandlers.js";
 //-----------------------------------------------
 
 //Run
@@ -33,6 +31,7 @@ function handleCurrentPage() {
     case "/pages/receipts.html":
       //Page specific code goes here
       setupSingleReceipt();
+      createReceipt();
       const confirmationSectionref = getElement(`#wrapperOrderConfirmation`);
       const orderWrapperRef = getElement(`#wrapperOrders`);
       const receiptwrapperRef = getElement(`#wrapperSingleReceipt`);
