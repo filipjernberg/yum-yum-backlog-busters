@@ -61,17 +61,19 @@
     border-bottom: var(--off-white);
 }
 
-/* === Basic Styling  === */
+/* === Basic Styling === */
 .page {
     width: 100%;
     height: 100vh;
 }
 
 .page--light {
+    color: var(--dark-grey);
     background-color: var(--off-white);
 }
 
 .page--dark {
+    color: var(--off-white);
     background-color: var(--medium-grey);
 }
 
@@ -88,13 +90,7 @@
     width: 100%;
     max-height: 100vh;
     padding: 1rem;
-}
-
-.flex {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    gap: 2rem;
 }
 
 .wrapper--height100 {
@@ -105,9 +101,18 @@
     gap: 2rem;
 }
 
+.header {
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .content {
     width: 100%;
-    max-width: 1100px;
+    max-width: 850px;
     height: auto;
     margin-bottom: 6rem;
 
@@ -127,8 +132,8 @@
 
 .alert {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 0.5rem;
+    right: 0.5rem;
 
     display: flex;
     align-items: center;
@@ -139,7 +144,11 @@
     padding: 1rem;
 
     border-radius: 1rem;
+    color: var(--off-white);
     background-color: var(--red);
+
+    pointer-events: none;
+    z-index: 8;
 }
 
 h1 {
@@ -170,21 +179,17 @@ h4 {
 h5 {
     font: var(--font-fira-sans-h5);
     letter-spacing: 0.1rem;
+    color: var(--medium-grey);
 }
 
 p {
     font: var(--font-fira-sans-text);
 }
 
-/* === Button Styling  === */
-
+/* === Button Styling === */
 .button {
-    /* Tidigare inställningar*/
-    /* padding: 2rem 3rem; */
-    /* font: var(--font-fira-sans-h2); */
-
     width: 100%;
-    padding: .5rem 3rem;
+    padding: 0.5rem 3rem;
     border-radius: 0.5rem;
     border-style: unset;
 
@@ -230,6 +235,10 @@ p {
     background-color: transparent;
 }
 
+.button--small {
+    padding: 0.75rem 1rem;
+}
+
 /* === Scroll Container === */
 .scroll-container {
     position: relative;
@@ -272,7 +281,39 @@ p {
     fill: red;
 }
 
-/* === Map Styling  === */
+/* === Receipts === */
+
+.receipt__container {
+    width: 100%;
+}
+
+.receipt {
+    width: 100%;
+    padding: 1rem 0;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.receipt__details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.receipt__details.hidden {
+    max-height: 0;
+}
+
+.receipt__details:not(.hidden) {
+    max-height: 200px; /* Anpassa beroende på innehåll */
+}
+
+/* === Map Styling === */
 .map__header {
     display: flex;
     flex-direction: row;
@@ -360,21 +401,21 @@ p {
     margin-bottom: 5rem;
 }
 
-/* === Icon Styling  === */
+/* === Icon Styling === */
 i {
 }
 
-/* === Logo Styling  === */
+/* === Logo Styling === */
 .logo--big {
     width: 200px;
 }
 
 .logo--small {
-    width: 64px;
+    width: 4rem;
     align-self: flex-start;
 }
 
-/* === Order Styling  === */
+/* === Order Styling === */
 
 .order__img {
     max-width: 13rem;
@@ -397,7 +438,7 @@ i {
     padding: 0.5rem 1.3rem;
 }
 
-/* === Tab bar  === */
+/* === Tab bar === */
 .footer {
     display: flex;
     justify-content: center;
@@ -441,7 +482,7 @@ i {
     list-style: none;
 }
 
-/* === List Styling  === */
+/* === List Styling === */
 .list-section {
     width: 100%;
     overflow: auto;
@@ -498,13 +539,12 @@ i {
     border-radius: 100px;
 }
 
-/* === Cart Styling  === */
+/* === Cart Styling === */
 .cart {
-    width: 64px;
+    width: auto;
+    height: auto;
 
-    position: absolute;
-    top: 0;
-    right: 0;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
-    margin: 2rem;
+    z-index: 5;
 }
