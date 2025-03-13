@@ -3,6 +3,7 @@ import { createList, createScrollList, createElement, appendChildren, getElement
 import { fetchMenu } from "./modules/api.js";
 import { setupOrderButton, setupSingleReceipt, setupScrollBtn, removeOrderButton } from "./modules/eventHandlers.js";
 import { addToCartListener, latestOrder } from "./modules/cart.js";
+import { createReceipt } from "./modules/receipts.js";
 //-----------------------------------------------
 
 //Run
@@ -63,7 +64,7 @@ function handleCurrentPage() {
 //-----------------------------------------------
 async function createContent(heading, list) {
   const contentHeading = createElement("h1", [], {}, heading);
-  const scrollList = await createScrollList(await list);
+  const scrollList = await createScrollList(await list, "menu");
   appendChildren(content, contentHeading, scrollList);
   setupScrollBtn();
 }
