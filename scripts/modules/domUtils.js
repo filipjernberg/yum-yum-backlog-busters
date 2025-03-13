@@ -40,9 +40,17 @@ export async function createScrollList(list, type) {
   const scrollUpIcon = createElement("img", ["scroll-container__icon"], { src: "../resources/icons/arrow-up-w300.svg" });
 
   const scrollDown = createElement("button", ["scroll-container__button", "scroll-container__button--down"], { id: "scrollButtonDown" });
+  // const scrollUp = createElement("button", ["scroll-container__button-up"], { id: "scrollButtonUp" });
+  // const scrollUpIcon = createElement("img", ["scroll-container__icon"], { src: "../resources/icons/arrow-up-w300.svg" });
+
+  // const scrollDown = createElement("button", ["scroll-container__button-down"], { id: "scrollButtonDown" });
   const scrollDownIcon = createElement("img", ["scroll-container__icon"], { src: "../resources/icons/arrow-down-w300.svg" });
 
   const listContainer = await createList(list, type);
+
+  appendChildren(scrollUp, scrollUpIcon);
+  appendChildren(scrollDown, scrollDownIcon);
+  appendChildren(scrollContainer, scrollUp, listContainer, scrollDown);
 
   return scrollContainer;
 }
@@ -107,3 +115,9 @@ function filterButtons() {
 }
 //-----------------------------------------------
 // h1 id="menuTitle" class="heading-one heading-one--light">Meny</h1
+
+//style utilities
+
+export function styleElement(element, property, value) {
+  element.style[property] = value;
+}

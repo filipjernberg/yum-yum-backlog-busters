@@ -3,6 +3,7 @@ import { createList, createScrollList, createElement, appendChildren, getElement
 import { fetchMenu } from "./modules/api.js";
 import { setupOrderButton, setupSingleReceipt, setupScrollBtn, removeOrderButton } from "./modules/eventHandlers.js";
 import { addToCartListener, latestOrder } from "./modules/cart.js";
+import { checkParams, getParams } from "./modules/utils.js";
 import { createReceipt } from "./modules/receipts.js";
 //-----------------------------------------------
 
@@ -11,8 +12,6 @@ handleCurrentPage();
 //-----------------------------------------------
 
 function handleCurrentPage() {
-  const params = new URLSearchParams(window.location.search);
-
   switch (window.location.pathname) {
     case "/":
       break;
@@ -32,27 +31,7 @@ function handleCurrentPage() {
     case "/pages/receipts.html":
       //Page specific code goes here
       setupSingleReceipt();
-      createReceipt();
-      const confirmationSectionref = getElement(`#wrapperOrderConfirmation`);
-      const orderWrapperRef = getElement(`#wrapperOrders`);
-      const receiptwrapperRef = getElement(`#wrapperSingleReceipt`);
-      const body = getElement(`body`);
-      if (confirmationSectionref) {
-        confirmationSectionref.style.display = `none`;
-      }
-
-      if (params.get(`showConfirmation`) === `true`) {
-        confirmationSectionref.style.display = `flex`;
-        addClasses(orderWrapperRef, [`d-none`]);
-        body.style.backgroundColor = `#605858`;
-        // Ovan är bara test. behöver komma åt variabelnamn från css
-        // DOM funktion för att ändra style?
-      }
-      if (params.get(`showSingleReceipt`) === `true`) {
-        addClasses(receiptwrapperRef, [`wrapper__flex`]);
-        addClasses(orderWrapperRef, [`d-none`]);
-        body.style.backgroundColor = `#605858`;
-      }
+      checkParams(getParams());
       break;
     case "/pages/user-page.html":
       //Page specific code goes here
