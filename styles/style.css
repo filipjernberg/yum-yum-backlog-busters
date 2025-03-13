@@ -253,7 +253,25 @@ p {
   overflow: hidden;
 }
 
-.scroll-container__button-up {
+.scroll-container__button {
+  position: absolute;
+  height: 3rem;
+  width: 100%;
+  border-style: unset;
+  background: var(--medium-grey);
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: #353131;
+}
+
+.scroll-container__button--up {
+  top: 0;
+}
+.scroll-container__button--down {
+  bottom: 0;
+}
+
+/* .scroll-container__button-up {
   position: absolute;
   top: 0;
   height: 3rem;
@@ -274,7 +292,7 @@ p {
   background: var(--medium-grey);
   cursor: pointer;
   z-index: 2;
-}
+} */
 
 .scroll-container__icon {
   height: 100%;
@@ -456,6 +474,7 @@ i {
   width: 100%;
   overflow: auto;
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 
 .list-section::-webkit-scrollbar {
