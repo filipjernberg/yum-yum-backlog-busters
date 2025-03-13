@@ -1,4 +1,5 @@
 import { getElement } from "./domUtils.js";
+import { saveUserData } from "./utils.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {

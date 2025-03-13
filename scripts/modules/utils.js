@@ -1,4 +1,4 @@
-import { getElements, getElement, addClasses, styleElement } from "./domUtils.js";
+import { getElement, addClasses, styleElement } from "./domUtils.js";
 import { getFromLocalStorage, removeFromLocalStorage, setLocalStorage } from "./localStorageUtils.js";
 
 export function getParams() {
@@ -6,34 +6,37 @@ export function getParams() {
 }
 
 export function checkParams(params) {
-  const confirmationSectionref = getElement(`#wrapperOrderConfirmation`);
+  const confirmationSectionRef = getElement(`#wrapperOrderConfirmation`);
   const orderWrapperRef = getElement(`#wrapperOrders`);
   const receiptwrapperRef = getElement(`#wrapperSingleReceipt`);
   const body = getElement(`body`);
 
-  if (confirmationSectionref) {
-    confirmationSectionref.style.display = `none`;
+  if (confirmationSectionRef) {
+    confirmationSectionRef.style.display = `none`;
   }
 
   if (params.get(`showConfirmation`) === `true`) {
-    startTimer(`#timerConfirmation`);
-    confirmationSectionref.style.display = `flex`;
-    addClasses(orderWrapperRef, [`d-none`]);
-    styleElement(body, `backgroundColor`, `#605858`);
-
-    // Ovan är bara test. behöver komma åt variabelnamn från css
-    // DOM funktion för att ändra style?
+    handleOrderConfirmation(confirmationSectionRef, orderWrapperRef, body);
   }
   if (params.get(`showSingleReceipt`) === `true`) {
-    addClasses(receiptwrapperRef, [`flex`]);
-    addClasses(orderWrapperRef, [`d-none`]);
-    styleElement(body, `backgroundColor`, `#605858`);
-
-    const startTime = getFromLocalStorage(`startTime`);
-    if (startTime) {
-      startCountdown(startTime, `#timerForReceipt`);
-    }
+    handleSingleReceipt(receiptwrapperRef, orderWrapperRef, body);
   }
+}
+
+export function handleOrderConfirmation(confirmationSectionRef, orderWrapperRef, body) {
+  startTimer(`#timerConfirmation`);
+  confirmationSectionRef.style.display = `flex`;
+  addClasses(orderWrapperRef, [`d-none`]);
+  styleElement(body, `backgroundColor`, `#605858`);
+  saveUserData(`#timerConfirmation`);
+}
+function handleSingleReceipt(receiptWrapperRef, orderWrapperRef, body) {
+  addClasses(receiptWrapperRef, [`flex`]);
+  addClasses(orderWrapperRef, [`d-none`]);
+  styleElement(body, `backgroundColor`, `#605858`);
+
+  const startTime = getFromLocalStorage(`startTime`);
+  if (startTime) startCountdown(startTime, `#timerForReceipt`);
 }
 
 export function startTimer(timerElementId) {
@@ -66,4 +69,44 @@ export function startCountdown(startTime, timerElementId) {
 
 export function getConfirmationNumber(number) {
   getElement(`#confirmationNumber`).textContent = `#${number}`;
+}
+
+export function generateConfirmationNumber() {
+  return Math.floor(Math.random() * 1000000);
+}
+
+export function submitOrder(orderDetails) {
+  const confirmationNumber = generateConfirmationNumber();
+}
+
+//---
+
+export function saveUserData(timerElementId) {
+  const confirmationNumber = generateConfirmationNumber();
+  const startTime = Date.now(); // Tidsstämpel när användaren skapar beställningen
+
+  const userData = {
+    confirmationNumber: confirmationNumber,
+    startTime: startTime,
+  };
+  let user = getFromLocalStorage(`user`);
+
+  user = Array.isArray(user) ? user : user ? [user] : [];
+  user.push(userData);
+
+  setLocalStorage(`user`, user);
+
+  console.log("UserData saved:", userData);
+  startCountdown(startTime, timerElementId);
+}
+
+export function getUserData() {
+  const userData = getFromLocalStorage(`user`);
+
+  if (userData && userData.length > 0) {
+    console.log("UserData retrieved:", userData);
+    startCountdown(userData[userData.length - 1].startTime, timerElementId);
+  } else {
+    console.log("No user data found");
+  }
 }

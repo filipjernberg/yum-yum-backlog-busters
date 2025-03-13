@@ -75,6 +75,6 @@ function filterButtons() {
 
 //style utilities
 
-export function styleElement(element, property, color) {
-  element.style[property] = color;
+export function styleElement(element, property, value) {
+  element.style[property] = value;
 }
