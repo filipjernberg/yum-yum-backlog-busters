@@ -59,3 +59,12 @@ export function updateCartAlert() {
 
   cartIcon.textContent = totalItems;
 }
+//Om man vill läsa in senaste ordern från local Storage
+export function latestOrder() {
+  const orders = getFromLocalStorage("orderHistory");
+  const latestOrder = orders[orders.length - 1];
+  const orderId = getElement("#orderId");
+  orderId.textContent = `#${latestOrder.id}`;
+
+  console.log(latestOrder.id);
+}
