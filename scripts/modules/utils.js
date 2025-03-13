@@ -1,4 +1,4 @@
-import { getElements } from "./domUtils.js";
+import { getElements, getElement, addClasses } from "./domUtils.js";
 import { getIntFromLocalStorage, removeFromLocalStorage } from "./localStorageUtils.js";
 
 export function timer() {
@@ -43,4 +43,33 @@ export function startCountdown(duration, id, updateCallback, finishCallback) {
       finishCallback();
     }
   }, 1000);
+}
+
+export function getParams() {
+  return new URLSearchParams(window.location.search);
+}
+
+export function checkParams(params) {
+  const confirmationSectionref = getElement(`#wrapperOrderConfirmation`);
+  const orderWrapperRef = getElement(`#wrapperOrders`);
+  const receiptwrapperRef = getElement(`#wrapperSingleReceipt`);
+  const body = getElement(`body`);
+
+  if (confirmationSectionref) {
+    confirmationSectionref.style.display = `none`;
+  }
+
+  if (params.get(`showConfirmation`) === `true`) {
+    timer();
+    confirmationSectionref.style.display = `flex`;
+    addClasses(orderWrapperRef, [`d-none`]);
+    body.style.backgroundColor = `#605858`;
+    // Ovan är bara test. behöver komma åt variabelnamn från css
+    // DOM funktion för att ändra style?
+  }
+  if (params.get(`showSingleReceipt`) === `true`) {
+    addClasses(receiptwrapperRef, [`wrapper__flex`]);
+    addClasses(orderWrapperRef, [`d-none`]);
+    body.style.backgroundColor = `#605858`;
+  }
 }
