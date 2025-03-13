@@ -1,6 +1,7 @@
 import { getElement, getElements } from "./domUtils.js";
 import { setLocalStorage, getFromLocalStorage } from "./localStorageUtils.js";
 import { fetchMenu } from "./api.js";
+import { setupOrderButton } from "./eventHandlers.js";
 
 export async function addToCartListener() {
   console.log("addToCartListener()");
@@ -46,7 +47,7 @@ function addProductToCart(product) {
   setLocalStorage("cart", cart);
 }
 
-function updateCartAlert() {
+export function updateCartAlert() {
   const cartIcon = getElement("#cartAlert");
   let cart = getFromLocalStorage("cart") || [];
   let totalItems = 0;

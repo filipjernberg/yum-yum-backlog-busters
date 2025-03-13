@@ -2,7 +2,7 @@
 import { createList, createScrollList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
 import { addToCartListener } from "./modules/cart.js";
-import { setupOrderButton, setupSingleReceipt } from "./modules/eventHandlers.js";
+import { setupOrderButton, setupSingleReceipt, removeOrderButton } from "./modules/eventHandlers.js";
 //-----------------------------------------------
 
 //Run
@@ -22,6 +22,7 @@ function handleCurrentPage() {
       setupOrderButton();
       createContent("Meny", fetchMenu());
       addToCartListener();
+      removeOrderButton();
 
       break;
     case "/pages/map.html":
