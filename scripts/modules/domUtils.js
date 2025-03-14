@@ -36,10 +36,14 @@ export function getElements(selector) {
 export async function createScrollList(list, type) {
   const scrollContainer = createElement("div", ["scroll-container"]);
 
-  const scrollUp = createElement("button", ["scroll-container__button-up"], { id: "scrollButtonUp" });
+  const scrollUp = createElement("button", ["scroll-container__button", "scroll-container__button--up"], { id: "scrollButtonUp" });
   const scrollUpIcon = createElement("img", ["scroll-container__icon"], { src: "../resources/icons/arrow-up-w300.svg" });
 
-  const scrollDown = createElement("button", ["scroll-container__button-down"], { id: "scrollButtonDown" });
+  const scrollDown = createElement("button", ["scroll-container__button", "scroll-container__button--down"], { id: "scrollButtonDown" });
+  // const scrollUp = createElement("button", ["scroll-container__button-up"], { id: "scrollButtonUp" });
+  // const scrollUpIcon = createElement("img", ["scroll-container__icon"], { src: "../resources/icons/arrow-up-w300.svg" });
+
+  // const scrollDown = createElement("button", ["scroll-container__button-down"], { id: "scrollButtonDown" });
   const scrollDownIcon = createElement("img", ["scroll-container__icon"], { src: "../resources/icons/arrow-down-w300.svg" });
 
   const listContainer = await createList(list, type);
