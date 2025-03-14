@@ -42,7 +42,7 @@ function handleCurrentPage() {
 }
 //-----------------------------------------------
 async function createContent(heading, list) {
-  const contentHeading = createElement("h1", [], {}, heading);
+  const contentHeading = createElement("h1", ["content__title"], {}, heading);
   const scrollList = await createScrollList(await list, "menu");
   appendChildren(content, contentHeading, scrollList);
   setupScrollBtn();
