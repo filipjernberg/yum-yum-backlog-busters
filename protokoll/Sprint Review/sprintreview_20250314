@@ -1,0 +1,34 @@
+# Mötesprotokoll 20250314
+
+## Närvarande
+
+- Product Owner Jakob
+- Scrum Master Annelie
+- Klara
+- Robin
+- Filip
+
+## Protokoll
+
+Bra känsla denna veckan i gruppen. Samarbetet har funkat bra, vi har haft dagliga möten och känner att vi ligger bra till.
+
+Vi visar upp vad vi hunnit med denna veckan och klickar igenom appen tillsammans i teams. Pratar utifrån följande:
+
+Anpassat appen responsivt, ska även funka i större storlekar även om fokus är på mobil.
+Framtida model för varukorgen. Knapparna kommer förflyttas in i varukorgen.
+Nav bar längst ner för att förflytta sig inom appen.
+Du kan se dina pågående beställningar (det i varukorgen) och tidigare beställningar som kvitton på kvittosidan.
+Kvitton är stylat på samma sätt som menyn för sammanhängande styling.
+
+Statiska adresser, kommer ändras utifrån var foodtrucken befinner sig. Tankar om interaktiv karta, ligger längre ner på att-göra-listan just nu. 
+Prioriterar användarfunktioner
+
+Visar användarsidan, ofärdig just nu. Nästa sprint.
+
+Product owners tankar: Sidan såg snygg ut. Önskar inför nästa vecka : Få mer sammanhängande vy. 
+Nu funkar i princip hela processen iom att pågående köp syns vid kvitton, blir nog tydligare när kundvganen fungerar ordentligt.  
+Bra att Beställ knappen fungerar, och att det går att genomföra köp. Saknar logga in och registrera, fokusera på det också nästa vecka. 
+Undrar om tillgänglghetsnapassaning, vi svarar att det kommer i nästa sprint. 
+Bra jobbat! 
+
+
