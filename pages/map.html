@@ -11,6 +11,23 @@
   </head>
   <body class="page page--light">
     <section id="wrapperMap" class="wrapper">
+      <header class="header">
+        <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+        <button id="cart" class="cart button button--light button--small" aria-label="Shopping cart button"><img src="../resources/icons/shopping-bag-w300.svg" aria-hidden="true" class="footer__icon"></button>
+      </header>
+            <h5 id="cartAlert" class="alert">0</h5>
+            <section id="cartModal" class="cart__modal d-none">
+                <!--Temp d-none until done. -->
+                <img class="" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+                <h2 class="cart__title">Din beställning</h2>
+                <h4 class="cart__subtitle">tidigare beställningar ></h4>
+                <p class="cart__paragraph">din varukorg är tom</p>
+                <!-- tillfällig button -->
+
+            </section>
+            <button class="button button--margin-bottom" id="addOrder">beställ order</button>
+            <button class="button button--margin-bottom" id="removeOrder">töm varukorgen</button>
+        </button>
       <!-- <img class="logo--small" src="../resources/logo-outline-white-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
       <button id="cart" class="cart"> -->
       <!-- ikon -->
@@ -22,10 +39,10 @@
           <p id="cartParagraph" class="cart__paragraph">din varukorg är tom</p>
         </section> -->
       <!-- </button> -->
-      <div class="map__container">
-        <section id="map" class="map">
-          <h1 id="mapTitle" class="heading-one heading-one--light">Karta</h1>
-          <div class="map">
+      <!-- <div class="map__container flex"> -->
+        <section id="map" class="map map__container flex   ">
+          <h1 id="mapTitle" class="heading-one ">Karta</h1>
+          <div class="map map__img-div">
             <img class="map__img" src="../resources/karlstad.png" alt="Karta över trucks" />
           </div>
           <!--
@@ -41,36 +58,39 @@
 
           <section id="addressField" class="field__adress">
             <h3 class="field__title">Adresser:</h3>
-            <p id="adressTruckOne" class="field__paragraph">Wontonvägen 12</p>
-            <p id="adressTruckTwo" class="field__paragraph">Sashimivägen 8</p>
-            <p id="adressTruckThree" class="field__paragraph">Sjögrästorget 1</p>
+            <p id="adressTruckOne" class="field__paragraph text">Wontonvägen 12</p>
+            <p id="adressTruckTwo" class="field__paragraph text">Sashimivägen 8</p>
+            <p id="adressTruckThree" class="field__paragraph text">Sjögrästorget 1</p>
           </section>
           <section id="openHoursField" class="field__open-hours">
             <h3 class="field__title">Öppettider:</h3>
-            <p class="field__paragraph">Tisdag-Torsdag: 11:00-21:00</p>
-            <p class="field__paragraph">Fredag-Lördag: 11:00-23:00</p>
-            <p class="field__paragraph">Söndag-Måndag: Stängt</p>
+            <p class="field__paragraph text">Tisdag-Torsdag: 11:00-21:00</p>
+            <p class="field__paragraph text">Fredag-Lördag: 11:00-23:00</p>
+            <p class="field__paragraph text">Söndag-Måndag: Stängt</p>
           </section>
           <section id="contactField" class="field__contact">
             <h3 class="field__title">Kontakt</h3>
-            <p class="field__paragraph">Kontakt@YumYumGimmeSum.nu</p>
-            <p class="field__paragraph">072-222-22-22</p>
+            <p class="field__paragraph text">Kontakt@YumYumGimmeSum.nu</p>
+            <p class="field__paragraph text">072-222-22-22</p>
           </section>
         </section>
-      </div>
-      <hr class="field__end" />
+      <!-- </div> -->
+      <hr class="list-item__hr" />
 
-      <section id="aboutUs" class="about">
-        <h1 id="headingOne" class="heading-one heading-one--light">Om Yum Yum Gimmie Sum</h1>
+      <section id="aboutUs" class="about flex">
+        <h1 id="headingOne" class="heading-one ">Om Yum Yum Gimmie Sum</h1>
         <img src="../resources/Founder.jpeg" alt="Grundaren av YumYumGimmeSum" class="about__img" />
         <h2 class="heading-two">Allt började med en itusågad ätpinne</h2>
-        <p class="about-us__paragraph">
-          Första dagen med foodtrucken var kaos. Bröden brann, beställningar tappades bort och jag insåg alldeles för sent att jag glömt
-          köpa servetter. Men mitt i allt såg jag någon ta en tugga, blunda och le – och då visste jag att jag var på rätt väg. Yum Yum
-          Gimmie Sum föddes ur kärleken till mat som känns. Rörig, smakrik och omöjlig att äta utan att slicka fingrarna efteråt. Nu rullar
+        <p class="about-us__paragraph text">   Första dagen med foodtrucken var kaos. Bröden brann, beställningar tappades bort och jag insåg alldeles för sent att jag glömt
+          köpa servetter. </p>
+        <p class="about-us__paragraph text">   Men mitt i allt såg jag någon ta en tugga, blunda och le – och då visste jag att jag var på rätt väg. Yum Yum
+          Gimmie Sum föddes ur kärleken till mat som känns. Rörig, smakrik och omöjlig att äta utan att slicka fingrarna efteråt.</p>
+        <p class="about-us__paragraph text">  </p>
+        <p class="about-us__paragraph text">  Nu rullar
           flera truckar, men passionen är densamma. Och om du ser mig vid grillen – kom fram, säg hej, och låt mig bjuda på något riktigt
-          gott.
-        </p>
+          gott.</p>
+     
+       
 
         <section class="about__section">
           <i class="fa-brands fa-square-instagram"></i>

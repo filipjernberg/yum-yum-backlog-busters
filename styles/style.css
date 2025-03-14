@@ -26,6 +26,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  /* outline: 1pt solid salmon; */
 }
 
 /* === Utility Classes === */
@@ -54,6 +55,12 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
   white-space: nowrap;
+}
+
+.text {
+  font: var(--font-fira-sans-text);
+  line-height: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .text-light {
@@ -93,15 +100,15 @@
   /* Lägg till i en annan class om det önskas: gap: 2rem; */
 }
 
-.wrapper--height100 {
+.height-100 {
   height: 100%;
 }
 
-.wrapper__flex--gap {
-  gap: 2rem;
+.gap-1rem {
+  gap: 1rem;
 }
-.wrapper__flex--gap-4rem {
-  gap: 4rem;
+.gap-2rem {
+  gap: 2rem;
 }
 
 .header {
@@ -121,7 +128,7 @@
 
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  /* gap: 2rem; */
 
   overflow: hidden;
 
@@ -131,6 +138,11 @@
 .content--dark {
   color: var(--off-white);
   background-color: var(--medium-grey);
+}
+
+.content__title {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
 }
 
 .alert {
@@ -194,6 +206,9 @@ p {
   width: 100%;
   padding: 0.5rem 3rem;
   border-radius: 0.5rem;
+
+  /* margin: 0.5rem 0rem; */
+
   border-style: unset;
 
   font: var(--font-fira-sans-h2);
@@ -215,6 +230,10 @@ p {
 .button:hover {
   background-color: var(--off-white);
   color: var(--dark-grey);
+}
+
+.button--margin-bottom {
+  margin-bottom: 0.5rem;
 }
 
 .button--light {
@@ -321,6 +340,7 @@ p {
 
 .heading-one {
   text-align: center;
+  margin-top: 1.5rem;
 }
 
 .heading-one--padding {
@@ -331,16 +351,25 @@ p {
   color: var(--off-white);
 }
 
-.map__container {
+.field__title {
+  margin-bottom: 0.25rem;
+}
+
+/* .map__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 2rem;
+} */
+
+.map {
+  width: 100%;
 }
 
 .map__img {
   width: 100%;
+  margin: 1rem 0rem;
 }
 
 .field-title {
@@ -351,12 +380,11 @@ p {
   font: var(--font-fira-sans-text);
 }
 
-.field__adress {
-  padding: 2rem 0rem;
-}
-
+.field__adress,
+.field__contact,
 .field__open-hours {
-  padding: 0rem 0rem 2rem 0rem;
+  padding: 1rem 0rem;
+  width: 100%;
 }
 
 .field__end {
@@ -368,17 +396,17 @@ p {
 
 /*ABOUT US*/
 
-.about {
+/* .about {
   background-color: var(--off-white);
   display: flex;
   flex-direction: column;
   gap: 2rem;
   padding: 0rem 2rem;
-}
+} */
 
-.heading-two {
+/* .heading-two {
   text-align: center;
-}
+} */
 
 .about__img {
   align-self: center;
@@ -386,6 +414,7 @@ p {
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
+  margin: 1rem 0rem;
 }
 
 .about__section {
@@ -396,7 +425,9 @@ p {
 }
 
 .fa-brands {
-  margin-bottom: 5rem;
+  margin: 1rem 0rem 8rem 0rem;
+  font-size: 3rem;
+  color: var(--dark-grey);
 }
 
 /* === Icon Styling === */
@@ -416,7 +447,7 @@ i {
 /* === Order Styling === */
 
 .order__img {
-  max-width: 13rem;
+  /* max-width: 13rem; */
 }
 
 .order__paragraph {
@@ -547,4 +578,13 @@ i {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   z-index: 5;
+}
+
+@media screen and (min-width: 600px) {
+  .map__container {
+    text-align: center;
+  }
+  .map__img-div {
+    max-width: 500px;
+  }
 }
