@@ -4,7 +4,8 @@ import { fetchMenu } from "./modules/api.js";
 import { addToCartListener, latestOrder } from "./modules/cart.js";
 import { setupOrderButton, setupSingleReceipt, removeOrderButton } from "./modules/eventHandlers.js";
 import { checkParams, getParams } from "./modules/utils.js";
-import { createReceipt } from "./modules/receipts.js";
+import { createReceipts } from "./modules/receipts.js";
+import { getFromLocalStorage } from "./modules/localStorageUtils.js";
 //-----------------------------------------------
 
 //Run
@@ -12,37 +13,38 @@ handleCurrentPage();
 //-----------------------------------------------
 
 function handleCurrentPage() {
-  switch (window.location.pathname) {
-    case "/":
-      break;
-    case "/pages/index.html":
-      //Page specific code goes here
-      break;
-    case "/pages/food-menu.html":
-      setupOrderButton();
-      createContent("Meny", fetchMenu());
-      addToCartListener();
-      removeOrderButton();
+    switch (window.location.pathname) {
+        case "/":
+            break;
+        case "/pages/index.html":
+            //Page specific code goes here
+            break;
+        case "/pages/food-menu.html":
+            setupOrderButton();
+            createContent("Meny", fetchMenu());
+            addToCartListener();
+            removeOrderButton();
 
-      break;
-    case "/pages/map.html":
-      //Page specific code goes here
-      break;
-    case "/pages/receipts.html":
-      //Page specific code goes here
-      setupSingleReceipt();
-      checkParams(getParams());
-      break;
-    case "/pages/user-page.html":
-      //Page specific code goes here
-      break;
-    default:
-      return "unknown";
-  }
+            break;
+        case "/pages/map.html":
+            //Page specific code goes here
+            break;
+        case "/pages/receipts.html":
+            //Page specific code goes here
+            createReceipts();
+            setupSingleReceipt();
+            checkParams(getParams());
+            break;
+        case "/pages/user-page.html":
+            //Page specific code goes here
+            break;
+        default:
+            return "unknown";
+    }
 }
 //-----------------------------------------------
 async function createContent(heading, list) {
-  const contentHeading = createElement("h1", [], {}, heading);
-  const scrollList = await createScrollList(await list, "menu");
-  appendChildren(content, contentHeading, scrollList);
+    const contentHeading = createElement("h1", [], {}, heading);
+    const scrollList = await createScrollList(await list, "menu");
+    appendChildren(content, contentHeading, scrollList);
 }
