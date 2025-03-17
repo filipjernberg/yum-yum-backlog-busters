@@ -2,6 +2,7 @@ import { getElement, addClasses, styleElement, removeClasses } from "./domUtils.
 import { getFromLocalStorage, setLocalStorage } from "./localStorageUtils.js";
 import { registerUser } from "./eventHandlers.js";
 import { fetchUsers } from "./api.js";
+import { startTimer, startCountdown } from "./timerUtils.js";
 
 export function getParams() {
   return new URLSearchParams(window.location.search);
@@ -67,34 +68,6 @@ function handleRegistrationForm() {
 
   addClasses(wrapperguestRef, [`d-none`]);
   removeClasses(wrapperguestRef, [`flex`]);
-}
-
-export function startTimer(timerElementId) {
-  const startTime = Date.now();
-  // setLocalStorage(`startTime`, startTime);
-  getConfirmationNumber(startTime);
-  startCountdown(startTime, timerElementId);
-}
-
-export function startCountdown(startTime, timerElementId) {
-  const countdownElement = getElement(timerElementId);
-
-  const duration = 10 * 60 * 1000;
-
-  const timerInterval = setInterval(() => {
-    const elapsedTime = Date.now() - startTime;
-    const timeLeft = duration - elapsedTime;
-
-    if (timeLeft <= 0) {
-      clearInterval(timerInterval);
-      countdownElement.textContent = `Maten är klar`;
-      return;
-    }
-
-    const minutes = Math.floor(timeLeft / 60000);
-    const seconds = Math.floor((timeLeft % 60000) / 1000);
-    countdownElement.textContent = `Klar om ${minutes}m ${seconds}s`;
-  }, 1000);
 }
 
 //genererar ett random nummer som vi sedan anger till confirmationnumber
