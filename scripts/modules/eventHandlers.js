@@ -1,13 +1,5 @@
 import { getElement, getElements, styleElement } from "./domUtils.js";
-import {
-  saveUserData,
-  hashPassword,
-  getAllUsers,
-  validateUserInput,
-  displayErrorMessages,
-  saveNewUser,
-  displaySuccessMessage,
-} from "./utils.js";
+import { hashPassword, getAllUsers, validateUserInput, displayErrorMessages, saveNewUser, displaySuccessMessage } from "./utils.js";
 import { getFromLocalStorage, setLocalStorage, removeFromLocalStorage, clearLocalStorage } from "./localStorageUtils.js";
 import { fetchUsers } from "./api.js";
 

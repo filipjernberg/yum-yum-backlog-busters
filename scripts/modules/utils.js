@@ -36,7 +36,7 @@ export function handleOrderConfirmation(confirmationSection) {
   removeClasses(orderWrapperRef, ["flex"]);
   styleElement(body, `backgroundColor`, `#605858`);
 
-  saveUserData(`#timerConfirmation`);
+  saveOrder(`#timerConfirmation`);
 }
 
 function handleSingleReceipt() {
@@ -97,15 +97,18 @@ export function startCountdown(startTime, timerElementId) {
   }, 1000);
 }
 
-export function getConfirmationNumber(number) {
-  getElement(`#confirmationNumber`).textContent = `#${number}`;
-}
-
+//genererar ett random nummer som vi sedan anger till confirmationnumber
 export function generateConfirmationNumber() {
   return Math.floor(Math.random() * 1000000);
 }
 
-export function saveUserData(timerElementId) {
+//Skriver ut vårt nummer i rutan för confirmationnnumber
+export function getConfirmationNumber(number) {
+  getElement(`#confirmationNumber`).textContent = `#${number}`;
+}
+
+// sparar en timer och confirmationNumber kopplat till vår senaste skapade användare
+export function saveOrder(timerElementId) {
   const confirmationNumber = generateConfirmationNumber();
   const startTime = Date.now();
 
@@ -115,6 +118,7 @@ export function saveUserData(timerElementId) {
     return;
   }
 
+  //Ändra detta senare till att gälla inloggad person istället
   users[users.length - 1] = {
     ...users[users.length - 1], // Behåll tidigare data
     confirmationNumber,
@@ -180,10 +184,13 @@ export function validateUserInput(username, email, password, confirmPassword, al
   return errors;
 }
 
+//Skriver ut felmeddelande errormessages är div, errors är själva felet
 export function displayErrorMessages(errorMessages, errors) {
   errorMessages.innerHTML = errors.map((error) => `<p>${error}</p>`).join("");
 }
 
+// sparar ny användare, anropas när valideringen av formuläret för registrering lyckats. Användare sparas under "users"
+// Hashedpassword är krypterade tecken
 export function saveNewUser(username, email, hashedPassword) {
   const usersFromLocalStorage = getFromLocalStorage(`users`);
   const newUser = { username, email, password: hashedPassword };
@@ -193,12 +200,14 @@ export function saveNewUser(username, email, hashedPassword) {
   console.log(`ny användare sparad`);
 }
 
+//Lyckas man komma igenom registrering så kommer en grön text upp som bekräftelse ovanför länken "logga in"
 export function displaySuccessMessage() {
   const congrats = getElement(`#changeParagraph`);
   styleElement(congrats, `color`, `green`);
   congrats.textContent = `Du har nu skapat ett konto!`;
 }
 
+//funktion för att ändra lösenordet till krypterad när det sparas i localstorage. Behövs liknande för att kunna jämföra i login senare
 export async function hashPassword(password) {
   const encoder = new TextEncoder();
   const data = encoder.encode(password);
