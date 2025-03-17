@@ -121,22 +121,6 @@ export function saveUserData(timerElementId) {
   startCountdown(startTime, timerElementId);
 }
 
-// export function extraSaveUserData(username, email, password) {
-//   const user = {
-//     username: username,
-//     email: email,
-//     password: password,
-//     orders: [],
-//   };
-//   let users = getFromLocalStorage(`users`);
-//   console.log(username);
-
-//   users[username] = user;
-
-//   setLocalStorage(`users`, users);
-//   console.log(`saved håkan?`);
-// }
-
 export function getUserData() {
   const userData = getFromLocalStorage(`user`);
 
