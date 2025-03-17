@@ -616,7 +616,7 @@ i {
   z-index: 5;
 }
 
-/* === user- styling === */
+/* === user styling === */
 
 .user__paragraph {
   text-align: center;
@@ -625,8 +625,29 @@ i {
 
 .user__link {
   text-decoration: none;
+  text-align: center;
   color: var(--dark-grey);
   font-family: var(--font-fira-sans-text);
+}
+
+/* === form styling === */
+
+.user-container {
+  width: 80%;
+}
+.register-form {
+  margin: 2rem 0 1.5rem;
+}
+
+.input-field {
+  margin-bottom: 1.2rem;
+  border: none;
+  border-bottom: var(--light-grey) solid 2px;
+  font-family: var(--font-fira-sans-text);
+}
+
+.input-field::placeholder {
+  color: var(--medium-grey);
 }
 
 @media screen and (min-width: 600px) {

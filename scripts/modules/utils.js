@@ -23,12 +23,12 @@ export function checkParams(params) {
   }
 }
 
-export function handleOrderConfirmation(confirmation) {
+export function handleOrderConfirmation(confirmationSection) {
   const orderWrapperRef = getElement(`#wrapperOrders`);
   const body = getElement(`body`);
 
   startTimer(`#timerConfirmation`);
-  addClasses(confirmation, [`flex`]);
+  addClasses(confirmationSection, [`flex`]);
   addClasses(orderWrapperRef, [`d-none`]);
   removeClasses(orderWrapperRef, ["flex"]);
   styleElement(body, `backgroundColor`, `#605858`);
@@ -53,7 +53,14 @@ function handleSingleReceipt() {
 }
 
 function handleRegistrationForm() {
-  addClasses();
+  const registrationWrapperRef = getElement(`#wrapperRegister`);
+  const wrapperguestRef = getElement(`#wrapperGuest`);
+
+  removeClasses(registrationWrapperRef, [`d-none`]);
+  addClasses(registrationWrapperRef, [`flex`]);
+
+  addClasses(wrapperguestRef, [`d-none`]);
+  removeClasses(wrapperguestRef, [`flex`]);
 }
 
 export function startTimer(timerElementId) {

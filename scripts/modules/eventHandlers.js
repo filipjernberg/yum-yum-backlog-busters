@@ -83,11 +83,17 @@ function scrollList(scrollpixels) {
 
 // Beställ knapp på food-menu.html
 export function setupRegistrationBtn() {
-  const registerUserBtn = getElement(`#registeruser`);
+  const registerUserBtn = getElement(`#registerUser`);
   console.log(registerUserBtn);
 
-  registerUserBtn.addEventListener(`click`, function () {
-    console.log(`Klick på registrera användare`);
-    window.location.href = "../pages/user-page.html?registrationForm=true";
+  registerUserBtn.addEventListener(`click`, function (event) {
+    event.preventDefault();
+
+    let originalUrl = this.href;
+    let newUrl = new URL(originalUrl, window.location.origin);
+
+    newUrl.searchParams.set("registrationForm", "true");
+
+    window.location.href = newUrl;
   });
 }
