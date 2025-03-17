@@ -1,7 +1,14 @@
 //Import
 import { createList, createScrollList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
-import { setupOrderButton, setupSingleReceipt, setupScrollBtn, removeOrderButton, setupRegistrationBtn } from "./modules/eventHandlers.js";
+import {
+  setupOrderButton,
+  setupSingleReceipt,
+  setupScrollBtn,
+  removeOrderButton,
+  setupRegistrationBtn,
+  registerUser,
+} from "./modules/eventHandlers.js";
 import { addToCartListener, latestOrder } from "./modules/cart.js";
 import { checkParams, getParams } from "./modules/utils.js";
 import { createReceipts } from "./modules/receipts.js";

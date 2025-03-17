@@ -1,5 +1,6 @@
 import { getElement, addClasses, styleElement, removeClasses } from "./domUtils.js";
 import { getFromLocalStorage, setLocalStorage } from "./localStorageUtils.js";
+import { registerUser } from "./eventHandlers.js";
 
 export function getParams() {
   return new URLSearchParams(window.location.search);
@@ -20,6 +21,7 @@ export function checkParams(params) {
   }
   if (params.get(`registrationForm`) === `true`) {
     handleRegistrationForm();
+    registerUser();
   }
 }
 
@@ -117,6 +119,22 @@ export function saveUserData(timerElementId) {
   console.log("UserData saved:", userData);
   startCountdown(startTime, timerElementId);
 }
+
+// export function extraSaveUserData(username, email, password) {
+//   const user = {
+//     username: username,
+//     email: email,
+//     password: password,
+//     orders: [],
+//   };
+//   let users = getFromLocalStorage(`users`);
+//   console.log(username);
+
+//   users[username] = user;
+
+//   setLocalStorage(`users`, users);
+//   console.log(`saved håkan?`);
+// }
 
 export function getUserData() {
   const userData = getFromLocalStorage(`user`);
