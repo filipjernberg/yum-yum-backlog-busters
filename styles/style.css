@@ -616,6 +616,19 @@ i {
   z-index: 5;
 }
 
+/* === user- styling === */
+
+.user__paragraph {
+  text-align: center;
+  color: var(--dark-grey);
+}
+
+.user__link {
+  text-decoration: none;
+  color: var(--dark-grey);
+  font-family: var(--font-fira-sans-text);
+}
+
 @media screen and (min-width: 600px) {
   .map__container {
     text-align: center;
