@@ -89,7 +89,7 @@ function toggleReceipt(selectedReceipt, forceOpen = false) {
     details.style.maxHeight = "0px";
   }
 }
-
+// Får ut alla ordrar på admin page
 export async function displayOrderHistory() {
   const adminPage = getElement("#adminContainer");
   const orderHistory = getFromLocalStorage("orderHistory") || [];
