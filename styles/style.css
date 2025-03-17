@@ -19,6 +19,7 @@
   --font-fira-sans-h4: 500 9pt/12pt "Fira Sans", sans-serif; /* Content Sub-Heading */
   --font-fira-sans-h5: 700 8pt/10pt "Fira Sans", sans-serif; /* Icon Heading */
   --font-fira-sans-text: 12pt/14pt "Fira Sans", sans-serif; /* Text */
+  --font-fira-sans-error: 10pt/12pt "Fira Sans", sans-serif; /* error msg */
 }
 
 /* ==== Reset & Normalize ==== */
@@ -664,6 +665,11 @@ i {
 .error-message {
   color: red;
   margin-top: 0.2rem;
+  font-size: var(--font-fira-sans-error);
+  text-align: center;
+}
+.error-message p {
+  font-size: var(--font-fira-sans-error);
 }
 
 @media screen and (min-width: 600px) {
