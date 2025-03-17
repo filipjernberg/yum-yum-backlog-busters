@@ -97,3 +97,14 @@ export function setupRegistrationBtn() {
     window.location.href = newUrl;
   });
 }
+
+export function registerUser() {
+  const submitUserBtn = getElement(`#registerSubmit`);
+
+  submitUserBtn.addEventListener(`click`, function () {
+    const username = getElement(`#registerUsername`).value;
+    const email = getElement(`#registerMail`).value;
+    const password = getElement(`#registerPasswordOne`).value;
+    const confirmPassword = getElement(`#registerPasswordTwo`).value;
+  });
+}

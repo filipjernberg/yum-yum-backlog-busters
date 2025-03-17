@@ -632,15 +632,26 @@ i {
 
 /* === form styling === */
 
-.user-container {
-  width: 80%;
-}
+/* .user-container {
+  padding: 1rem;
+} */
+
 .register-form {
   margin: 2rem 0 1.5rem;
 }
+.register-form__logo {
+  width: 35px;
+  margin-right: 1rem;
+}
+
+.form__label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.3rem;
+}
 
 .input-field {
-  margin-bottom: 1.2rem;
+  /* margin-bottom: 1.2rem; */
   border: none;
   border-bottom: var(--light-grey) solid 2px;
   font-family: var(--font-fira-sans-text);
