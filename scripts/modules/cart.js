@@ -1,7 +1,7 @@
-import { getElement, getElements } from "./domUtils.js";
+import { getElement, getElements, removeClasses, toggleClasses, createElement, appendChildren } from "./domUtils.js";
 import { setLocalStorage, getFromLocalStorage } from "./localStorageUtils.js";
 import { fetchMenu } from "./api.js";
-import { setupOrderButton } from "./eventHandlers.js";
+import { removeOrderButton, setupOrderButton } from "./eventHandlers.js";
 
 export async function addToCartListener() {
   console.log("addToCartListener()");
@@ -59,6 +59,7 @@ export function updateCartAlert() {
 
   cartIcon.textContent = totalItems;
 }
+
 //Om man vill läsa in senaste ordern från local Storage
 export function latestOrder() {
   const orders = getFromLocalStorage("orderHistory");
@@ -67,4 +68,23 @@ export function latestOrder() {
   orderId.textContent = `#${latestOrder.id}`;
 
   console.log(latestOrder.id);
+}
+
+export function showCart() {
+  console.log(`showCart()`);
+  toggleClasses(getElement(`#cartModal`), [`d-none`]);
+  toggleClasses(getElement(`#bodyPage`), [`page--black-white-opacity`]);
+  createCart();
+  removeOrderButton();
+  setupOrderButton();
+}
+
+function createCart() {
+  console.log(`createCart()`);
+  const modal = getElement(`#cartModal`);
+
+  const confirmButton = createElement(`button`, [`button`, `button--margin-bottom`], { id: `addOrder` }, `bekräfta order`);
+  const resetCartButton = createElement(`button`, [`button`, `button--margin-bottom`], { id: `removeOrder` }, `töm varukorgen`);
+  appendChildren(modal, confirmButton);
+  appendChildren(modal, resetCartButton);
 }

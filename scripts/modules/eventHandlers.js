@@ -1,6 +1,7 @@
 import { getElement, getElements } from "./domUtils.js";
 import { saveUserData } from "./utils.js";
 import { getFromLocalStorage, setLocalStorage, removeFromLocalStorage, clearLocalStorage } from "./localStorageUtils.js";
+import { showCart } from "./cart.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {
@@ -34,6 +35,8 @@ export function removeOrderButton() {
 
   removeOrderBtn.addEventListener("click", () => {
     removeFromLocalStorage("cart");
+    console.log(`klick på töm order-knapp`);
+
     location.reload();
   });
 }
@@ -84,10 +87,5 @@ function scrollList(scrollpixels) {
 //Lyssnare på cart-knappen
 export function setupCartBtnListener() {
   console.log(`setupCartBtnListener()`);
-  const cartButton = getElement(`#cartBtn`);
-  cartButton.addEventListener(`click`, showCart);
-}
-
-function showCart() {
-  console.log(`showCart()`);
+  getElement(`#cartBtn`).addEventListener(`click`, showCart);
 }

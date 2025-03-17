@@ -20,10 +20,10 @@ function handleCurrentPage() {
       //Page specific code goes here
       break;
     case "/pages/food-menu.html":
-      setupOrderButton();
+      // setupOrderButton();
       createContent("Meny", fetchMenu());
       addToCartListener();
-      removeOrderButton();
+      // removeOrderButton();
       setupCartBtnListener();
 
       break;

@@ -23,6 +23,10 @@ export function addClasses(element, classNames = []) {
   if (classNames.length) element.classList.add(...classNames);
 }
 
+export function toggleClasses(element, classNames = []) {
+  if (classNames.length) element.classList.toggle(...classNames);
+}
+
 export function getElement(selector) {
   return document.querySelector(selector);
 }
