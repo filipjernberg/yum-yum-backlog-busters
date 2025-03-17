@@ -63,8 +63,8 @@
       <section id="userContainer" class="user-container flex">
         <h1 id="createAccountTitle" class="heading-one heading-one--dark">Skapa konto</h1>
         <form id="registerForm" class="register-form">
-          <figure><!-- ikon för användare--></figure>
-          <label>
+          <label class="form__label">
+            <img src="../resources/icons/user-unfilled-w300.svg" class="register-form__logo" alt="ange användarnamn" />
             <input
               id="registerUsername"
               class="input-field"
@@ -75,8 +75,10 @@
               required
             />
           </label>
-          <figure><!-- ikon för email--></figure>
-          <label>
+
+          <label class="form__label">
+            <img src="../resources/icons/mail-w300.svg" class="register-form__logo" alt="ange mejladress" />
+
             <input
               id="registerMail"
               class="input-field"
@@ -88,8 +90,8 @@
             />
           </label>
 
-          <figure><!-- ikon för lösenord--></figure>
-          <label>
+          <label class="form__label">
+            <img src="../resources/icons/lock-password-w300.svg" class="register-form__logo" alt="ange lösenord" />
             <input
               id="registerPasswordOne"
               class="input-field"
@@ -100,8 +102,8 @@
               required
             />
           </label>
-          <figure><!-- ikon för lösenord--></figure>
-          <label>
+          <label class="form__label">
+            <img src="../resources/icons/lock-password-w300.svg" class="register-form__logo" alt="ange samma lösenord igen" />
             <input
               id="registerPasswordtwo"
               class="input-field"
