@@ -96,6 +96,55 @@ export function saveOrder(timerElementId) {
   startCountdown(orders.startTime, timerElementId);
 }
 
+// Krånglig kod, avvaktar med den
+// export function saveOrder(timerElementId) {
+//   // const confirmationNumber = generateConfirmationNumber();
+//   // const startTime = Date.now();
+
+//   const users = getFromLocalStorage(`users`);
+//   const currentUser = getFromLocalStorage(`currentUser`);
+//   const guest = getFromLocalStorage(`guestUser`);
+
+//   if (!currentUser && !guest) {
+//     console.log(`Ingen användare inloggad. Kan inte spara order.`);
+//     return;
+//   }
+
+//   const orders = orderCart();
+
+//   if (currentUser) {
+//     const user = users.find((u) => u.username === currentUser);
+//     if (user) {
+//       if (user.orders && Array.isArray(user.orders)) {
+//         user.orders.push(orders); // Lägg till den nya ordern i arrayen
+//       } else {
+//         user.orders = [orders];
+//       }
+//     } else {
+//       console.log(`Användare ej hittad. Kan ej uppdatera ordern.`);
+//     }
+//   } else if (guest) {
+//     if (guest.orders && Array.isArray(guest.orders)) {
+//       guest.orders.push(orders); // Lägg till den nya ordern i arrayen
+//     } else {
+//       guest.orders = [orders]; // Om ingen tidigare order finns, skapa en ny array
+//     }
+//     setLocalStorage(`guestUser`, guest);
+//   }
+//   // //Ändra detta senare till att gälla inloggad person istället
+//   // users[users.length - 1] = {
+//   //   ...users[users.length - 1], // Behåll tidigare data
+//   //   // confirmationNumber,
+//   //   // startTime,
+//   //   orders,
+//   // };
+
+//   setLocalStorage(`users`, users);
+//   console.log(`Orderdata sparad för användare`);
+
+//   startCountdown(orders.startTime, timerElementId);
+// }
+
 export function getUserData() {
   const userData = getFromLocalStorage(`user`);
 
