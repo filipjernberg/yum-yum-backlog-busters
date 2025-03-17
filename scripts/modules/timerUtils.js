@@ -1,15 +1,15 @@
-import { getConfirmationNumber } from "./utils.js";
+import { writeConfirmationNumber } from "./utils.js";
 import { getElement } from "./domUtils.js";
 
-export function startTimer(timerElementId) {
-  const startTime = Date.now();
-  // setLocalStorage(`startTime`, startTime);
-  getConfirmationNumber(startTime);
-  startCountdown(startTime, timerElementId);
-}
+// export function startTimer(start) {
+//   // const startTime = Date.now();
+//   // setLocalStorage(`startTime`, startTime);
+//   writeConfirmationNumber(start);
+// }
 
 export function startCountdown(startTime, timerElementId) {
   const countdownElement = getElement(timerElementId);
+  writeConfirmationNumber(startTime);
 
   const duration = 10 * 60 * 1000;
 

@@ -1,7 +1,8 @@
 import { getElement, getElements } from "./domUtils.js";
-import { setLocalStorage, getFromLocalStorage } from "./localStorageUtils.js";
+import { setLocalStorage, getFromLocalStorage, removeFromLocalStorage } from "./localStorageUtils.js";
 import { fetchMenu } from "./api.js";
 import { setupOrderButton } from "./eventHandlers.js";
+import { writeConfirmationNumber, generateConfirmationNumber } from "./utils.js";
 
 export async function addToCartListener() {
   console.log("addToCartListener()");
@@ -67,4 +68,20 @@ export function latestOrder() {
   orderId.textContent = `#${latestOrder.id}`;
 
   console.log(latestOrder.id);
+}
+
+export function orderCart() {
+  const cart = getFromLocalStorage("cart");
+  const confirmationNumber = generateConfirmationNumber();
+
+  const orders = {
+    ConfirmationNumber: confirmationNumber,
+    startTime: Date.now(),
+    items: cart,
+    total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Beräkna totalpris
+    timestamp: new Date().toISOString(), // sparar tidpunkten då ordern skapas i ett ISO-format (YYYY-MM-DDTHH:mm:ss.sssZ).
+  };
+  removeFromLocalStorage("cart");
+
+  return orders;
 }

@@ -2,8 +2,9 @@ import { getElement, addClasses, styleElement, removeClasses } from "./domUtils.
 import { getFromLocalStorage, setLocalStorage } from "./localStorageUtils.js";
 import { registerUser } from "./eventHandlers.js";
 import { fetchUsers } from "./api.js";
-import { startTimer, startCountdown } from "./timerUtils.js";
+import { startCountdown } from "./timerUtils.js";
 import { handleRegistrationForm } from "./formUtils.js";
+import { orderCart } from "./cart.js";
 
 export function getParams() {
   return new URLSearchParams(window.location.search);
@@ -32,7 +33,6 @@ export function handleOrderConfirmation(confirmationSection) {
   const orderWrapperRef = getElement(`#wrapperOrders`);
   const body = getElement(`body`);
 
-  startTimer(`#timerConfirmation`);
   addClasses(confirmationSection, [`flex`]);
   addClasses(orderWrapperRef, [`d-none`]);
   removeClasses(orderWrapperRef, ["flex"]);
@@ -54,8 +54,8 @@ function handleSingleReceipt() {
   const users = getFromLocalStorage(`users`);
   if (users.length > 0) {
     const latestUser = users[users.length - 1]; // Hämta senaste beställningen
-    if (latestUser.startTime) {
-      startCountdown(latestUser.startTime, `#timerForReceipt`);
+    if (latestUser.orders.startTime) {
+      startCountdown(latestUser.orders.startTime, `#timerForReceipt`);
     }
   }
 }
@@ -66,32 +66,34 @@ export function generateConfirmationNumber() {
 }
 
 //Skriver ut vårt nummer i rutan för confirmationnnumber
-export function getConfirmationNumber(number) {
+export function writeConfirmationNumber(number) {
   getElement(`#confirmationNumber`).textContent = `#${number}`;
 }
 
 // sparar en timer och confirmationNumber kopplat till vår senaste skapade användare
 export function saveOrder(timerElementId) {
-  const confirmationNumber = generateConfirmationNumber();
-  const startTime = Date.now();
+  // const confirmationNumber = generateConfirmationNumber();
+  // const startTime = Date.now();
 
   let users = getFromLocalStorage(`users`);
   if (users.length === 0) {
     console.log(`Ingen användare hittad. Kan inte spara orderdata`);
     return;
   }
+  const orders = orderCart();
 
   //Ändra detta senare till att gälla inloggad person istället
   users[users.length - 1] = {
     ...users[users.length - 1], // Behåll tidigare data
-    confirmationNumber,
-    startTime,
+    // confirmationNumber,
+    // startTime,
+    orders,
   };
 
   setLocalStorage(`users`, users);
   console.log(`Orderdata sparad för användare:`, users[users.length - 1]);
 
-  startCountdown(startTime, timerElementId);
+  startCountdown(orders.startTime, timerElementId);
 }
 
 export function getUserData() {
