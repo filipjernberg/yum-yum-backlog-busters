@@ -80,3 +80,14 @@ function scrollList(scrollpixels) {
     behavior: "smooth",
   });
 }
+
+// Beställ knapp på food-menu.html
+export function setupRegistrationBtn() {
+  const registerUserBtn = getElement(`#registeruser`);
+  console.log(registerUserBtn);
+
+  registerUserBtn.addEventListener(`click`, function () {
+    console.log(`Klick på registrera användare`);
+    window.location.href = "../pages/user-page.html?registrationForm=true";
+  });
+}

@@ -7,32 +7,39 @@ export function getParams() {
 
 export function checkParams(params) {
   const confirmationSectionRef = getElement(`#wrapperOrderConfirmation`);
-  const orderWrapperRef = getElement(`#wrapperOrders`);
-  const receiptwrapperRef = getElement(`#wrapperSingleReceipt`);
-  const body = getElement(`body`);
 
   if (confirmationSectionRef) {
     removeClasses(confirmationSectionRef, ["flex"]);
   }
 
   if (params.get(`showConfirmation`) === `true`) {
-    handleOrderConfirmation(confirmationSectionRef, orderWrapperRef, body);
+    handleOrderConfirmation(confirmationSectionRef);
   }
   if (params.get(`showSingleReceipt`) === `true`) {
-    handleSingleReceipt(receiptwrapperRef, orderWrapperRef, body);
+    handleSingleReceipt();
+  }
+  if (params.get(`registrationForm`) === `true`) {
+    handleRegistrationForm();
   }
 }
 
-export function handleOrderConfirmation(confirmationSectionRef, orderWrapperRef, body) {
+export function handleOrderConfirmation(confirmation) {
+  const orderWrapperRef = getElement(`#wrapperOrders`);
+  const body = getElement(`body`);
+
   startTimer(`#timerConfirmation`);
-  addClasses(confirmationSectionRef, [`flex`]);
+  addClasses(confirmation, [`flex`]);
   addClasses(orderWrapperRef, [`d-none`]);
   removeClasses(orderWrapperRef, ["flex"]);
   styleElement(body, `backgroundColor`, `#605858`);
   saveUserData(`#timerConfirmation`);
 }
 
-function handleSingleReceipt(receiptWrapperRef, orderWrapperRef, body) {
+function handleSingleReceipt() {
+  const receiptWrapperRef = getElement(`#wrapperSingleReceipt`);
+  const orderWrapperRef = getElement(`#wrapperOrders`);
+  const body = getElement(`body`);
+
   addClasses(receiptWrapperRef, [`flex`]);
   addClasses(orderWrapperRef, [`d-none`]);
   removeClasses(orderWrapperRef, ["flex"]);
@@ -43,6 +50,10 @@ function handleSingleReceipt(receiptWrapperRef, orderWrapperRef, body) {
     const latestUser = userData[userData.length - 1]; // Hämta senaste beställningen
     if (latestUser.startTime) startCountdown(latestUser.startTime, `#timerForReceipt`);
   }
+}
+
+function handleRegistrationForm() {
+  addClasses();
 }
 
 export function startTimer(timerElementId) {
