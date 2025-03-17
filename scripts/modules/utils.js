@@ -2,7 +2,7 @@ import { getElement, addClasses, styleElement, removeClasses } from "./domUtils.
 import { getFromLocalStorage, setLocalStorage } from "./localStorageUtils.js";
 import { registerUser } from "./eventHandlers.js";
 import { fetchUsers } from "./api.js";
-import { startCountdown } from "./timerUtils.js";
+import { startCountdown } from "./timer.js";
 import { handleRegistrationForm } from "./formUtils.js";
 import { orderCart } from "./cart.js";
 

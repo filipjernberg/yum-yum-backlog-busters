@@ -1,8 +1,7 @@
 import { getElement, getElements } from "./domUtils.js";
 import { setLocalStorage, getFromLocalStorage, removeFromLocalStorage } from "./localStorageUtils.js";
 import { fetchMenu } from "./api.js";
-import { setupOrderButton } from "./eventHandlers.js";
-import { writeConfirmationNumber, generateConfirmationNumber } from "./utils.js";
+import { generateConfirmationNumber } from "./utils.js";
 
 export async function addToCartListener() {
   console.log("addToCartListener()");
