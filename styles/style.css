@@ -466,6 +466,11 @@ p {
     color: var(--dark-grey);
 }
 
+/* Admin page */
+#adminContainer {
+    margin-bottom: 5rem;
+}
+
 /* === Icon Styling === */
 i {
 }
