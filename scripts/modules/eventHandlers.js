@@ -80,3 +80,14 @@ function scrollList(scrollpixels) {
     behavior: "smooth",
   });
 }
+
+//Lyssnare på cart-knappen
+export function setupCartBtnListener() {
+  console.log(`setupCartBtnListener()`);
+  const cartButton = getElement(`#cartBtn`);
+  cartButton.addEventListener(`click`, showCart);
+}
+
+function showCart() {
+  console.log(`showCart()`);
+}
