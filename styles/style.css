@@ -466,6 +466,26 @@ p {
     color: var(--dark-grey);
 }
 
+/*Filter button*/
+.content__filters {
+    gap: .5rem;
+}
+
+.filter-button {
+    border: none;
+    width: 90px;
+    border-radius: 100px;
+    padding: .5rem 1rem;
+    margin: .15rem;
+    background-color: var(--dark-grey);
+    color: var(--off-white);
+    cursor: pointer;
+}
+
+.filter-button:hover {
+    background-color: var(--light-grey);
+}
+
 /* === Icon Styling === */
 i {
 }
