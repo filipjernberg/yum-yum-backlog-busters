@@ -3,6 +3,7 @@ import { getFromLocalStorage, setLocalStorage } from "./localStorageUtils.js";
 import { registerUser } from "./eventHandlers.js";
 import { fetchUsers } from "./api.js";
 import { startTimer, startCountdown } from "./timerUtils.js";
+import { handleRegistrationForm } from "./formUtils.js";
 
 export function getParams() {
   return new URLSearchParams(window.location.search);
@@ -57,17 +58,6 @@ function handleSingleReceipt() {
       startCountdown(latestUser.startTime, `#timerForReceipt`);
     }
   }
-}
-
-function handleRegistrationForm() {
-  const registrationWrapperRef = getElement(`#wrapperRegister`);
-  const wrapperguestRef = getElement(`#wrapperGuest`);
-
-  removeClasses(registrationWrapperRef, [`d-none`]);
-  addClasses(registrationWrapperRef, [`flex`]);
-
-  addClasses(wrapperguestRef, [`d-none`]);
-  removeClasses(wrapperguestRef, [`flex`]);
 }
 
 //genererar ett random nummer som vi sedan anger till confirmationnumber
@@ -134,34 +124,6 @@ export async function getAllUsers() {
   }
 }
 
-export function validateUserInput(username, email, password, confirmPassword, allUsers) {
-  let errors = [];
-  console.log(`All users: `, allUsers);
-
-  if (allUsers.some((user) => user.username === username)) {
-    errors.push(`Användarnamnet är upptaget.`);
-  }
-  if (allUsers.some((user) => user.email === email)) {
-    errors.push(`Mejladressen är redan registrerad.`);
-  }
-  if (!email.includes("@")) {
-    errors.push(`Mejladressen måste innehålla ett @.`);
-  }
-  if (password.length < 6) {
-    errors.push(`Lösenordet måste vara minst 6 tecken.`);
-  }
-  if (password !== confirmPassword) {
-    errors.push(`Lösenorden matchar inte. Försök igen.`);
-  }
-
-  return errors;
-}
-
-//Skriver ut felmeddelande errormessages är div, errors är själva felet
-export function displayErrorMessages(errorMessages, errors) {
-  errorMessages.innerHTML = errors.map((error) => `<p>${error}</p>`).join("");
-}
-
 // sparar ny användare, anropas när valideringen av formuläret för registrering lyckats. Användare sparas under "users"
 // Hashedpassword är krypterade tecken
 export function saveNewUser(username, email, hashedPassword) {
@@ -171,13 +133,6 @@ export function saveNewUser(username, email, hashedPassword) {
   usersFromLocalStorage.push(newUser);
   setLocalStorage(`users`, usersFromLocalStorage);
   console.log(`ny användare sparad`);
-}
-
-//Lyckas man komma igenom registrering så kommer en grön text upp som bekräftelse ovanför länken "logga in"
-export function displaySuccessMessage() {
-  const congrats = getElement(`#changeParagraph`);
-  styleElement(congrats, `color`, `green`);
-  congrats.textContent = `Du har nu skapat ett konto!`;
 }
 
 //funktion för att ändra lösenordet till krypterad när det sparas i localstorage. Behövs liknande för att kunna jämföra i login senare
