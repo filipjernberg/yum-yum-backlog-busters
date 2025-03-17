@@ -1,5 +1,13 @@
 import { getElement, getElements, styleElement } from "./domUtils.js";
-import { saveUserData } from "./utils.js";
+import {
+  saveUserData,
+  hashPassword,
+  getAllUsers,
+  validateUserInput,
+  displayErrorMessages,
+  saveNewUser,
+  displaySuccessMessage,
+} from "./utils.js";
 import { getFromLocalStorage, setLocalStorage, removeFromLocalStorage, clearLocalStorage } from "./localStorageUtils.js";
 import { fetchUsers } from "./api.js";
 
@@ -113,46 +121,35 @@ export function registerUser() {
 
     const errorMessages = getElement("#registrationError");
 
+    styleElement(errorMessages, `color`, `red`);
     errorMessages.innerHTML = ``;
 
     try {
-      const usersFromAPI = await fetchUsers();
-      const usersFromLocalStorage = getFromLocalStorage(`users`);
+      const allUsers = await getAllUsers();
+      const validationErrors = validateUserInput(username, email, password, confirmPassword, allUsers);
 
-      const allUsers = [...usersFromAPI, ...usersFromLocalStorage];
-
-      const userExists = allUsers.some((user) => user.username === username || user.email === email);
-
-      if (userExists) {
-        if (allUsers.some((user) => user.username === username)) {
-          console.log(`Användarnamnet är upptaget`);
-
-          errorMessages.innerHTML += `<p>Användarnamnet är upptaget</p>`;
-        }
-        if (allUsers.some((user) => user.email === email)) {
-          console.log(`Mejladressen är redan registrerad.`);
-
-          errorMessages.innerHTML += `<p>Mejladressen är redan registrerad.</p>`;
-        }
+      if (validationErrors.length > 0) {
+        displayErrorMessages(errorMessages.validationErrors);
+        return;
       }
 
-      if (password !== confirmPassword) {
-        console.log(`Lösenorden matchar inte. Försök igen.`);
+      const hashedPassword = await hashPassword(password);
+      saveNewUser(username, email, hashedPassword);
 
-        errorMessages.innerHTML += `<p>Lösenorden matchar inte. Försök igen.</p>`;
-      }
+      displaySuccessMessage();
 
-      if (errorMessages.innerHTML === ``) {
-        const newUser = { username, email, password };
-        usersFromLocalStorage.push(newUser);
-        setLocalStorage(`users`, usersFromLocalStorage);
+      // if (errorMessages.innerHTML === ``) {
+      //   const congrats = getElement(`#changeParagraph`);
+      //   const newUser = { username, email, password: hashedPassword };
 
-        users.push(newUser);
-        setLocalStorage(`users`, users);
-      }
+      //   usersFromLocalStorage.push(newUser);
+      //   setLocalStorage(`users`, usersFromLocalStorage);
+      //   styleElement(congrats, `color`, `green`);
+      //   congrats.textContent = `Du har nu skapat ett konto`;
+      // }
     } catch (error) {
       console.error(`Fel vid registrering: ${error.message}`);
-      errorMessages.innerHTML += `<p>Fel vid registrering: ${error.message}</p>`;
+      displayErrorMessages(errorMessages, [`Fel vid registrering: ${error.message}`]);
     }
   });
 }

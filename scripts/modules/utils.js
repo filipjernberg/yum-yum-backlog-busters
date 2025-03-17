@@ -1,6 +1,7 @@
 import { getElement, addClasses, styleElement, removeClasses } from "./domUtils.js";
 import { getFromLocalStorage, setLocalStorage } from "./localStorageUtils.js";
 import { registerUser } from "./eventHandlers.js";
+import { fetchUsers } from "./api.js";
 
 export function getParams() {
   return new URLSearchParams(window.location.search);
@@ -149,3 +150,75 @@ export function getUserData() {
     console.log("No user data found");
   }
 }
+
+export async function getAllUsers() {
+  try {
+    const usersFromAPI = await fetchUsers();
+    const usersFromLocalStorage = getFromLocalStorage(`users`);
+
+    console.log("Users from API:", usersFromAPI);
+    console.log("Users from Local Storage:", usersFromLocalStorage);
+
+    // Se till att vi alltid har arrayer
+    return [...(Array.isArray(usersFromAPI) ? usersFromAPI : []), ...(Array.isArray(usersFromLocalStorage) ? usersFromLocalStorage : [])];
+  } catch (error) {
+    console.error("Fel vid hämtning av användare:", error);
+    return [];
+  }
+}
+
+export function validateUserInput(username, email, password, confirmPassword, allUsers) {
+  let errors = [];
+  console.log(`All users: `, allUsers);
+
+  if (allUsers.some((user) => user.username === username)) {
+    errors.push(`Användarnamnet är upptaget.`);
+  }
+  if (allUsers.some((user) => user.email === email)) {
+    errors.push(`Mejladressen är redan registrerad.`);
+  }
+  if (!email.includes("@")) {
+    errors.push(`Mejladressen måste innehålla ett @.`);
+  }
+  if (password.length < 6) {
+    errors.push(`Lösenordet måste vara minst 6 tecken.`);
+  }
+  if (password !== confirmPassword) {
+    errors.push(`Lösenorden matchar inte. Försök igen.`);
+  }
+
+  return errors;
+}
+
+export function displayErrorMessages(errorMessages, errors) {
+  errorMessages.innerHTML = errors.map((error) => `<p>${error}</p>`).join("");
+}
+
+export function saveNewUser(username, email, hashedPassword) {
+  const usersFromLocalStorage = getFromLocalStorage(`users`) || [];
+  const newUser = { username, email, password: hashedPassword };
+
+  usersFromLocalStorage.push(newUser);
+  setLocalStorage(`users`, usersFromLocalStorage);
+}
+
+export function displaySuccessMessage() {
+  const congrats = getElement(`#changeParagraph`);
+  styleElement(congrats, `color`, `green`);
+  congrats.textContent = `Du har nu skapat ett konto!`;
+}
+
+export async function hashPassword(password) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer)); // Omvandla hashBuffer till en array
+  const hashHex = hashArray.map((byte) => byte.toString(16).padStart(2, "0")).join("");
+  return hashHex; // Returvärdet är den hexa-hashade versionen av lösenordet
+}
+
+// Senare funktion för att jämföra lösenord?
+// async function comparePasswords(inputPassword, storedHash) {
+//   const inputHash = await hashPassword(inputPassword);
+//   return inputHash === storedHash;
+// }
