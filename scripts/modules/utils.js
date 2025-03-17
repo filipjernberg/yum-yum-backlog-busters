@@ -35,6 +35,7 @@ export function handleOrderConfirmation(confirmationSection) {
   addClasses(orderWrapperRef, [`d-none`]);
   removeClasses(orderWrapperRef, ["flex"]);
   styleElement(body, `backgroundColor`, `#605858`);
+
   saveUserData(`#timerConfirmation`);
 }
 
@@ -48,10 +49,12 @@ function handleSingleReceipt() {
   removeClasses(orderWrapperRef, ["flex"]);
   styleElement(body, `backgroundColor`, `#605858`);
 
-  const userData = getFromLocalStorage(`user`);
-  if (userData && userData.length > 0) {
-    const latestUser = userData[userData.length - 1]; // Hämta senaste beställningen
-    if (latestUser.startTime) startCountdown(latestUser.startTime, `#timerForReceipt`);
+  const users = getFromLocalStorage(`users`);
+  if (users.length > 0) {
+    const latestUser = users[users.length - 1]; // Hämta senaste beställningen
+    if (latestUser.startTime) {
+      startCountdown(latestUser.startTime, `#timerForReceipt`);
+    }
   }
 }
 
@@ -106,18 +109,21 @@ export function saveUserData(timerElementId) {
   const confirmationNumber = generateConfirmationNumber();
   const startTime = Date.now();
 
-  const userData = {
-    confirmationNumber: confirmationNumber,
-    startTime: startTime,
+  let users = getFromLocalStorage(`users`);
+  if (users.length === 0) {
+    console.log(`Ingen användare hittad. Kan inte spara orderdata`);
+    return;
+  }
+
+  users[users.length - 1] = {
+    ...users[users.length - 1], // Behåll tidigare data
+    confirmationNumber,
+    startTime,
   };
-  let user = getFromLocalStorage(`user`);
 
-  user = Array.isArray(user) ? user : user ? [user] : [];
-  user.push(userData);
+  setLocalStorage(`users`, users);
+  console.log(`Orderdata sparad för användare:`, users[users.length - 1]);
 
-  setLocalStorage(`user`, user);
-
-  console.log("UserData saved:", userData);
   startCountdown(startTime, timerElementId);
 }
 
@@ -179,11 +185,12 @@ export function displayErrorMessages(errorMessages, errors) {
 }
 
 export function saveNewUser(username, email, hashedPassword) {
-  const usersFromLocalStorage = getFromLocalStorage(`users`) || [];
+  const usersFromLocalStorage = getFromLocalStorage(`users`);
   const newUser = { username, email, password: hashedPassword };
 
   usersFromLocalStorage.push(newUser);
   setLocalStorage(`users`, usersFromLocalStorage);
+  console.log(`ny användare sparad`);
 }
 
 export function displaySuccessMessage() {

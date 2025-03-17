@@ -129,7 +129,7 @@ export function registerUser() {
       const validationErrors = validateUserInput(username, email, password, confirmPassword, allUsers);
 
       if (validationErrors.length > 0) {
-        displayErrorMessages(errorMessages.validationErrors);
+        displayErrorMessages(errorMessages, validationErrors);
         return;
       }
 
