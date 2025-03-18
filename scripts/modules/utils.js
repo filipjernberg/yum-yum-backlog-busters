@@ -67,7 +67,8 @@ function handleSingleReceipt() {
   }
 }
 
-// Togs bort för överflödig
+// ---------------------------------Togs bort för överflödig---------------------
+
 // export function startTimer(timerElementId) {
 //   const startTime = Date.now();
 //   // setLocalStorage(`startTime`, startTime);
@@ -75,34 +76,35 @@ function handleSingleReceipt() {
 //   startCountdown(startTime, timerElementId);
 // }
 
-//Annelie flyttade denna till timer.js. Justera där istället?
-export function startCountdown(startTime, timerElementId, orderId = null) {
-  const countdownElement = getElement(timerElementId);
-  const duration = 10 * 60 * 1000;
+//--------------------Annelie flyttade denna till timer.js. Justera där istället?------------------
 
-  const timerInterval = setInterval(() => {
-    const elapsedTime = Date.now() - startTime;
-    const timeLeft = duration - elapsedTime;
+// export function startCountdown(startTime, timerElementId, orderId = null) {
+//   const countdownElement = getElement(timerElementId);
+//   const duration = 10 * 60 * 1000;
 
-    if (timeLeft <= 0) {
-      clearInterval(timerInterval);
-      countdownElement.textContent = `Maten är klar`;
+//   const timerInterval = setInterval(() => {
+//     const elapsedTime = Date.now() - startTime;
+//     const timeLeft = duration - elapsedTime;
 
-      // Move order from pending to orderHistory if orderId provided
-      if (orderId !== null) {
-        let userData = getUserData();
-        const orderIndex = userData.pending.findIndex((order) => order.id === orderId);
+//     if (timeLeft <= 0) {
+//       clearInterval(timerInterval);
+//       countdownElement.textContent = `Maten är klar`;
 
-        if (orderIndex !== -1) {
-          const completedOrder = userData.pending.splice(orderIndex, 1)[0];
-          userData.orderHistory.push(completedOrder);
-          setUserData(userData);
-          console.log(`Order #${orderId} moved to history.`);
-        }
-      }
+//       // Move order from pending to orderHistory if orderId provided
+//       if (orderId !== null) {
+//         let userData = getUserData();
+//         const orderIndex = userData.pending.findIndex((order) => order.id === orderId);
 
-      return;
-    }
+//         if (orderIndex !== -1) {
+//           const completedOrder = userData.pending.splice(orderIndex, 1)[0];
+//           userData.orderHistory.push(completedOrder);
+//           setUserData(userData);
+//           console.log(`Order #${orderId} moved to history.`);
+//         }
+//       }
+
+//       return;
+//     }
 
     const minutes = Math.floor(timeLeft / 60000);
     const seconds = Math.floor((timeLeft % 60000) / 1000);
