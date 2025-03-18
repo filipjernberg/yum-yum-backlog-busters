@@ -1,11 +1,16 @@
-import { getElement, getElements } from "./domUtils.js";
-import { saveUserData } from "./utils.js";
-import { getFromLocalStorage, setLocalStorage, removeFromLocalStorage, clearLocalStorage } from "./localStorageUtils.js";
-import { fetchMenu } from "./api.js";
-import { createList } from "./domUtils.js";
-import { appendChildren } from "./domUtils.js";
-import { addToCartListener } from "./cart.js";
+import { getElement, getElements, styleElement } from "./domUtils.js";
+import { saveUserData, saveNewUser, hashPassword, getAllUsers } from "./utils.js";
+import {
+  getFromLocalStorage,
+  setLocalStorage,
+  removeFromLocalStorage,
+  clearLocalStorage,
+  getUserData,
+  setUserData,
+} from "./localStorageUtils.js";
+import { displayErrorMessages, displaySuccessMessage, validateUserInput } from "./formUtils.js";
 import { updateMenu } from "../script.js";
+import { fetchMenu } from "./api.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {
@@ -13,21 +18,23 @@ export function setupOrderButton() {
   console.log(addOrderBtn);
 
   addOrderBtn.addEventListener(`click`, function () {
-    console.log(`Klick på beställning`);
-    const cart = getFromLocalStorage("cart");
+    //utkommenterat för har flyttats till egen funktion
+    //
+    // console.log(`Klick på beställning`);
+    // const cart = getFromLocalStorage("cart");
 
-    const order = {
-      id: Date.now(), // Unikt order-ID baserat på tid
-      items: cart,
-      total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Beräkna totalpris
-      timestamp: new Date().toISOString(), // sparar tidpunkten då ordern skapas i ett ISO-format (YYYY-MM-DDTHH:mm:ss.sssZ).
-    };
+    // const order = {
+    //   id: Date.now(), // Unikt order-ID baserat på tid
+    //   items: cart,
+    //   total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Beräkna totalpris
+    //   timestamp: new Date().toISOString(), // sparar tidpunkten då ordern skapas i ett ISO-format (YYYY-MM-DDTHH:mm:ss.sssZ).
+    // };
 
-    const orders = getFromLocalStorage("orderHistory") || [];
-    orders.push(order);
-    setLocalStorage("orderHistory", orders);
+    // const orders = getFromLocalStorage("orderHistory") || [];
+    // orders.push(order);
+    // setLocalStorage("orderHistory", orders);
 
-    removeFromLocalStorage("cart");
+    // removeFromLocalStorage("cart");
 
     window.location.href = "../pages/receipts.html?showConfirmation=true";
   });
@@ -38,7 +45,9 @@ export function removeOrderButton() {
   const removeOrderBtn = getElement("#removeOrder");
 
   removeOrderBtn.addEventListener("click", () => {
-    removeFromLocalStorage("cart");
+    let userData = getUserData();
+    userData.cart = [];
+    setUserData(userData);
     location.reload();
   });
 }
@@ -107,4 +116,58 @@ export async function filterListener() {
       updateMenu(filteredMenu);
     });
   }
+}
+
+// Beställ knapp på food-menu.html
+export function setupRegistrationBtn() {
+  const registerUserBtn = getElement(`#registerUser`);
+  console.log(registerUserBtn);
+
+  registerUserBtn.addEventListener(`click`, function (event) {
+    event.preventDefault();
+
+    let originalUrl = this.href;
+    let newUrl = new URL(originalUrl, window.location.origin);
+
+    newUrl.searchParams.set("registrationForm", "true");
+
+    window.location.href = newUrl;
+  });
+}
+
+export function registerUser() {
+  const registerFormRef = getElement(`#registerForm`);
+  const submitUserBtn = getElement(`#registerSubmit`);
+
+  registerFormRef.addEventListener(`submit`, async function (event) {
+    event.preventDefault();
+
+    const username = getElement(`#registerUsername`).value;
+    const email = getElement(`#registerMail`).value;
+    const password = getElement(`#registerPasswordOne`).value;
+    const confirmPassword = getElement(`#registerPasswordtwo`).value;
+
+    const errorMessages = getElement("#registrationError");
+
+    styleElement(errorMessages, `color`, `red`);
+    errorMessages.innerHTML = ``;
+
+    try {
+      const allUsers = await getAllUsers();
+      const validationErrors = validateUserInput(username, email, password, confirmPassword, allUsers);
+
+      if (validationErrors.length > 0) {
+        displayErrorMessages(errorMessages, validationErrors);
+        return;
+      }
+
+      const hashedPassword = await hashPassword(password);
+      saveNewUser(username, email, hashedPassword);
+
+      displaySuccessMessage();
+    } catch (error) {
+      console.error(`Fel vid registrering: ${error.message}`);
+      displayErrorMessages(errorMessages, [`Fel vid registrering: ${error.message}`]);
+    }
+  });
 }

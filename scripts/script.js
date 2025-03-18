@@ -11,9 +11,10 @@ import {
 } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
 import { setupOrderButton, setupSingleReceipt, setupScrollBtn, removeOrderButton, filterListener } from "./modules/eventHandlers.js";
+import { setupRegistrationBtn, registerUser } from "./modules/eventHandlers.js";
 import { addToCartListener, latestOrder } from "./modules/cart.js";
 import { checkParams, getParams } from "./modules/utils.js";
-import { createReceipts } from "./modules/receipts.js";
+import { createReceipts, displayOrderHistory } from "./modules/receipts.js";
 import { getFromLocalStorage } from "./modules/localStorageUtils.js";
 import { updateCartAlert } from "./modules/cart.js";
 //-----------------------------------------------
@@ -47,6 +48,7 @@ function handleCurrentPage() {
       setupSingleReceipt();
       checkParams(getParams());
       updateCartAlert();
+      displayOrderHistory();
       break;
     case "/pages/user-page.html":
       //Page specific code goes here
@@ -73,4 +75,7 @@ export async function updateMenu(filter) {
   const menuList = await createList(filter, "menu"); // Skapa en ny lista med filtrerade rätter
   appendChildren(menuContainer, menuList);
   addToCartListener();
+  //   const scrollList = await createScrollList(await list, "menu");
+  //   appendChildren(content, contentHeading, scrollList);
+  //   setupScrollBtn();
 }

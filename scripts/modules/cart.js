@@ -1,7 +1,7 @@
 import { getElement, getElements } from "./domUtils.js";
-import { setLocalStorage, getFromLocalStorage } from "./localStorageUtils.js";
+import { setLocalStorage, getFromLocalStorage, removeFromLocalStorage, getUserData, setUserData } from "./localStorageUtils.js";
 import { fetchMenu } from "./api.js";
-import { setupOrderButton } from "./eventHandlers.js";
+import { generateConfirmationNumber } from "./utils.js";
 
 export async function addToCartListener() {
   console.log("addToCartListener()");
@@ -34,37 +34,73 @@ export async function addToCartListener() {
 }
 
 function addProductToCart(product) {
-  let cart = getFromLocalStorage("cart") || [];
+  let userData = getUserData();
+  let cart = userData.cart;
 
-  // Kolla om produkten redan finns i varukorgen
-  let existingProduct = cart.find((item) => item.id === product.id); //Kollar ifall den klickade rätten redan finns
+  let existingProduct = cart.find((item) => item.id === product.id);
   if (existingProduct) {
-    existingProduct.quantity += 1; // Ifall den finns ökas quantityn
+    existingProduct.quantity += 1;
   } else {
-    cart.push({ ...product, quantity: 1 }); //Om ingen rätt hittas kopieras product som klickats och lägger till quantity: 1
+    cart.push({ ...product, quantity: 1 });
   }
 
-  setLocalStorage("cart", cart);
+  userData.cart = cart;
+  setUserData(userData);
 }
 
 export function updateCartAlert() {
   const cartIcon = getElement("#cartAlert");
-  let cart = getFromLocalStorage("cart") || [];
-  let totalItems = 0;
-
-  for (let item of cart) {
-    totalItems += item.quantity;
-  }
-  console.log(totalItems);
-
+  const userData = getUserData();
+  let totalItems = userData.cart.reduce((sum, item) => sum + item.quantity, 0);
   cartIcon.textContent = totalItems;
 }
+
 //Om man vill läsa in senaste ordern från local Storage
 export function latestOrder() {
-  const orders = getFromLocalStorage("orderHistory");
+  const userData = getUserData();
+  const orders = userData.orderHistory;
+
+  if (orders.length === 0) return;
+
   const latestOrder = orders[orders.length - 1];
   const orderId = getElement("#orderId");
   orderId.textContent = `#${latestOrder.id}`;
-
   console.log(latestOrder.id);
+}
+
+export function orderCart() {
+  const cart = getFromLocalStorage("cart");
+  const confirmationNumber = generateConfirmationNumber();
+
+  const orders = {
+    ConfirmationNumber: confirmationNumber,
+    startTime: Date.now(),
+    items: cart,
+    total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Beräkna totalpris
+    timestamp: new Date().toISOString(), // sparar tidpunkten då ordern skapas i ett ISO-format (YYYY-MM-DDTHH:mm:ss.sssZ).
+  };
+
+  adminOrderHistory(confirmationNumber, orders.items, orders.total, orders.timestamp);
+
+  removeFromLocalStorage("cart");
+
+  return orders;
+}
+
+// Försök till att rädda Robins funktion till adminpage...
+// funktion för att spara en egen local storage till admin innehållande confirmationnumber, varor, totala summan och klockslag.
+export function adminOrderHistory(number, items, total, timestamp) {
+  const orderHistory = getFromLocalStorage(`orderhistory`);
+
+  const newOrder = {
+    number,
+    items,
+    total,
+    timestamp,
+  };
+
+  orderHistory.push(newOrder);
+
+  setLocalStorage(`orderhistory`, orderHistory);
+  console.log("Order sparad för admin:", newOrder);
 }
