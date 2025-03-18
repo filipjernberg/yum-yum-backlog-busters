@@ -1,5 +1,5 @@
 import { getElement, addClasses, styleElement, removeClasses } from "./domUtils.js";
-import { getFromLocalStorage, setLocalStorage } from "./localStorageUtils.js";
+import { getFromLocalStorage, setLocalStorage, getUserData, setUserData } from "./localStorageUtils.js";
 import { registerUser } from "./eventHandlers.js";
 import { fetchUsers } from "./api.js";
 import { startCountdown } from "./timer.js";
@@ -51,6 +51,13 @@ function handleSingleReceipt() {
   removeClasses(orderWrapperRef, ["flex"]);
   styleElement(body, `backgroundColor`, `#605858`);
 
+  const userData = getFromLocalStorage(`user`);
+  if (userData && userData.length > 0) {
+    const latestUser = userData[userData.length - 1]; // Hämta senaste beställningen
+    if (latestUser.startTime) startCountdown(latestUser.startTime, `#timerForReceipt`);
+  }
+
+  // Annelies kod för localstorage
   const users = getFromLocalStorage(`users`);
   if (users.length > 0) {
     const latestUser = users[users.length - 1]; // Hämta senaste beställningen
@@ -60,7 +67,53 @@ function handleSingleReceipt() {
   }
 }
 
-//genererar ett random nummer som vi sedan anger till confirmationnumber
+// Togs bort för överflödig
+// export function startTimer(timerElementId) {
+//   const startTime = Date.now();
+//   // setLocalStorage(`startTime`, startTime);
+//   getConfirmationNumber(startTime);
+//   startCountdown(startTime, timerElementId);
+// }
+
+//Annelie flyttade denna till timer.js. Justera där istället?
+export function startCountdown(startTime, timerElementId, orderId = null) {
+  const countdownElement = getElement(timerElementId);
+  const duration = 10 * 60 * 1000;
+
+  const timerInterval = setInterval(() => {
+    const elapsedTime = Date.now() - startTime;
+    const timeLeft = duration - elapsedTime;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      countdownElement.textContent = `Maten är klar`;
+
+      // Move order from pending to orderHistory if orderId provided
+      if (orderId !== null) {
+        let userData = getUserData();
+        const orderIndex = userData.pending.findIndex((order) => order.id === orderId);
+
+        if (orderIndex !== -1) {
+          const completedOrder = userData.pending.splice(orderIndex, 1)[0];
+          userData.orderHistory.push(completedOrder);
+          setUserData(userData);
+          console.log(`Order #${orderId} moved to history.`);
+        }
+      }
+
+      return;
+    }
+
+    const minutes = Math.floor(timeLeft / 60000);
+    const seconds = Math.floor((timeLeft % 60000) / 1000);
+    countdownElement.textContent = `Klar om ${minutes}m ${seconds}s`;
+  }, 1000);
+}
+
+// export function getConfirmationNumber(number) {
+//   getElement(`#confirmationNumber`).textContent = `#${number}`;
+// }
+
 export function generateConfirmationNumber() {
   return Math.floor(Math.random() * 1000000);
 }
@@ -70,80 +123,28 @@ export function writeConfirmationNumber(number) {
   getElement(`#confirmationNumber`).textContent = `#${number}`;
 }
 
-// sparar en timer och confirmationNumber kopplat till vår senaste skapade användare
-export function saveOrder(timerElementId) {
-  // const confirmationNumber = generateConfirmationNumber();
-  // const startTime = Date.now();
+export function saveUserData(timerElementId) {
+  const confirmationNumber = generateConfirmationNumber();
+  const startTime = Date.now();
 
-  let users = getFromLocalStorage(`users`);
-  if (users.length === 0) {
-    console.log(`Ingen användare hittad. Kan inte spara orderdata`);
-    return;
-  }
-  const orders = orderCart();
-
-  //Ändra detta senare till att gälla inloggad person istället
-  users[users.length - 1] = {
-    ...users[users.length - 1], // Behåll tidigare data
-    // confirmationNumber,
-    // startTime,
-    orders,
+  const userData = {
+    confirmationNumber: confirmationNumber,
+    startTime: startTime,
   };
+  let user = getFromLocalStorage(`user`);
 
-  setLocalStorage(`users`, users);
-  console.log(`Orderdata sparad för användare:`, users[users.length - 1]);
+  user = Array.isArray(user) ? user : user ? [user] : [];
+  user.push(userData);
 
-  startCountdown(orders.startTime, timerElementId);
+  setLocalStorage(`user`, user);
+
+  console.log("UserData saved:", userData);
+  startCountdown(startTime, timerElementId);
 }
 
-// Krånglig kod, avvaktar med den
-// export function saveOrder(timerElementId) {
-//   // const confirmationNumber = generateConfirmationNumber();
-//   // const startTime = Date.now();
-
-//   const users = getFromLocalStorage(`users`);
-//   const currentUser = getFromLocalStorage(`currentUser`);
-//   const guest = getFromLocalStorage(`guestUser`);
-
-//   if (!currentUser && !guest) {
-//     console.log(`Ingen användare inloggad. Kan inte spara order.`);
-//     return;
-//   }
-
-//   const orders = orderCart();
-
-//   if (currentUser) {
-//     const user = users.find((u) => u.username === currentUser);
-//     if (user) {
-//       if (user.orders && Array.isArray(user.orders)) {
-//         user.orders.push(orders); // Lägg till den nya ordern i arrayen
-//       } else {
-//         user.orders = [orders];
-//       }
-//     } else {
-//       console.log(`Användare ej hittad. Kan ej uppdatera ordern.`);
-//     }
-//   } else if (guest) {
-//     if (guest.orders && Array.isArray(guest.orders)) {
-//       guest.orders.push(orders); // Lägg till den nya ordern i arrayen
-//     } else {
-//       guest.orders = [orders]; // Om ingen tidigare order finns, skapa en ny array
-//     }
-//     setLocalStorage(`guestUser`, guest);
-//   }
-//   // //Ändra detta senare till att gälla inloggad person istället
-//   // users[users.length - 1] = {
-//   //   ...users[users.length - 1], // Behåll tidigare data
-//   //   // confirmationNumber,
-//   //   // startTime,
-//   //   orders,
-//   // };
-
-//   setLocalStorage(`users`, users);
-//   console.log(`Orderdata sparad för användare`);
-
-//   startCountdown(orders.startTime, timerElementId);
-// }
+export function getCurrentUser() {
+  return localStorage.getItem("username") || "guest";
+}
 
 export function getUserData() {
   const userData = getFromLocalStorage(`user`);

@@ -11,7 +11,7 @@ import {
 } from "./modules/eventHandlers.js";
 import { addToCartListener, latestOrder } from "./modules/cart.js";
 import { checkParams, getParams } from "./modules/utils.js";
-import { createReceipts } from "./modules/receipts.js";
+import { createReceipts, displayOrderHistory } from "./modules/receipts.js";
 import { getFromLocalStorage } from "./modules/localStorageUtils.js";
 //-----------------------------------------------
 
@@ -41,11 +41,10 @@ function handleCurrentPage() {
       createReceipts();
       setupSingleReceipt();
       checkParams(getParams());
+      displayOrderHistory();
       break;
     case "/pages/user-page.html":
       //Page specific code goes here
-      checkParams(getParams());
-      setupRegistrationBtn();
       break;
     default:
       return "unknown";

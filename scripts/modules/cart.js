@@ -1,5 +1,5 @@
 import { getElement, getElements } from "./domUtils.js";
-import { setLocalStorage, getFromLocalStorage, removeFromLocalStorage } from "./localStorageUtils.js";
+import { setLocalStorage, getFromLocalStorage, removeFromLocalStorage, getUserData, setUserData } from "./localStorageUtils.js";
 import { fetchMenu } from "./api.js";
 import { generateConfirmationNumber } from "./utils.js";
 
@@ -34,38 +34,37 @@ export async function addToCartListener() {
 }
 
 function addProductToCart(product) {
-  let cart = getFromLocalStorage("cart") || [];
+  let userData = getUserData();
+  let cart = userData.cart;
 
-  // Kolla om produkten redan finns i varukorgen
-  let existingProduct = cart.find((item) => item.id === product.id); //Kollar ifall den klickade rätten redan finns
+  let existingProduct = cart.find((item) => item.id === product.id);
   if (existingProduct) {
-    existingProduct.quantity += 1; // Ifall den finns ökas quantityn
+    existingProduct.quantity += 1;
   } else {
-    cart.push({ ...product, quantity: 1 }); //Om ingen rätt hittas kopieras product som klickats och lägger till quantity: 1
+    cart.push({ ...product, quantity: 1 });
   }
 
-  setLocalStorage("cart", cart);
+  userData.cart = cart;
+  setUserData(userData);
 }
 
 export function updateCartAlert() {
   const cartIcon = getElement("#cartAlert");
-  let cart = getFromLocalStorage("cart") || [];
-  let totalItems = 0;
-
-  for (let item of cart) {
-    totalItems += item.quantity;
-  }
-  console.log(totalItems);
-
+  const userData = getUserData();
+  let totalItems = userData.cart.reduce((sum, item) => sum + item.quantity, 0);
   cartIcon.textContent = totalItems;
 }
+
 //Om man vill läsa in senaste ordern från local Storage
 export function latestOrder() {
-  const orders = getFromLocalStorage("orderHistory");
+  const userData = getUserData();
+  const orders = userData.orderHistory;
+
+  if (orders.length === 0) return;
+
   const latestOrder = orders[orders.length - 1];
   const orderId = getElement("#orderId");
   orderId.textContent = `#${latestOrder.id}`;
-
   console.log(latestOrder.id);
 }
 

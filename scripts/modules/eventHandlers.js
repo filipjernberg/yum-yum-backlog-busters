@@ -1,7 +1,14 @@
 import { getElement, getElements, styleElement } from "./domUtils.js";
-import { hashPassword, getAllUsers, saveNewUser } from "./utils.js";
+import { saveUserData, saveNewUser, hashPassword, getAllUsers } from "./utils.js";
+import {
+  getFromLocalStorage,
+  setLocalStorage,
+  removeFromLocalStorage,
+  clearLocalStorage,
+  getUserData,
+  setUserData,
+} from "./localStorageUtils.js";
 import { displayErrorMessages, displaySuccessMessage, validateUserInput } from "./formUtils.js";
-import { removeFromLocalStorage } from "./localStorageUtils.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {
@@ -9,6 +16,24 @@ export function setupOrderButton() {
   console.log(addOrderBtn);
 
   addOrderBtn.addEventListener(`click`, function () {
+    //utkommenterat för har flyttats till egen funktion
+    //
+    // console.log(`Klick på beställning`);
+    // const cart = getFromLocalStorage("cart");
+
+    // const order = {
+    //   id: Date.now(), // Unikt order-ID baserat på tid
+    //   items: cart,
+    //   total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Beräkna totalpris
+    //   timestamp: new Date().toISOString(), // sparar tidpunkten då ordern skapas i ett ISO-format (YYYY-MM-DDTHH:mm:ss.sssZ).
+    // };
+
+    // const orders = getFromLocalStorage("orderHistory") || [];
+    // orders.push(order);
+    // setLocalStorage("orderHistory", orders);
+
+    // removeFromLocalStorage("cart");
+
     window.location.href = "../pages/receipts.html?showConfirmation=true";
   });
 }
@@ -18,7 +43,9 @@ export function removeOrderButton() {
   const removeOrderBtn = getElement("#removeOrder");
 
   removeOrderBtn.addEventListener("click", () => {
-    removeFromLocalStorage("cart");
+    let userData = getUserData();
+    userData.cart = [];
+    setUserData(userData);
     location.reload();
   });
 }
