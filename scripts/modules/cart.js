@@ -8,9 +8,10 @@ import {
   createList,
   removeElement,
 } from "./domUtils.js";
-import { setLocalStorage, getFromLocalStorage, getUserData, setUserData } from "./localStorageUtils.js";
 // import { fetchMenu } from "./api.js";
 import { removeOrderButton, setupCloseCartListerner, setupOrderButton, setupQuantityBtnListener } from "./eventHandlers.js";
+import { setLocalStorage, getFromLocalStorage, removeFromLocalStorage, getUserData, setUserData } from "./localStorageUtils.js";
+import { generateConfirmationNumber } from "./utils.js";
 
 //Lyssnare på add-knappen ligger nu i eventHandlers och anropas samtidigt som knappen skapas.
 
@@ -30,9 +31,23 @@ import { removeOrderButton, setupCloseCartListerner, setupOrderButton, setupQuan
 //         const productElement = event.target.closest(".list-item");
 //         const productId = Number(productElement.dataset.id); // Konvertera till nummer
 
-//         // Hämta rätt produkt från menyn
-//         const product = menu.find((item) => item.id === productId);
-//         console.log(product);
+//                 if (product) {
+//                     addProductToCart(product); // Lägg till i localStorage
+//                     updateCartAlert(); // Uppdatera siffran i varukorgen
+//                 } else {
+//                     console.error("Kunde inte hitta rätten med ID:", productId);
+//                 }
+//             });
+
+//             button.addEventListener("keydown", (e) => {
+//                 if (e.key === "Enter" || e.key === " ") {
+//                     e.preventDefault();
+//                     button.click();
+//                 }
+//             });
+//         });
+//     }, 500);
+// }
 
 //         if (product) {
 //           addProductToCart(product); // Lägg till i localStorage
@@ -178,4 +193,41 @@ function createCartQuantityBtns(item) {
   setupQuantityBtnListener(increaseBtn);
   appendChildren(quantityDiv, decreaseBtn, itemInfo, increaseBtn);
   return quantityDiv;
+}
+
+export function orderCart() {
+  const cart = getFromLocalStorage("cart");
+  const confirmationNumber = generateConfirmationNumber();
+
+  const orders = {
+    ConfirmationNumber: confirmationNumber,
+    startTime: Date.now(),
+    items: cart,
+    total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Beräkna totalpris
+    timestamp: new Date().toISOString(), // sparar tidpunkten då ordern skapas i ett ISO-format (YYYY-MM-DDTHH:mm:ss.sssZ).
+  };
+
+  adminOrderHistory(confirmationNumber, orders.items, orders.total, orders.timestamp);
+
+  removeFromLocalStorage("cart");
+
+  return orders;
+}
+
+// Försök till att rädda Robins funktion till adminpage...
+// funktion för att spara en egen local storage till admin innehållande confirmationnumber, varor, totala summan och klockslag.
+export function adminOrderHistory(number, items, total, timestamp) {
+  const orderHistory = getFromLocalStorage(`orderhistory`);
+
+  const newOrder = {
+    number,
+    items,
+    total,
+    timestamp,
+  };
+
+  orderHistory.push(newOrder);
+
+  setLocalStorage(`orderhistory`, orderHistory);
+  console.log("Order sparad för admin:", newOrder);
 }

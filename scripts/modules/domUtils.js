@@ -42,10 +42,16 @@ export function getElements(selector) {
 export async function createScrollList(list, type) {
   const scrollContainer = createElement("div", ["scroll-container"]);
 
-  const scrollUp = createElement("button", ["scroll-container__button", "scroll-container__button--up"], { id: "scrollButtonUp" });
+  const scrollUp = createElement("button", ["scroll-container__button", "scroll-container__button--up"], {
+    id: "scrollButtonUp",
+    "aria-label": "Scrolla upp i menyn.",
+  });
   const scrollUpIcon = createElement("img", ["scroll-container__icon"], { src: "../resources/icons/arrow-up-w300.svg" });
 
-  const scrollDown = createElement("button", ["scroll-container__button", "scroll-container__button--down"], { id: "scrollButtonDown" });
+  const scrollDown = createElement("button", ["scroll-container__button", "scroll-container__button--down"], {
+    id: "scrollButtonDown",
+    "aria-label": "Scrolla ner i menyn.",
+  });
   // const scrollUp = createElement("button", ["scroll-container__button-up"], { id: "scrollButtonUp" });
   // const scrollUpIcon = createElement("img", ["scroll-container__icon"], { src: "../resources/icons/arrow-up-w300.svg" });
 
@@ -74,7 +80,7 @@ export async function createList(list, type) {
 
 //createListItem med lyssnare på add-button direkt när den skapas
 function createListItem(item, mode) {
-  const listItem = createElement("li", ["list-item", `list-item--${mode}`], { "data-id": item.id });
+  const listItem = createElement("li", ["list-item", `list-item--${mode}`], { "data-id": item.id, tabindex: "0" });
   const rowOne = createElement("div", ["list-item__row"]);
   const rowTwo = createElement("div", ["list-item__row"]);
 
@@ -85,8 +91,12 @@ function createListItem(item, mode) {
       itemName = createElement("h2", ["list-item__name"], {}, item.name);
       itemPrice = createElement("h2", ["list-item__price"], {}, `${item.price} SEK`);
       itemInfo = createElement("h4", ["list-item__info"], {}, item.ingredients?.length ? item.ingredients.join(", ") : "");
-      quantityButton = createElement("button", ["button", "list-item__quantity-button"], {}, "Add");
-      setupQuantityBtnListener(quantityButton);
+      quantityButton = createElement(
+        "button",
+        ["button", "list-item__quantity-button"],
+        { "aria-label": `Lägg till ${item.name} i varukorgen.` },
+        "Add"
+      );
       break;
 
     case "receipt":
@@ -109,6 +119,19 @@ function createListItem(item, mode) {
   }
 
   return listItem;
+}
+
+//Menu filter
+export function menuFilter() {
+  const filterContainer = createElement("div", ["content__filters"], {});
+  const filters = { alla: "Visa alla", wonton: "Wontons", drink: "Dryck", dip: "Dipp" };
+
+  for (let filter in filters) {
+    let button = createElement("button", ["filter-button"], { "data-filter": filter }, filters[filter]);
+    appendChildren(filterContainer, button);
+  }
+  console.log(filterContainer);
+  return filterContainer;
 }
 
 // //Originalkod createListItem

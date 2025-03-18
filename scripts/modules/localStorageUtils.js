@@ -8,13 +8,6 @@ export function getFromLocalStorage(keyname) {
     return JSON.parse(localStorage.getItem(keyname)) || [];
 }
 
-// export function getIntFromLocalStorage(id, defaultValue) {
-//   const storedValue = localStorage.getItem(id);
-//   const parsedValue = parseInt(storedValue, 10); // Base 10 för tydlighet
-
-//   return isNaN(parsedValue) ? defaultValue : parsedValue;
-// }
-
 export function addToLocalStorage(keyname, obj) {
     let list = getFromLocalStorage(keyname);
     list.push(obj);

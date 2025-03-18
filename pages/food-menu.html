@@ -10,12 +10,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     </head>
     <body id="bodyPage" class="page page--background-image ">
-        <section id="wrapper" class="wrapper flex">
+        <div id="wrapper" class="wrapper flex">
             <header class="header">
             <img class="logo--small" src="../resources/logo-outline-white-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-            <button id="cartBtn" class="cart button button--light button--small" aria-label="Shopping cart button"><img src="../resources/icons/shopping-bag-w300.svg" aria-hidden="true" class="footer__icon"></button></header>
-                <h5 id="cartAlert" class="alert">0</h5>
-                <section id="cartModal" class="cart__modal d-none">
+            <button id="cartBtn" class="cart button button--light button--small" aria-label="Öppna varukorgen"><img src="../resources/icons/shopping-bag-w300.svg" aria-hidden="true" class="footer__icon"></button></header>
+            <h5 id="cartAlert" class="alert" aria-live="polite">0</h5>
+                <section id="cartModal" class="cart__modal d-none" role="dialog" aria-hidden="true" aria-labelledby="cartTitle">
                     <!--Temp d-none until done. -->
                     <!-- <img class="" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
                     <h2 class="cart__title">Din beställning</h2>
@@ -30,10 +30,12 @@
              
             </button>
             <section class="content content--dark gap-1rem" id="content"></section>
-        </section>
+        </section>    <main class="content content--dark gap-1rem" id="content"></main>
+    </div>
+
         <footer id="tabBar" class="footer">
             <!-- Annan class beroende på ikon -->
-            <nav class="footer__navigation">
+            <nav class="footer__navigation" role="navigation" aria-label="Huvudnavigering">
                 <ul>
                     <li class="footer__list-item">
                         <a href="./food-menu.html" class="tab-bar__link"

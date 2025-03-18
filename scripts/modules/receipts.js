@@ -1,6 +1,6 @@
 import { appendChildren, createElement, createList, getElement } from "./domUtils.js";
 import { getFromLocalStorage, getUserData } from "./localStorageUtils.js";
-import { startCountdown } from "./utils.js";
+import { startCountdown } from "./timer.js";
 
 export async function createReceipts() {
     const userData = getUserData();
@@ -35,8 +35,23 @@ export async function createReceipts() {
 }
 
 export async function createReceipt(order, type) {
-    const receipt = createElement("div", ["receipt", "flex"], {});
+    const receipt = createElement("div", ["receipt", "flex"], { "aria-expanded": "false", tabindex: "0" });
     let formattedDate, formattedTime, totalAmount;
+
+    // Toggle receipt on click or Enter key press
+    receipt.addEventListener("click", () => {
+        const expanded = receipt.getAttribute("aria-expanded") === "true";
+        receipt.setAttribute("aria-expanded", expanded ? "false" : "true");
+        toggleReceipt(receipt);
+    });
+
+    receipt.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            const expanded = receipt.getAttribute("aria-expanded") === "true";
+            receipt.setAttribute("aria-expanded", expanded ? "false" : "true");
+            toggleReceipt(receipt);
+        }
+    });
 
     if (type === "new") {
         formattedDate = "I din kundvagn";
@@ -71,7 +86,6 @@ export async function createReceipt(order, type) {
     appendChildren(totalContainer, leftColumn, totalAmountEl);
     appendChildren(details, totalContainer);
 
-    receipt.addEventListener("click", () => toggleReceipt(receipt));
     appendChildren(receipt, date, time, details);
 
     const container = type === "previous" ? "#previousReceiptContainer" : "#newReceiptContainer";
@@ -80,7 +94,6 @@ export async function createReceipt(order, type) {
     return receipt;
 }
 
-// Improved toggle with smooth collapse-before-expand behavior
 function toggleReceipt(selectedReceipt, forceOpen = false) {
     const selectedDetails = selectedReceipt.querySelector(".receipt__details");
 
@@ -123,22 +136,25 @@ function toggleReceipt(selectedReceipt, forceOpen = false) {
 }
 
 // Display all orders on the admin page
-export async function displayOrderHistory() {
-    const adminPage = getElement("#adminContainer");
-    const orderHistory = getFromLocalStorage("orderHistory") || [];
+// export async function displayOrderHistory() {
+//   const adminPage = await getElement("#adminContainer");
+//   const orderHistory = getFromLocalStorage("orderHistory");
 
-    if (!Array.isArray(orderHistory) || orderHistory.length === 0) {
-        adminPage.innerHTML = "<p>Ingen orderhistorik tillgänglig.</p>";
-        return;
-    }
+//   if (!Array.isArray(orderHistory) || orderHistory.length === 0) {
 
-    const previousReceiptContainer = createElement("div", ["receipt__container"], { id: "adminReceipts" });
-    appendChildren(adminPage, previousReceiptContainer);
+//     adminPage.innerHTML = "<p>Ingen orderhistorik tillgänglig.</p>";
+//     console.log(`test2`);
 
-    window.previousReceiptContainer = previousReceiptContainer;
+//     return;
+//   }
 
-    for (const order of orderHistory) {
-        const receipt = await createReceipt(order, "previous");
-        appendChildren(previousReceiptContainer, receipt);
-    }
-}
+//   const previousReceiptContainer = createElement("div", ["receipt__container"], { id: "adminReceipts" });
+//   appendChildren(adminPage, previousReceiptContainer);
+
+//   window.previousReceiptContainer = previousReceiptContainer;
+
+//   for (const order of orderHistory) {
+//     const receipt = await createReceipt(order, "previous");
+//     appendChildren(previousReceiptContainer, receipt);
+//   }
+// }

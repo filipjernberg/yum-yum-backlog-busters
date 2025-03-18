@@ -19,6 +19,7 @@
   --font-fira-sans-h4: 500 9pt/12pt "Fira Sans", sans-serif; /* Content Sub-Heading */
   --font-fira-sans-h5: 700 8pt/10pt "Fira Sans", sans-serif; /* Icon Heading */
   --font-fira-sans-text: 12pt/14pt "Fira Sans", sans-serif; /* Text */
+  --font-fira-sans-error: 10pt/12pt "Fira Sans", sans-serif; /* error msg */
 }
 
 /* ==== Reset & Normalize ==== */
@@ -491,6 +492,25 @@ p {
   margin-bottom: 5rem;
 }
 
+/*Filter button*/
+.content__filters {
+  gap: 0.5rem;
+}
+
+.filter-button {
+  border: none;
+  width: 90px;
+  padding: 0.5rem 1rem;
+  margin: 0.15rem;
+  background-color: var(--dark-grey);
+  color: var(--off-white);
+  cursor: pointer;
+}
+
+.filter-button:hover {
+  background-color: var(--light-grey);
+}
+
 /* === Icon Styling === */
 i {
 }
@@ -508,7 +528,7 @@ i {
 /* === Order Styling === */
 
 .order__img {
-  /* max-width: 13rem; */
+  max-width: 13rem;
 }
 
 .order__paragraph {
@@ -658,13 +678,69 @@ i {
   position: absolute;
   z-index: 1; /* Sit on top */
   width: 80%;
-}
 
-@media screen and (min-width: 600px) {
-  .map__container {
+  /* === user styling === */
+
+  .user__paragraph {
+    text-align: center;
+    color: var(--dark-grey);
+  }
+
+  .user__link {
+    text-decoration: none;
+    text-align: center;
+    color: var(--dark-grey);
+    font-family: var(--font-fira-sans-text);
+  }
+
+  /* === form styling === */
+
+  /* .user-container {
+  padding: 1rem;
+} */
+
+  .register-form,
+  .login-form {
+    margin: 2rem 0 1.5rem;
+  }
+  .register-form__logo {
+    width: 35px;
+    margin-right: 1rem;
+  }
+
+  .form__label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.3rem;
+  }
+
+  .input-field {
+    /* margin-bottom: 1.2rem; */
+    border: none;
+    border-bottom: var(--light-grey) solid 2px;
+    font-family: var(--font-fira-sans-text);
+  }
+
+  .input-field::placeholder {
+    color: var(--medium-grey);
+  }
+
+  .error-message {
+    color: red;
+    margin-top: 0.2rem;
+    font-size: var(--font-fira-sans-error);
     text-align: center;
   }
-  .map__img-div {
-    max-width: 500px;
+  .error-message p {
+    font-size: var(--font-fira-sans-error);
+  }
+
+  @media screen and (min-width: 600px) {
+    .map__container {
+      text-align: center;
+    }
+    .map__img-div {
+      max-width: 500px;
+    }
   }
 }
