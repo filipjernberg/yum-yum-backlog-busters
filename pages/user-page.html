@@ -16,11 +16,12 @@
         <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
       </header>
 
-      <section id="userContainer" class="user-container">
+      <section id="userContainer" class="user-container flex">
         <h1 id="userTitle" class="heading-one">Hej gäst!</h1>
         <form id="loginForm" class="login-form">
           <figure><!-- ikon för användare--></figure>
-          <label>
+          <label class="form__label">
+            <img src="../resources/icons/user-unfilled-w300.svg" class="register-form__logo" alt="ange användarnamn" />
             <input
               id="loginUsername"
               class="input-field"
@@ -33,7 +34,8 @@
           </label>
 
           <figure><!-- ikon för lösenord--></figure>
-          <label>
+          <label class="form__label">
+            <img src="../resources/icons/lock-password-w300.svg" class="register-form__logo" alt="ange lösenord" />
             <input
               id="loginPassword"
               class="input-field"
