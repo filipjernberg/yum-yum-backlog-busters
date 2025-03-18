@@ -1,6 +1,7 @@
 import { addClasses, getElement, getElements, removeClasses, toggleClasses } from "./domUtils.js";
+import { fetchMenu } from "./api.js";
 
-import { showCart } from "./cart.js";
+import { showCart, addProductToCart, updateCartAlert, updateCartAlertTest } from "./cart.js";
 import {
   getFromLocalStorage,
   setLocalStorage,
@@ -42,6 +43,43 @@ export function removeOrderButton() {
     setUserData(userData);
     location.reload();
   });
+}
+
+export async function setupQuantityBtnListener(button) {
+  button.addEventListener("click", async (event) => {
+    const product = await getClickedElement(event);
+    console.log(product);
+
+    // console.log(button.classList.contains(`list-item__quantity-button`));
+
+    if (button.classList.contains(`list-item__quantity-button`)) {
+      console.log(`hej`);
+      addProductToCart(product); // Lägg till i localStorage
+    }
+  });
+}
+
+export async function getClickedElement(event) {
+  const productElement = event.target.closest(".list-item");
+  console.log("Klick på:", productElement);
+
+  const menu = await fetchMenu();
+  const product = isProductInCart(menu, productElement);
+  return product;
+
+  // if (product) {
+  //   addProductToCart(product); // Lägg till i localStorage
+  //   updateCartAlert(); // Uppdatera siffran i varukorgen
+  //   // updateCartAlertTest(product);
+  // } else {
+  //   // console.error("Kunde inte hitta rätten med ID:", productId);
+  // }
+}
+
+//Letar upp ett element i en arrayen
+function isProductInCart(data, element) {
+  const product = data.find((item) => item.id === Number(element.dataset.id));
+  return product;
 }
 
 //Visa enskilt kvitto

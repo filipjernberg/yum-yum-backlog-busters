@@ -9,40 +9,12 @@ import {
   removeElement,
 } from "./domUtils.js";
 import { setLocalStorage, getFromLocalStorage, getUserData, setUserData } from "./localStorageUtils.js";
-import { fetchMenu } from "./api.js";
-import { removeOrderButton, setupCloseCartListerner, setupOrderButton } from "./eventHandlers.js";
+// import { fetchMenu } from "./api.js";
+import { removeOrderButton, setupCloseCartListerner, setupOrderButton, setupQuantityBtnListener } from "./eventHandlers.js";
 
-export async function addToCartListener() {
-  console.log("addToCartListener()");
+//Lyssnare på add-knappen ligger nu i eventHandlers och anropas samtidigt som knappen skapas.
 
-  const menu = await fetchMenu();
-
-  setTimeout(() => {
-    const menuButtons = getElements(".list-item__quantity-button");
-
-    menuButtons.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        console.log("Klick på:", event.target.closest(".list-item"));
-
-        const productElement = event.target.closest(".list-item");
-        const productId = Number(productElement.dataset.id); // Konvertera till nummer
-
-        // Hämta rätt produkt från menyn
-        const product = menu.find((item) => item.id === productId);
-        console.log(product);
-
-        if (product) {
-          addProductToCart(product); // Lägg till i localStorage
-          updateCartAlert(); // Uppdatera siffran i varukorgen
-        } else {
-          console.error("Kunde inte hitta rätten med ID:", productId);
-        }
-      });
-    });
-  }, 500);
-}
-
-//Originalkod
+//Originalkod addToCartListener.
 // export async function addToCartListener() {
 //   console.log("addToCartListener()");
 
@@ -73,7 +45,7 @@ export async function addToCartListener() {
 //   }, 500);
 // }
 
-function addProductToCart(product) {
+export function addProductToCart(product) {
   let userData = getUserData();
   let cart = userData.cart;
 
@@ -94,6 +66,27 @@ export function updateCartAlert() {
   let totalItems = userData.cart.reduce((sum, item) => sum + item.quantity, 0);
   cartIcon.textContent = totalItems;
 }
+
+export async function updateCartAlertTest(item) {
+  const cartIcon = await getElement(`#listItemQuantity`);
+  console.log(cartIcon);
+
+  const userData = getUserData();
+  console.log(userData.cart);
+
+  let totalItems = userData.cart.item.quantity;
+  console.log(totalItems);
+
+  cartIcon.textContent = totalItems;
+}
+
+//Originalkod
+// export function updateCartAlert() {
+//   const cartIcon = getElement("#cartAlert");
+//   const userData = getUserData();
+//   let totalItems = userData.cart.reduce((sum, item) => sum + item.quantity, 0);
+//   cartIcon.textContent = totalItems;
+// }
 
 //Om man vill läsa in senaste ordern från local Storage
 export function latestOrder() {
@@ -120,7 +113,10 @@ export function showCart() {
 
 async function createCart() {
   const modal = getElement(`#cartModal`);
-  const cart = getFromLocalStorage(`cart`);
+  // const user = getFromLocalStorage(`usersData`);
+  //Kontrollfunktion för att se om varukorgen finns hos usersData eller userName
+  const cart = getFromLocalStorage(`usersData`).guest.cart;
+
   resetCartList(getElement(`.cart__list`));
 
   const listSection = createElement("ul", ["list-section", "cart__list"]);
@@ -157,18 +153,29 @@ function createCartItem(item) {
   itemTotalPrice = createElement("h4", ["list-item__total", "list-item__info--small"], {}, `Totalt: ${item.quantity * item.price} SEK`);
   console.log(itemTotalPrice);
 
-  itemInfo = createElement("h4", ["list-item__info", "list-item__info--small"], {}, `Antal: ${item.quantity || 1}`);
-
   const dottedLine = createElement("hr", ["list-item__hr"], {});
 
   appendChildren(rowOne, itemName, dottedLine, itemPrice);
-  appendChildren(rowTwo, itemTotalPrice, itemInfo, createCartQuantityBtns());
+  appendChildren(rowTwo, itemTotalPrice, createCartQuantityBtns(item));
   appendChildren(listItem, rowOne, rowTwo);
   return listItem;
 }
 
-function createCartQuantityBtns() {
+function createCartQuantityBtns(item) {
   console.log(`createCartQuantityBtns`);
-  const quantityDiv = createElement(`div`);
+  const quantityDiv = createElement(`div`, [`flex-row`, `list-item__quantityDiv`]);
+  const decreaseBtn = createElement(`img`, [`list-item__decrease`], {
+    role: `button`,
+    src: `../../resources/icons/remove-minus-w300.svg`,
+  });
+  const itemInfo = createElement("h4", ["list-item__info", "list-item__info--small"], { id: "listItemQuantity" }, item.quantity);
+  const increaseBtn = createElement(`img`, [`list-item__increase`], {
+    role: `button`,
+    src: `../../resources/icons/add-plus-w300.svg`,
+  });
+
+  setupQuantityBtnListener(decreaseBtn);
+  setupQuantityBtnListener(increaseBtn);
+  appendChildren(quantityDiv, decreaseBtn, itemInfo, increaseBtn);
   return quantityDiv;
 }

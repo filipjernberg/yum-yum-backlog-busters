@@ -1,3 +1,5 @@
+import { setupQuantityBtnListener } from "./eventHandlers.js";
+
 //Basic Utilities
 export function createElement(tag, classNames = [], attributes = {}, textContent = "") {
   const element = document.createElement(tag);
@@ -70,7 +72,7 @@ export async function createList(list, type) {
   return listSection;
 }
 
-//Originalkod createListItem
+//createListItem med lyssnare på add-button direkt när den skapas
 function createListItem(item, mode) {
   const listItem = createElement("li", ["list-item", `list-item--${mode}`], { "data-id": item.id });
   const rowOne = createElement("div", ["list-item__row"]);
@@ -84,6 +86,7 @@ function createListItem(item, mode) {
       itemPrice = createElement("h2", ["list-item__price"], {}, `${item.price} SEK`);
       itemInfo = createElement("h4", ["list-item__info"], {}, item.ingredients?.length ? item.ingredients.join(", ") : "");
       quantityButton = createElement("button", ["button", "list-item__quantity-button"], {}, "Add");
+      setupQuantityBtnListener(quantityButton);
       break;
 
     case "receipt":
@@ -107,6 +110,44 @@ function createListItem(item, mode) {
 
   return listItem;
 }
+
+// //Originalkod createListItem
+// function createListItem(item, mode) {
+//   const listItem = createElement("li", ["list-item", `list-item--${mode}`], { "data-id": item.id });
+//   const rowOne = createElement("div", ["list-item__row"]);
+//   const rowTwo = createElement("div", ["list-item__row"]);
+
+//   let itemName, itemPrice, itemInfo, quantityButton;
+
+//   switch (mode) {
+//     case "menu":
+//       itemName = createElement("h2", ["list-item__name"], {}, item.name);
+//       itemPrice = createElement("h2", ["list-item__price"], {}, `${item.price} SEK`);
+//       itemInfo = createElement("h4", ["list-item__info"], {}, item.ingredients?.length ? item.ingredients.join(", ") : "");
+//       quantityButton = createElement("button", ["button", "list-item__quantity-button"], {}, "Add");
+//       break;
+
+//     case "receipt":
+//       itemName = createElement("h3", ["list-item__name", "list-item__name--small"], {}, item.name);
+//       itemPrice = createElement("h3", ["list-item__price", "list-item__price--small"], {}, `${item.price} SEK`);
+//       itemInfo = createElement("h4", ["list-item__info", "list-item__info--small"], {}, `Antal: ${item.quantity || 1}`);
+//       break;
+//   }
+
+//   const dottedLine = createElement("hr", ["list-item__hr"], {});
+//   const dottedLineDivider = createElement("hr", ["list-item__hr", "list-item__hr--divider"], {});
+
+//   appendChildren(rowOne, itemName, dottedLine, itemPrice);
+//   appendChildren(rowTwo, itemInfo);
+//   if (mode === "menu") {
+//     appendChildren(rowTwo, quantityButton);
+//     appendChildren(listItem, rowOne, rowTwo, dottedLineDivider);
+//   } else {
+//     appendChildren(listItem, rowOne, rowTwo);
+//   }
+
+//   return listItem;
+// }
 
 //-----------------------------------------------
 

@@ -2,7 +2,7 @@
 import { createList, createScrollList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
 import { setupOrderButton, setupSingleReceipt, setupScrollBtn, removeOrderButton, setupCartBtnListener } from "./modules/eventHandlers.js";
-import { addToCartListener, latestOrder } from "./modules/cart.js";
+import { latestOrder } from "./modules/cart.js";
 import { checkParams, getParams } from "./modules/utils.js";
 import { createReceipts, displayOrderHistory } from "./modules/receipts.js";
 import { getFromLocalStorage } from "./modules/localStorageUtils.js";
@@ -22,7 +22,7 @@ function handleCurrentPage() {
     case "/pages/food-menu.html":
       // setupOrderButton();
       createContent("Meny", fetchMenu());
-      addToCartListener();
+      // addToCartListener();
       // removeOrderButton();
       setupCartBtnListener();
 
