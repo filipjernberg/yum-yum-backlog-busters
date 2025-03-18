@@ -8,11 +8,14 @@ import {
   removeOrderButton,
   setupRegistrationBtn,
   registerUser,
+  loginUser,
 } from "./modules/eventHandlers.js";
 import { addToCartListener, latestOrder } from "./modules/cart.js";
 import { checkParams, getParams } from "./modules/utils.js";
-import { createReceipts, displayOrderHistory } from "./modules/receipts.js";
+import { createReceipts } from "./modules/receipts.js";
 import { getFromLocalStorage } from "./modules/localStorageUtils.js";
+
+// displayOrderHistory
 //-----------------------------------------------
 
 //Run
@@ -41,9 +44,12 @@ function handleCurrentPage() {
       createReceipts();
       setupSingleReceipt();
       checkParams(getParams());
-      displayOrderHistory();
+      // displayOrderHistory();
       break;
     case "/pages/user-page.html":
+      checkParams(getParams());
+      loginUser();
+      setupRegistrationBtn();
       //Page specific code goes here
       break;
     default:
