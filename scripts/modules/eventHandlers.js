@@ -96,7 +96,7 @@ function scrollList(scrollpixels) {
 // Beställ knapp på food-menu.html
 export function setupRegistrationBtn() {
   const registerUserBtn = getElement(`#registerUser`);
-  console.log(registerUserBtn);
+  console.log(`här är registreringsknappen: ${registerUserBtn}`);
 
   registerUserBtn.addEventListener(`click`, function (event) {
     event.preventDefault();

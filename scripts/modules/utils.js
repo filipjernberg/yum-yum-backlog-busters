@@ -24,6 +24,8 @@ export function checkParams(params) {
     handleSingleReceipt();
   }
   if (params.get(`registrationForm`) === `true`) {
+    handleRegistrationForm();
+    registerUser();
   }
 }
 

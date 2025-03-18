@@ -45,6 +45,7 @@ function handleCurrentPage() {
       break;
     case "/pages/user-page.html":
       checkParams(getParams());
+      setupRegistrationBtn();
       //Page specific code goes here
       break;
     default:
