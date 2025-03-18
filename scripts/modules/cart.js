@@ -115,23 +115,15 @@ export function showCart() {
   setupCloseCartListerner();
   toggleClasses(getElement(`#cartModal`), [`d-none`]);
   toggleClasses(getElement(`#bodyPage`), [`page--black-white-opacity`]);
-  getCartList();
   createCart();
   removeOrderButton();
   setupOrderButton();
 }
 
-function getCartList() {
-  console.log(`getCartList()`);
-}
-
 async function createCart() {
   const modal = getElement(`#cartModal`);
   const cart = getFromLocalStorage(`cart`);
-
-  if (getElement(`.cart__list`)) {
-    removeElement(getElement(`.cart__list`));
-  }
+  resetCartList(getElement(`.cart__list`));
 
   const listSection = createElement("ul", ["list-section", "cart__list"]);
 
@@ -141,10 +133,17 @@ async function createCart() {
   });
 
   appendChildren(modal, listSection);
+  const confirmOrderBtn = createElement("button", ["button", "button--margin-bottom"], { id: "addOrder" }, "bekräfta order");
+  const deleteCartBtn = createElement("button", ["button", "button--margin-bottom"], { id: "removeOrder" }, "töm varukorgen");
+  appendChildren(modal, confirmOrderBtn, deleteCartBtn);
+}
 
-  // const cartList = await createList(cart, "receipt");
-  // console.log(cartList);
-  // appendChildren(modal, cartList);
+function resetCartList(element) {
+  if (element) {
+    removeElement(element);
+    removeElement(getElement(`#addOrder`));
+    removeElement(getElement(`#removeOrder`));
+  }
 }
 
 function createCartItem(item) {
@@ -153,16 +152,25 @@ function createCartItem(item) {
   const rowOne = createElement("div", ["list-item__row"]);
   const rowTwo = createElement("div", ["list-item__row"]);
 
-  let itemName, itemPrice, itemInfo;
+  let itemName, itemPrice, itemTotalPrice, itemInfo;
 
   itemName = createElement("h3", ["list-item__name", "list-item__name--small"], {}, item.name);
   itemPrice = createElement("h3", ["list-item__price", "list-item__price--small"], {}, `${item.price} SEK`);
+  itemTotalPrice = createElement("h4", ["list-item__total", "list-item__info--small"], {}, `Totalt: ${item.quantity * item.price} SEK`);
+  console.log(itemTotalPrice);
+
   itemInfo = createElement("h4", ["list-item__info", "list-item__info--small"], {}, `Antal: ${item.quantity || 1}`);
 
   const dottedLine = createElement("hr", ["list-item__hr"], {});
 
   appendChildren(rowOne, itemName, dottedLine, itemPrice);
-  appendChildren(rowTwo, itemInfo);
+  appendChildren(rowTwo, itemTotalPrice, itemInfo, createCartQuantityBtns());
   appendChildren(listItem, rowOne, rowTwo);
   return listItem;
+}
+
+function createCartQuantityBtns() {
+  console.log(`createCartQuantityBtns`);
+  const quantityDiv = createElement(`div`);
+  return quantityDiv;
 }
