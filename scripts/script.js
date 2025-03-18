@@ -1,7 +1,14 @@
 //Import
 import { createList, createScrollList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
-import { setupOrderButton, setupSingleReceipt, setupScrollBtn, removeOrderButton } from "./modules/eventHandlers.js";
+import {
+  setupOrderButton,
+  setupSingleReceipt,
+  setupScrollBtn,
+  removeOrderButton,
+  setupRegistrationBtn,
+  registerUser,
+} from "./modules/eventHandlers.js";
 import { addToCartListener, latestOrder } from "./modules/cart.js";
 import { checkParams, getParams } from "./modules/utils.js";
 import { createReceipts, displayOrderHistory } from "./modules/receipts.js";
@@ -34,10 +41,10 @@ function handleCurrentPage() {
       createReceipts();
       setupSingleReceipt();
       checkParams(getParams());
+      displayOrderHistory();
       break;
     case "/pages/user-page.html":
       //Page specific code goes here
-      displayOrderHistory();
       break;
     default:
       return "unknown";

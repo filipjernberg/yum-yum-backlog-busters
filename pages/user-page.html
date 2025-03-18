@@ -11,10 +11,10 @@
   </head>
   <body>
     <!-- Gästmode, inte inloggad. Då syns wrapperGuest -->
-    <section id="wrapperGuest" class="wrapper">
-      <div class="logo--small">
-        <img src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-      </div>
+    <section id="wrapperGuest" class="wrapper flex">
+      <header class="header">
+        <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+      </header>
 
       <section id="userContainer" class="user-container">
         <h1 id="userTitle" class="heading-one">Hej gäst!</h1>
@@ -50,21 +50,21 @@
       <p class="user__paragraph">Glömt lösenord?</p>
       <hr class="stroke" />
       <p class="user__paragraph">Inget konto?</p>
-      <a class="user__link" href="./register-user.html">Logga in</a>
+      <a id="registerUser" class="user__link" href="./user-page.html">skapa konto</a>
     </section>
 
     <!-- Registera användare, då syns wrapperRegister -->
 
-    <section id="wrapperRegister" class="wrapper">
-      <div class="logo--small">
-        <img src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-      </div>
+    <section id="wrapperRegister" class="wrapper d-none">
+      <header class="header">
+        <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+      </header>
 
-      <section id="userContainer" class="user-container">
-        <h1 id="createAccountTitle" class="heading-one heading-one--dark">Hej gäst!</h1>
+      <section id="userContainer" class="user-container flex">
+        <h1 id="createAccountTitle" class="heading-one heading-one--dark">Skapa konto</h1>
         <form id="registerForm" class="register-form">
-          <figure><!-- ikon för användare--></figure>
-          <label>
+          <label class="form__label">
+            <img src="../resources/icons/user-unfilled-w300.svg" class="register-form__logo" alt="ange användarnamn" />
             <input
               id="registerUsername"
               class="input-field"
@@ -75,8 +75,10 @@
               required
             />
           </label>
-          <figure><!-- ikon för email--></figure>
-          <label>
+
+          <label class="form__label">
+            <img src="../resources/icons/mail-w300.svg" class="register-form__logo" alt="ange mejladress" />
+
             <input
               id="registerMail"
               class="input-field"
@@ -88,8 +90,8 @@
             />
           </label>
 
-          <figure><!-- ikon för lösenord--></figure>
-          <label>
+          <label class="form__label">
+            <img src="../resources/icons/lock-password-w300.svg" class="register-form__logo" alt="ange lösenord" />
             <input
               id="registerPasswordOne"
               class="input-field"
@@ -100,8 +102,8 @@
               required
             />
           </label>
-          <figure><!-- ikon för lösenord--></figure>
-          <label>
+          <label class="form__label">
+            <img src="../resources/icons/lock-password-w300.svg" class="register-form__logo" alt="ange samma lösenord igen" />
             <input
               id="registerPasswordtwo"
               class="input-field"
@@ -112,21 +114,22 @@
               required
             />
           </label>
-          <button id="registerSubmit" class="button button--dark">Registrera</button>
+          <button id="registerSubmit" class="button button--dark button--margin-bottom">Registrera</button>
+          <div id="registrationError" class="error-message"></div>
         </form>
+        <p id="changeParagraph" class="user__paragraph">har du redan ett konto?</p>
+        <a id="registerUser" class="user__link" href="./user-page.html">Logga in</a>
       </section>
-      <p class="user__paragraph">har du redan ett konto?</p>
-      <a class="user__link" href="./register-user.html">Logga in</a>
     </section>
 
     <!-- Om inloggad, då syns wrapperProfile -->
-    <section id="wrapperProfile" class="wrapper">
-      <div class="logo--small">
-        <img src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-      </div>
+    <section id="wrapperProfile" class="wrapper d-none">
+      <header class="header">
+        <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+      </header>
       <div class="profile">
         <figure class="profile__circle">
-          <img src="BILD PÅ ANVÄNDARE" alt="Profilbild" />
+          <img src="../resources/Founder.jpeg" alt="Profilbild" />
         </figure>
         <h4 class="profile__title">Mr Scrum</h4>
       </div>
@@ -207,12 +210,12 @@
     </section>
 
     <!-- admin view -->
-    <section id="wrapperAdmin" class="wrapper">
+    <section id="wrapperAdmin" class="wrapper d-none">
       <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
 
       <div class="profile">
         <figure class="profile__circle">
-          <img src="BILD PÅ ADMIN" alt="Profilbild" />
+          <img src="../resources/Founder.jpeg" alt="Profilbild" />
         </figure>
         <h4 class="profile__title">Admin</h4>
       </div>
