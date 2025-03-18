@@ -30,22 +30,28 @@ export function checkParams(params) {
 }
 
 export function handleOrderConfirmation(confirmationSection) {
-  const orderWrapperRef = getElement(`#wrapperOrders`);
+  const orderWrapperRef = getElement(`#wrapperOrderConfirmation`);
+  const receiptsWrapper = getElement(`#wrapperReceipts`);
   const body = getElement(`body`);
 
+  addClasses(receiptsWrapper, [`d-none`]);
+  removeClasses(receiptsWrapper, [`flex`, `gap-1rem`]);
   addClasses(confirmationSection, [`flex`]);
-  addClasses(orderWrapperRef, [`d-none`]);
-  removeClasses(orderWrapperRef, ["flex"]);
+  addClasses(orderWrapperRef, [`flex`]);
+  removeClasses(orderWrapperRef, ["d-none"]);
   styleElement(body, `backgroundColor`, `#605858`);
 
-  saveOrder(`#timerConfirmation`);
+  // saveOrder(`#timerConfirmation`);
 }
 
 function handleSingleReceipt() {
   const receiptWrapperRef = getElement(`#wrapperSingleReceipt`);
-  const orderWrapperRef = getElement(`#wrapperOrders`);
+  const orderWrapperRef = getElement(`#wrapperOrderConfirmation`);
+  const receiptsWrapperRef = getElement(`#wrapperReceipts`);
   const body = getElement(`body`);
 
+  addClasses(receiptsWrapperRef, [`d-none`]);
+  removeClasses(receiptsWrapperRef, [`flex`, `gap-1rem`]);
   addClasses(receiptWrapperRef, [`flex`]);
   addClasses(orderWrapperRef, [`d-none`]);
   removeClasses(orderWrapperRef, ["flex"]);
@@ -200,7 +206,7 @@ export async function hashPassword(password) {
 }
 
 // Senare funktion för att jämföra lösenord?
-// async function comparePasswords(inputPassword, storedHash) {
-//   const inputHash = await hashPassword(inputPassword);
-//   return inputHash === storedHash;
-// }
+export async function comparePasswords(inputPassword, storedHash) {
+  const inputHash = await hashPassword(inputPassword);
+  return inputHash === storedHash;
+}
