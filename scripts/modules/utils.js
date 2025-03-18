@@ -37,18 +37,21 @@ export function handleOrderConfirmation(confirmationSection) {
   addClasses(receiptsWrapper, [`d-none`]);
   removeClasses(receiptsWrapper, [`flex`, `gap-1rem`]);
   addClasses(confirmationSection, [`flex`]);
-  addClasses(orderWrapperRef, [`d-none`]);
-  removeClasses(orderWrapperRef, ["flex"]);
+  addClasses(orderWrapperRef, [`flex`]);
+  removeClasses(orderWrapperRef, ["d-none"]);
   styleElement(body, `backgroundColor`, `#605858`);
 
-  saveOrder(`#timerConfirmation`);
+  // saveOrder(`#timerConfirmation`);
 }
 
 function handleSingleReceipt() {
   const receiptWrapperRef = getElement(`#wrapperSingleReceipt`);
-  const orderWrapperRef = getElement(`#wrapperOrders`);
+  const orderWrapperRef = getElement(`#wrapperOrderConfirmation`);
+  const receiptsWrapperRef = getElement(`#wrapperReceipts`);
   const body = getElement(`body`);
 
+  addClasses(receiptsWrapperRef, [`d-none`]);
+  removeClasses(receiptsWrapperRef, [`flex`, `gap-1rem`]);
   addClasses(receiptWrapperRef, [`flex`]);
   addClasses(orderWrapperRef, [`d-none`]);
   removeClasses(orderWrapperRef, ["flex"]);

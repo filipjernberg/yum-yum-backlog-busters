@@ -123,26 +123,25 @@ function toggleReceipt(selectedReceipt, forceOpen = false) {
 }
 
 // Display all orders on the admin page
-export async function displayOrderHistory() {
-  const adminPage = await getElement("#adminContainer");
-  const orderHistory = getFromLocalStorage("orderHistory");
+// export async function displayOrderHistory() {
+//   const adminPage = await getElement("#adminContainer");
+//   const orderHistory = getFromLocalStorage("orderHistory");
 
-  if (!Array.isArray(orderHistory) || orderHistory.length === 0) {
-    console.log(`test`);
+//   if (!Array.isArray(orderHistory) || orderHistory.length === 0) {
 
-    adminPage.innerHTML = "<p>Ingen orderhistorik tillgänglig.</p>";
-    console.log(`test2`);
+//     adminPage.innerHTML = "<p>Ingen orderhistorik tillgänglig.</p>";
+//     console.log(`test2`);
 
-    return;
-  }
+//     return;
+//   }
 
-  const previousReceiptContainer = createElement("div", ["receipt__container"], { id: "adminReceipts" });
-  appendChildren(adminPage, previousReceiptContainer);
+//   const previousReceiptContainer = createElement("div", ["receipt__container"], { id: "adminReceipts" });
+//   appendChildren(adminPage, previousReceiptContainer);
 
-  window.previousReceiptContainer = previousReceiptContainer;
+//   window.previousReceiptContainer = previousReceiptContainer;
 
-  for (const order of orderHistory) {
-    const receipt = await createReceipt(order, "previous");
-    appendChildren(previousReceiptContainer, receipt);
-  }
-}
+//   for (const order of orderHistory) {
+//     const receipt = await createReceipt(order, "previous");
+//     appendChildren(previousReceiptContainer, receipt);
+//   }
+// }

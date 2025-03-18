@@ -32,6 +32,9 @@ import { getUserData, setUserData } from "./localStorageUtils.js";
 
 export function startCountdown(startTime, timerElementId, orderId = null) {
   const countdownElement = getElement(timerElementId);
+  console.log(`timer`);
+
+  writeConfirmationNumber(startTime);
   const duration = 10 * 60 * 1000;
 
   const timerInterval = setInterval(() => {
