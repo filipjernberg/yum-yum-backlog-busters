@@ -80,7 +80,28 @@ export function orderCart() {
     total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Beräkna totalpris
     timestamp: new Date().toISOString(), // sparar tidpunkten då ordern skapas i ett ISO-format (YYYY-MM-DDTHH:mm:ss.sssZ).
   };
+
+  adminOrderHistory(confirmationNumber, orders.items, orders.total, orders.timestamp);
+
   removeFromLocalStorage("cart");
 
   return orders;
+}
+
+// Försök till att rädda Robins funktion till adminpage...
+// funktion för att spara en egen local storage till admin innehållande confirmationnumber, varor, totala summan och klockslag.
+export function adminOrderHistory(number, items, total, timestamp) {
+  const orderHistory = getFromLocalStorage(`orderhistory`);
+
+  const newOrder = {
+    number,
+    items,
+    total,
+    timestamp,
+  };
+
+  orderHistory.push(newOrder);
+
+  setLocalStorage(`orderhistory`, orderHistory);
+  console.log("Order sparad för admin:", newOrder);
 }
