@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="sv">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Yum Yum Gimmie Sum</title>
-        <script type="module" src="../scripts/script.js"></script>
-        <link rel="stylesheet" href="../styles/style.css" />
-        <!-- Använda fontawesome? -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    </head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yum Yum Gimmie Sum</title>
+    <script type="module" src="../scripts/script.js"></script>
+    <link rel="stylesheet" href="../styles/style.css" />
+    <!-- Använda fontawesome? -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  </head>
+  <body>
+    <!-- Gästmode, inte inloggad. Då syns wrapperGuest -->
+    <section id="wrapperGuest" class="wrapper flex">
+      <header class="header">
+        <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+      </header>
 
-
-    <body>
-        <!-- Gästmode, inte inloggad. Då syns wrapperGuest -->
-        <div id="wrapperGuest" class="wrapper flex">
-          <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-
-            <section id="userContainer" class="user-container flex">
+      <section id="userContainer" class="user-container flex">
         <h1 id="userTitle" class="heading-one">Hej gäst!</h1>
         <form id="loginForm" class="login-form">
           <figure><!-- ikon för användare--></figure>
@@ -55,159 +55,162 @@
       <p class="user__paragraph">Inget konto?</p>
       <a id="registerUser" class="user__link" href="./user-page.html">skapa konto</a>
     </section>
-        </div>
 
-        <!-- Registera användare, då syns wrapperRegister -->
+    <!-- Registera användare, då syns wrapperRegister -->
 
-        <div id="wrapperRegister" class="wrapper d-none">
-          <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+    <section id="wrapperRegister" class="wrapper d-none">
+      <header class="header">
+        <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+      </header>
 
-            <section id="userContainer2" class="user-container">
-                <h1 id="createAccountTitle" class="heading-one heading-one--dark">Hej gäst!</h1>
-                <form id="registerForm" class="register-form">
-                    <figure><!-- ikon för användare--></figure>
-                    <label class="form__label">
-                        <input
-                            id="registerUsername"
-                            class="input-field"
-                            placeholder="Användarnamn"
-                            name="username"
-                            type="text"
-                            aria-label="Användarnamn"
-                            required
-                        />
-                    </label>
-                    <figure><!-- ikon för email--></figure>
-                    <label class="form__label">
-                        <input
-                            id="registerMail"
-                            class="input-field"
-                            placeholder="Mailadress"
-                            name="mailadress"
-                            type="email"
-                            aria-label="Mejladress"
-                            required
-                        />
-                    </label>
+      <section id="userContainer" class="user-container flex">
+        <h1 id="createAccountTitle" class="heading-one heading-one--dark">Skapa konto</h1>
+        <form id="registerForm" class="register-form">
+          <label class="form__label">
+            <img src="../resources/icons/user-unfilled-w300.svg" class="register-form__logo" alt="ange användarnamn" />
+            <input
+              id="registerUsername"
+              class="input-field"
+              placeholder="Användarnamn"
+              name="username"
+              type="text"
+              aria-label="Användarnamn"
+              required
+            />
+          </label>
 
-                    <figure><!-- ikon för lösenord--></figure>
-                    <label class="form__label">
-                        <input
-                            id="registerPasswordOne"
-                            class="input-field"
-                            placeholder="Lösenord"
-                            name="password"
-                            type="password"
-                            aria-label="lösenord"
-                            required
-                        />
-                    </label>
-                    <figure><!-- ikon för lösenord--></figure>
-                    <label class="form__label">
-                        <input
-                            id="registerPasswordtwo"
-                            class="input-field"
-                            placeholder="Upprepa lösenord"
-                            name="password"
-                            type="password"
-                            aria-label="lösenord"
-                            required
-                        />
-                    </label>
-                    <button id="registerSubmit" class="button button--dark">Registrera</button>
-                </form>
-            </section>
-            <p class="user__paragraph">har du redan ett konto?</p>
-            <a class="user__link" href="./register-user.html">Logga in</a>
-        </div>
+          <label class="form__label">
+            <img src="../resources/icons/mail-w300.svg" class="register-form__logo" alt="ange mejladress" />
 
-        <!-- Om inloggad, då syns wrapperProfile -->
-        <div id="wrapperProfile" class="wrapper d-none">
-          <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-            <div class="profile">
-                <figure class="profile__circle">
-                    <img src="BILD PÅ ANVÄNDARE" alt="Profilbild" />
-                </figure>
-                <h4 class="profile__title">Mr Scrum</h4>
-            </div>
+            <input
+              id="registerMail"
+              class="input-field"
+              placeholder="Mailadress"
+              name="mailadress"
+              type="email"
+              aria-label="Mejladress"
+              required
+            />
+          </label>
 
-            <section id="userContainer3" class="user-container">
-                <h1 id="changeAccountTitle" class="heading-one">Hej gäst!</h1>
-                <form id="changeForm" class="form">
-                    <figure><!-- ikon för användare--></figure>
-                    <label class="form__label">
-                        <input
-                            id="changeUsername"
-                            class="input-field"
-                            placeholder="Användarnamn"
-                            name="username"
-                            type="text"
-                            aria-label="Användarnamn"
-                            required
-                        />
-                    </label>
-                    <figure><!-- ikon för email--></figure>
-                    <label class="form__label">
-                        <input
-                            id="changeMail"
-                            class="input-field"
-                            placeholder="Mailadress"
-                            name="mailadress"
-                            type="email"
-                            aria-label="Mejladress"
-                            required
-                        />
-                    </label>
+          <label class="form__label">
+            <img src="../resources/icons/lock-password-w300.svg" class="register-form__logo" alt="ange lösenord" />
+            <input
+              id="registerPasswordOne"
+              class="input-field"
+              placeholder="Lösenord"
+              name="password"
+              type="password"
+              aria-label="lösenord"
+              required
+            />
+          </label>
+          <label class="form__label">
+            <img src="../resources/icons/lock-password-w300.svg" class="register-form__logo" alt="ange samma lösenord igen" />
+            <input
+              id="registerPasswordtwo"
+              class="input-field"
+              placeholder="Upprepa lösenord"
+              name="password"
+              type="password"
+              aria-label="lösenord"
+              required
+            />
+          </label>
+          <button id="registerSubmit" class="button button--dark button--margin-bottom">Registrera</button>
+          <div id="registrationError" class="error-message"></div>
+        </form>
+        <p id="changeParagraph" class="user__paragraph">har du redan ett konto?</p>
+        <a id="registerUser" class="user__link" href="./user-page.html">Logga in</a>
+      </section>
+    </section>
 
-                    <figure><!-- ikon för telefon--></figure>
-                    <label class="form__label">
-                        <input
-                            id="changePhone"
-                            class="input-field"
-                            placeholder="Telefonnummer"
-                            name="phonenumber"
-                            type="tel"
-                            aria-label="Telefonnummer"
-                        />
-                    </label>
+    <!-- Om inloggad, då syns wrapperProfile -->
+    <section id="wrapperProfile" class="wrapper d-none">
+      <header class="header">
+        <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+      </header>
+      <div class="profile">
+        <figure class="profile__circle">
+          <img src="../resources/Founder.jpeg" alt="Profilbild" />
+        </figure>
+        <h4 class="profile__title">Mr Scrum</h4>
+      </div>
 
-                    <figure><!-- ikon för lösenord--></figure>
-                    <label class="form__label">
-                        <input
-                            id="changePasswordOne"
-                            class="input-field"
-                            placeholder="Lösenord"
-                            name="password"
-                            type="password"
-                            aria-label="lösenord"
-                            required
-                        />
-                    </label>
-                    <figure><!-- ikon för lösenord--></figure>
-                    <label class="form__label">
-                        <input
-                            id="changePasswordTwo"
-                            class="input-field"
-                            placeholder="Upprepa lösenord"
-                            name="password"
-                            type="password"
-                            aria-label="lösenord"
-                            required
-                        />
-                    </label>
-                </form>
-            </section>
+      <section id="userContainer" class="user-container">
+        <h1 id="changeAccountTitle" class="heading-one">Hej gäst!</h1>
+        <form id="changeForm" class="form">
+          <figure><!-- ikon för användare--></figure>
+          <label>
+            <input
+              id="changeUsername"
+              class="input-field"
+              placeholder="Användarnamn"
+              name="username"
+              type="text"
+              aria-label="Användarnamn"
+              required
+            />
+          </label>
+          <figure><!-- ikon för email--></figure>
+          <label>
+            <input
+              id="changeMail"
+              class="input-field"
+              placeholder="Mailadress"
+              name="mailadress"
+              type="email"
+              aria-label="Mejladress"
+              required
+            />
+          </label>
 
-            <a id="linkOrderHistory" class="link" href="">Orderhistorik ></a>
-            <a id="linkContact" class="link" href="">Kontakta oss ></a>
+          <figure><!-- ikon för telefon--></figure>
+          <label>
+            <input
+              id="changePhone"
+              class="input-field"
+              placeholder="Telefonnummer"
+              name="phonenumber"
+              type="tel"
+              aria-label="Telefonnummer"
+            />
+          </label>
 
+          <figure><!-- ikon för lösenord--></figure>
+          <label>
+            <input
+              id="changePasswordOne"
+              class="input-field"
+              placeholder="Lösenord"
+              name="password"
+              type="password"
+              aria-label="lösenord"
+              required
+            />
+          </label>
+          <figure><!-- ikon för lösenord--></figure>
+          <label>
+            <input
+              id="changePasswordTwo"
+              class="input-field"
+              placeholder="Upprepa lösenord"
+              name="password"
+              type="password"
+              aria-label="lösenord"
+              required
+            />
+          </label>
+        </form>
+      </section>
 
-            <!-- Egentligen vill man kanske ha button inuti form, men nu har vi logga ut i anslutning och andra länkar innan -->
-            <button id="changeSubmit" class="button button--dark" aria-label="Spara dina ändringar">Spara ändringar</button>
-            <button id="logout" class="button button--dark" aria-label="Logga ut från ditt konto">Logga ut</button>
-        </div>
+      <a id="linkOrderHistory" class="link" href="">ORDERHISTORIK ></a>
+      <a id="linkContact" class="link" href="">KONTAKTA OSS ></a>
 
-    
+      <!-- Egentligen vill man kanske ha button inuti form, men nu har vi logga ut i anslutning och andra länkar innan -->
+      <button id="changeSubmit" class="button button--dark">Spara ändringar</button>
+      <button id="logout" class="button button--dark">Logga ut</button>
+    </section>
 
     <!-- admin view -->
     <section id="wrapperAdmin" class="wrapper d-none">
@@ -220,44 +223,41 @@
         <h4 class="profile__title">Admin</h4>
       </div>
 
-
-            
-
-            <!-- ändra till admincontainer? -->
-            <section id="adminContainer" class="user-container">
-                <img class="logo--small" src="../resources/logo-color-yygs.svg" alt="logotype" />
-                <h2 class="section__title">Orderhistorik</h2>
-                <!-- <p class="section__subtitle">datum</p>
+      <!-- ändra till admincontainer? -->
+      <section id="adminContainer" class="user-container">
+        <img class="logo--small" src="../resources/logo-color-yygs.svg" alt="logotype" />
+        <h2 class="section__title">ORDERHISTORIK</h2>
+        <!-- <p class="section__subtitle">datum</p>
         <p class="section__paragraph">inget att visa från denna period</p> -->
-            </section>
-        </section>
+      </section>
+    </section>
 
-        <footer id="tabBar" class="footer">
-            <!-- Annan class beroende på ikon -->
-            <nav class="footer__navigation" role="navigation" aria-label="Huvudnavigering">
-                <ul>
-                    <li class="footer__list-item">
-                        <a href="./food-menu.html" class="tab-bar__link"
-                            ><img class="footer__icon" src="../resources/icons/menu-unfilled-w300.svg" alt="Gå till matmenyn"
-                        /></a>
-                    </li>
-                    <li class="footer__list-item">
-                        <a href="./map.html" class="tab-bar__link"
-                            ><img class="footer__icon" src="../resources/icons/foodtruck-unfilled-w300.svg" alt="Hitta närmaste food truck"
-                        /></a>
-                    </li>
-                    <li class="footer__list-item">
-                        <a href="./user-page.html" class="tab-bar__link"
-                            ><img class="footer__icon" src="../resources/icons/user-filled.svg" alt="Logga in/mina användaruppgifter"
-                        /></a>
-                    </li>
-                    <li class="footer__list-item">
-                        <a href="./receipts.html" class="tab-bar__link"
-                            ><img class="footer__icon" src="../resources/icons/receipt-unfilled-w300.svg" alt="Visa kvitto"
-                        /></a>
-                    </li>
-                </ul>
-            </nav>
-        </footer>
-    </body>
+    <footer id="tabBar" class="footer">
+      <!-- Annan class beroende på ikon -->
+      <nav class="footer__navigation">
+        <ul>
+          <li class="footer__list-item">
+            <a href="./food-menu.html" class="tab-bar__link"
+              ><img class="footer__icon" src="../resources/icons/menu-unfilled-w300.svg" alt="Gå till matmenyn"
+            /></a>
+          </li>
+          <li class="footer__list-item">
+            <a href="./map.html" class="tab-bar__link"
+              ><img class="footer__icon" src="../resources/icons/foodtruck-unfilled-w300.svg" alt="Hitta närmaste food truck"
+            /></a>
+          </li>
+          <li class="footer__list-item">
+            <a href="./user-page.html" class="tab-bar__link"
+              ><img class="footer__icon" src="../resources/icons/user-filled.svg" alt="Logga in/mina användaruppgifter"
+            /></a>
+          </li>
+          <li class="footer__list-item">
+            <a href="./receipts.html" class="tab-bar__link"
+              ><img class="footer__icon" src="../resources/icons/receipt-unfilled-w300.svg" alt="Visa kvitto"
+            /></a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
 </html>
