@@ -1,30 +1,33 @@
 import { addClasses, getElement, getElements, removeClasses, toggleClasses } from "./domUtils.js";
-import { saveUserData } from "./utils.js";
-import { getFromLocalStorage, setLocalStorage, removeFromLocalStorage, clearLocalStorage } from "./localStorageUtils.js";
+
 import { showCart } from "./cart.js";
+import {
+  getFromLocalStorage,
+  setLocalStorage,
+  removeFromLocalStorage,
+  clearLocalStorage,
+  getUserData,
+  setUserData,
+} from "./localStorageUtils.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {
   const addOrderBtn = getElement(`#addOrder`);
-  console.log(addOrderBtn);
-
-  addOrderBtn.addEventListener(`click`, function () {
-    console.log(`Klick på beställning`);
-    const cart = getFromLocalStorage("cart");
+  addOrderBtn.addEventListener(`click`, () => {
+    let userData = getUserData();
 
     const order = {
-      id: Date.now(), // Unikt order-ID baserat på tid
-      items: cart,
-      total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Beräkna totalpris
-      timestamp: new Date().toISOString(), // sparar tidpunkten då ordern skapas i ett ISO-format (YYYY-MM-DDTHH:mm:ss.sssZ).
+      id: Date.now(),
+      items: userData.cart,
+      total: userData.cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      timestamp: new Date().toISOString(),
+      timeRemaining: 600, // Timer in seconds (e.g., 10 min)
     };
 
-    const orders = getFromLocalStorage("orderHistory") || [];
-    orders.push(order);
-    setLocalStorage("orderHistory", orders);
+    userData.pending.push(order);
+    userData.cart = [];
 
-    removeFromLocalStorage("cart");
-
+    setUserData(userData);
     window.location.href = "../pages/receipts.html?showConfirmation=true";
   });
 }
@@ -34,9 +37,9 @@ export function removeOrderButton() {
   const removeOrderBtn = getElement("#removeOrder");
 
   removeOrderBtn.addEventListener("click", () => {
-    removeFromLocalStorage("cart");
-    console.log(`klick på töm order-knapp`);
-
+    let userData = getUserData();
+    userData.cart = [];
+    setUserData(userData);
     location.reload();
   });
 }
