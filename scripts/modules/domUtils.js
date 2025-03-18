@@ -113,6 +113,19 @@ function createListItem(item, mode) {
     return listItem;
 }
 
+//Menu filter
+export function menuFilter() {
+  const filterContainer = createElement("div", ["content__filters"], {});
+  const filters = { alla: "Visa alla", wonton: "Wontons", drink: "Dryck", dip: "Dipp" };
+
+  for (let filter in filters) {
+    let button = createElement("button", ["filter-button"], { "data-filter": filter }, filters[filter]);
+    appendChildren(filterContainer, button);
+  }
+  console.log(filterContainer);
+  return filterContainer;
+}
+
 //-----------------------------------------------
 
 //Food Menu

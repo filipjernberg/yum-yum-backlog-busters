@@ -1,11 +1,32 @@
 //Import
-import { createList, createScrollList, createElement, appendChildren, getElement, removeClasses, addClasses } from "./modules/domUtils.js";
+import {
+    createList,
+    createScrollList,
+    createElement,
+    appendChildren,
+    getElement,
+    removeClasses,
+    addClasses,
+    menuFilter,
+} from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
-import { setupOrderButton, setupSingleReceipt, setupScrollBtn, removeOrderButton } from "./modules/eventHandlers.js";
+import {
+    setupOrderButton,
+    setupSingleReceipt,
+    setupScrollBtn,
+    removeOrderButton,
+    registerUser,
+    loginUser,
+    setupRegistrationBtn,
+    filterListener,
+} from "./modules/eventHandlers.js";
 import { addToCartListener, latestOrder } from "./modules/cart.js";
 import { checkParams, getParams } from "./modules/utils.js";
-import { createReceipts, displayOrderHistory } from "./modules/receipts.js";
+import { createReceipts } from "./modules/receipts.js";
 import { getFromLocalStorage } from "./modules/localStorageUtils.js";
+import { updateCartAlert } from "./modules/cart.js";
+
+// displayOrderHistory
 //-----------------------------------------------
 
 //Run
@@ -24,20 +45,26 @@ function handleCurrentPage() {
             createContent("Meny", fetchMenu());
             addToCartListener();
             removeOrderButton();
+            updateCartAlert();
 
             break;
         case "/pages/map.html":
             //Page specific code goes here
+            updateCartAlert();
             break;
         case "/pages/receipts.html":
             //Page specific code goes here
             createReceipts();
             setupSingleReceipt();
             checkParams(getParams());
+            updateCartAlert();
+            // displayOrderHistory();
             break;
         case "/pages/user-page.html":
+            checkParams(getParams());
+            loginUser();
+            setupRegistrationBtn();
             //Page specific code goes here
-            displayOrderHistory();
             break;
         default:
             return "unknown";
@@ -46,7 +73,22 @@ function handleCurrentPage() {
 //-----------------------------------------------
 async function createContent(heading, list) {
     const contentHeading = createElement("h1", ["content__title"], {}, heading);
+    const filterContainer = menuFilter();
+
     const scrollList = await createScrollList(await list, "menu");
-    appendChildren(content, contentHeading, scrollList);
+    appendChildren(content, contentHeading, filterContainer, scrollList);
     setupScrollBtn();
+    filterListener();
+}
+
+export async function updateMenu(filter) {
+    const menuContainer = getElement(".list-section");
+    menuContainer.innerHTML = "";
+
+    const menuList = await createList(filter, "menu"); // Skapa en ny lista med filtrerade rätter
+    appendChildren(menuContainer, menuList);
+    addToCartListener();
+    //   const scrollList = await createScrollList(await list, "menu");
+    //   appendChildren(content, contentHeading, scrollList);
+    //   setupScrollBtn();
 }

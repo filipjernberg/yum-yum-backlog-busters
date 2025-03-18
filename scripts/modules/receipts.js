@@ -1,6 +1,6 @@
 import { appendChildren, createElement, createList, getElement } from "./domUtils.js";
 import { getFromLocalStorage, getUserData } from "./localStorageUtils.js";
-import { startCountdown } from "./utils.js";
+import { startCountdown } from "./timer.js";
 
 export async function createReceipts() {
     const userData = getUserData();
@@ -136,22 +136,25 @@ function toggleReceipt(selectedReceipt, forceOpen = false) {
 }
 
 // Display all orders on the admin page
-export async function displayOrderHistory() {
-    const adminPage = getElement("#adminContainer");
-    const orderHistory = getFromLocalStorage("orderHistory") || [];
+// export async function displayOrderHistory() {
+//   const adminPage = await getElement("#adminContainer");
+//   const orderHistory = getFromLocalStorage("orderHistory");
 
-    if (!Array.isArray(orderHistory) || orderHistory.length === 0) {
-        adminPage.innerHTML = "<p>Ingen orderhistorik tillgänglig.</p>";
-        return;
-    }
+//   if (!Array.isArray(orderHistory) || orderHistory.length === 0) {
 
-    const previousReceiptContainer = createElement("div", ["receipt__container"], { id: "adminReceipts" });
-    appendChildren(adminPage, previousReceiptContainer);
+//     adminPage.innerHTML = "<p>Ingen orderhistorik tillgänglig.</p>";
+//     console.log(`test2`);
 
-    window.previousReceiptContainer = previousReceiptContainer;
+//     return;
+//   }
 
-    for (const order of orderHistory) {
-        const receipt = await createReceipt(order, "previous");
-        appendChildren(previousReceiptContainer, receipt);
-    }
-}
+//   const previousReceiptContainer = createElement("div", ["receipt__container"], { id: "adminReceipts" });
+//   appendChildren(adminPage, previousReceiptContainer);
+
+//   window.previousReceiptContainer = previousReceiptContainer;
+
+//   for (const order of orderHistory) {
+//     const receipt = await createReceipt(order, "previous");
+//     appendChildren(previousReceiptContainer, receipt);
+//   }
+// }
