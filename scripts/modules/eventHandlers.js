@@ -114,6 +114,8 @@ export function registerUser() {
   const registerFormRef = getElement(`#registerForm`);
   const submitUserBtn = getElement(`#registerSubmit`);
 
+  console.log(`du har nått formuläret`);
+
   registerFormRef.addEventListener(`submit`, async function (event) {
     event.preventDefault();
 

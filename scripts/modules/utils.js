@@ -24,8 +24,6 @@ export function checkParams(params) {
     handleSingleReceipt();
   }
   if (params.get(`registrationForm`) === `true`) {
-    handleRegistrationForm();
-    registerUser();
   }
 }
 
@@ -148,19 +146,19 @@ export function getCurrentUser() {
   return localStorage.getItem("username") || "guest";
 }
 
-export function getUserData() {
-  const userData = getFromLocalStorage(`user`);
+// export function getUserData() {
+//   const userData = getFromLocalStorage(`user`);
 
-  if (userData && userData.length > 0) {
-    console.log("UserData retrieved:", userData);
-    const latestUser = userData[userData.length - 1];
-    if (latestUser.startTime) {
-      startCountdown(latestUser.startTime, `#timerForReceipt`);
-    }
-  } else {
-    console.log("No user data found");
-  }
-}
+//   if (userData && userData.length > 0) {
+//     console.log("UserData retrieved:", userData);
+//     const latestUser = userData[userData.length - 1];
+//     if (latestUser.startTime) {
+//       startCountdown(latestUser.startTime, `#timerForReceipt`);
+//     }
+//   } else {
+//     console.log("No user data found");
+//   }
+// }
 
 export async function getAllUsers() {
   try {

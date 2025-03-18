@@ -44,6 +44,7 @@ function handleCurrentPage() {
       displayOrderHistory();
       break;
     case "/pages/user-page.html":
+      checkParams(getParams());
       //Page specific code goes here
       break;
     default:
