@@ -29,6 +29,13 @@ export async function addToCartListener() {
                     console.error("Kunde inte hitta rätten med ID:", productId);
                 }
             });
+
+            button.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    button.click();
+                }
+            });
         });
     }, 500);
 }
