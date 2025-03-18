@@ -96,7 +96,9 @@
     width: 100%;
     max-height: 100vh;
     padding: 1rem;
-    /* Lägg till i en annan class om det önskas: gap: 2rem; */
+
+    overflow-y: auto; /* or scroll if you want scrollbar always visible */
+    max-height: 100vh;
 }
 
 .height-100 {
@@ -298,9 +300,6 @@ p {
 /* === Receipts === */
 .receipt__container {
     width: 100%;
-    min-height: 100px;
-
-    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
@@ -474,6 +473,11 @@ p {
     margin: 1rem 0rem 8rem 0rem;
     font-size: 3rem;
     color: var(--dark-grey);
+}
+
+/* Admin page */
+#adminContainer {
+    margin-bottom: 5rem;
 }
 
 /* === Icon Styling === */
