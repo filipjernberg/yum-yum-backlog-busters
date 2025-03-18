@@ -194,14 +194,15 @@ export function loginUser() {
     errorMessages.innerHTML = ``;
 
     try {
-      const allUsers = await getAllUsers();
-      const validationErrors = await validateLogin(username, password, allUsers);
+      const validationErrors = await validateLogin(username, password);
 
       if (validationErrors.length > 0) {
         displayErrorMessages(errorMessages, validationErrors);
         return;
       }
       console.log(`Du loggades in! `);
+
+      //Vad ska hända när vi loggats in? ändra role?
     } catch (error) {
       console.error(`Fel vid registrering: ${error.message}`);
       displayErrorMessages(errorMessages, [`Fel vid registrering: ${error.message}`]);

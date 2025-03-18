@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     </head>
 
+
     <body>
         <!-- Gästmode, inte inloggad. Då syns wrapperGuest -->
         <div id="wrapperGuest" class="wrapper">
@@ -17,41 +18,45 @@
                 <img src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
             </div>
 
-            <section id="userContainer1" class="user-container">
-                <h1 id="userTitle" class="heading-one">Hej gäst!</h1>
-                <form id="loginForm" class="login-form">
-                    <figure><!-- ikon för användare--></figure>
-                    <label>
-                        <input
-                            id="loginUsername"
-                            class="input-field"
-                            placeholder="Användarnamn"
-                            name="username"
-                            type="text"
-                            aria-label="Användarnamn"
-                            required
-                        />
-                    </label>
+            <section id="userContainer" class="user-container flex">
+        <h1 id="userTitle" class="heading-one">Hej gäst!</h1>
+        <form id="loginForm" class="login-form">
+          <figure><!-- ikon för användare--></figure>
+          <label class="form__label">
+            <img src="../resources/icons/user-unfilled-w300.svg" class="register-form__logo" alt="ange användarnamn" />
+            <input
+              id="loginUsername"
+              class="input-field"
+              placeholder="Användarnamn"
+              name="username"
+              type="text"
+              aria-label="Användarnamn"
+              required
+            />
+          </label>
 
-                    <figure><!-- ikon för lösenord--></figure>
-                    <label>
-                        <input
-                            id="loginPassword"
-                            class="input-field"
-                            placeholder="Lösenord"
-                            name="password"
-                            type="password"
-                            aria-label="lösenord"
-                            required
-                        />
-                    </label>
-                    <button id="loginSubmit" class="button button--dark">Logga in</button>
-                </form>
-            </section>
-            <p class="user__paragraph">Glömt lösenord?</p>
-            <hr class="stroke" />
-            <p class="user__paragraph">Inget konto?</p>
-            <a class="user__link" href="./register-user.html">Logga in</a>
+          <figure><!-- ikon för lösenord--></figure>
+          <label class="form__label">
+            <img src="../resources/icons/lock-password-w300.svg" class="register-form__logo" alt="ange lösenord" />
+            <input
+              id="loginPassword"
+              class="input-field"
+              placeholder="Lösenord"
+              name="password"
+              type="password"
+              aria-label="lösenord"
+              required
+            />
+          </label>
+          <button id="loginSubmit" class="button button--dark">Logga in</button>
+          <div id="loginError" class="error-message"></div>
+        </form>
+      </section>
+      <p class="user__paragraph">Glömt lösenord?</p>
+      <hr class="stroke" />
+      <p class="user__paragraph">Inget konto?</p>
+      <a id="registerUser" class="user__link" href="./user-page.html">skapa konto</a>
+    </section>
         </div>
 
         <!-- Registera användare, då syns wrapperRegister -->
@@ -202,16 +207,14 @@
             <a id="linkOrderHistory" class="link" href="">Orderhistorik ></a>
             <a id="linkContact" class="link" href="">Kontakta oss ></a>
 
-<<<<<<< HEAD
+
             <!-- Egentligen vill man kanske ha button inuti form, men nu har vi logga ut i anslutning och andra länkar innan -->
             <button id="changeSubmit" class="button button--dark" aria-label="Spara dina ändringar">Spara ändringar</button>
             <button id="logout" class="button button--dark" aria-label="Logga ut från ditt konto">Logga ut</button>
         </div>
 
-        <!-- admin view -->
-        <section id="wrapperAdmin" class="wrapper">
-            <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-=======
+    
+
     <!-- admin view -->
     <section id="wrapperAdmin" class="wrapper d-none">
       <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
@@ -222,14 +225,9 @@
         </figure>
         <h4 class="profile__title">Admin</h4>
       </div>
->>>>>>> origin/dev
 
-            <div class="profile">
-                <figure class="profile__circle">
-                    <img src="BILD PÅ ADMIN" alt="Profilbild" />
-                </figure>
-                <h4 class="profile__title">Admin</h4>
-            </div>
+
+            
 
             <!-- ändra till admincontainer? -->
             <section id="adminContainer" class="user-container">

@@ -1,5 +1,7 @@
 import { getElement, styleElement, addClasses, removeClasses } from "./domUtils.js";
 import { comparePasswords } from "./utils.js";
+import { fetchUsers } from "./api.js";
+import { getFromLocalStorage } from "./localStorageUtils.js";
 
 export function handleRegistrationForm() {
   const registrationWrapperRef = getElement(`#wrapperRegister`);
@@ -36,24 +38,42 @@ export function validateUserInput(username, email, password, confirmPassword, al
 }
 
 //validering av login
-export async function validateLogin(username, password, allUsers) {
+export async function validateLogin(username, password) {
   let errors = [];
-  console.log(`All users: `, allUsers);
-  const user = allUsers.find((user) => user.username === username);
 
-  if (!user) {
-    errors.push(`Användarnamnet finns inte`);
-  } else {
-    if (user.password) {
-      const isPasswordValid = await comparePasswords(password, user.password);
-      if (!isPasswordValid) {
-        errors.push(`Fel lösenord`);
-      }
+  const usersFromAPI = await fetchUsers(); // Hämta från API
+  const userFromAPI = usersFromAPI.find((user) => user.username === username);
+
+  const usersFromLocalStorage = getFromLocalStorage("users");
+  const userFromLocalStorage = usersFromLocalStorage.find((user) => user.username === username);
+
+  if (!userFromAPI && !userFromLocalStorage) {
+    errors.push("Användarnamnet är inte registrerat.");
+    console.log("Användarnamnet finns inte i API eller LocalStorage.");
+    return errors; // Avbryt validering här om användaren inte existerar
+  }
+
+  if (userFromAPI) {
+    if (userFromAPI.password !== password) {
+      errors.push("Fel lösenord.");
+      console.log("Fel lösenord från API.");
     } else {
-      errors.push(`Användaren har inte sparat ett lösenord.`);
+      console.log("Inloggning lyckades från API!");
+      return []; // Ingen anledning att fortsätta om lösenordet är korrekt
     }
   }
-  return errors;
+  if (userFromLocalStorage) {
+    const passwordMatches = await comparePasswords(password, userFromLocalStorage.password);
+    if (!passwordMatches) {
+      errors.push("Fel lösenord.");
+      console.log("Fel lösenord från LocalStorage.");
+    } else {
+      console.log("Inloggning lyckades från LocalStorage!");
+      return []; // Ingen anledning att fortsätta om lösenordet är korrekt
+    }
+  }
+  console.log("Inloggning misslyckades.");
+  return errors; // Återvänd med felmeddelanden
 }
 
 //Skriver ut felmeddelande errormessages är div, errors är själva felet
