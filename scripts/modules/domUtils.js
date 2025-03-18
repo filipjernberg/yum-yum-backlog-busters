@@ -59,6 +59,7 @@ export async function createScrollList(list, type) {
   return scrollContainer;
 }
 
+//Originalkod createList
 export async function createList(list, type) {
   const listSection = createElement("ul", ["list-section"]);
   list.forEach((item) => {
@@ -69,6 +70,7 @@ export async function createList(list, type) {
   return listSection;
 }
 
+//Originalkod createListItem
 function createListItem(item, mode) {
   const listItem = createElement("li", ["list-item", `list-item--${mode}`], { "data-id": item.id });
   const rowOne = createElement("div", ["list-item__row"]);

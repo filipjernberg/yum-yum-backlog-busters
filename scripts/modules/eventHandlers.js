@@ -1,4 +1,4 @@
-import { getElement, getElements } from "./domUtils.js";
+import { addClasses, getElement, getElements, removeClasses, toggleClasses } from "./domUtils.js";
 import { saveUserData } from "./utils.js";
 import { getFromLocalStorage, setLocalStorage, removeFromLocalStorage, clearLocalStorage } from "./localStorageUtils.js";
 import { showCart } from "./cart.js";
@@ -88,4 +88,12 @@ function scrollList(scrollpixels) {
 export function setupCartBtnListener() {
   console.log(`setupCartBtnListener()`);
   getElement(`#cartBtn`).addEventListener(`click`, showCart);
+}
+
+export function setupCloseCartListerner() {
+  console.log(`setupCloseCartListerner()`);
+  getElement(`#cartCloseButton`).addEventListener(`click`, () => {
+    addClasses(getElement(`#cartModal`), [`d-none`]);
+    removeClasses(getElement(`#bodyPage`), [`page--black-white-opacity`]);
+  });
 }
