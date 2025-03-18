@@ -1,44 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yum Yum Gimmie Sum</title>
-    <script type="module" src="../scripts/script.js"></script>
-    <link rel="stylesheet" href="../styles/style.css" />
-    <!-- Använda fontawesome? -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  </head>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Yum Yum Gimmie Sum</title>
+        <script type="module" src="../scripts/script.js"></script>
+        <link rel="stylesheet" href="../styles/style.css" />
+    </head>
 
-  <!-- landingpage -->
-  <body class="page page--background-image">
-    <section class="wrapper flex height-100 gap-2rem">
-      <img class="logo--big" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-      <a href="food-menu.html" role="button" class="button button--dark">Beställ mat</a>
-    </section>
-    <footer class="footer tab-bar--transparant-bg visually-hidden">
-      <img class="footer__icon" src="../resources/icons/arrow-left-w300.svg" alt="Visa föregående plats" />
-      <ul class="footer__location-list">
-        <li class="footer__location-list-item">
-          <a href="./map.html" class="tab-bar__link">Plats 1</a>
-        </li>
-        <!-- Element som ev. ska kunna skrollas fram senare -->
+    <body class="page page--background-image">
+        <div class="wrapper flex height-100 gap-2rem">
+            <img class="logo--big" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+            <a href="food-menu.html" role="button" class="button button--dark">Beställ mat</a>
+        </div>
 
-        <!-- <li>
+        <footer class="footer tab-bar--transparant-bg visually-hidden">
+            <img class="footer__icon" src="../resources/icons/arrow-left-w300.svg" alt="Visa föregående plats" />
+            <ul class="footer__location-list">
+                <li class="footer__location-list-item">
+                    <a href="./map.html" class="tab-bar__link" aria-label="Plats 1">Plats 1</a>
+                </li>
+                <!-- Element som ev. ska kunna skrollas fram senare -->
+                <!-- <li>
             <a href="./map.html" class="tab-bar__link">Plats 2</a>
           </li>
           <li>
             <a href="./map.html" class="tab-bar__link">Plats 3</a>
           </li> -->
-      </ul>
-
-      <img class="footer__icon" src="../resources/icons/arrow-right-w300.svg" alt="Visa nästa plats" />
-
-      <!-- 
+            </ul>
+            <img class="footer__icon" src="../resources/icons/arrow-right-w300.svg" alt="Visa nästa plats" />
+            <!-- 
           <p class="location__paragraph">Plats 1</p>
           <p class="location__paragraph">Plats 2</p>
           <p class="location__paragraph">Plats 3</p>
            -->
-    </footer>
-  </body>
+        </footer>
+    </body>
 </html>

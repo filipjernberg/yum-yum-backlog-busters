@@ -8,7 +8,9 @@ import {
   getUserData,
   setUserData,
 } from "./localStorageUtils.js";
-import { displayErrorMessages, displaySuccessMessage, validateLogin, validateUserInput } from "./formUtils.js";
+import { displayErrorMessages, displaySuccessMessage, validateUserInput } from "./formUtils.js";
+import { updateMenu } from "../script.js";
+import { fetchMenu } from "./api.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {
@@ -91,6 +93,29 @@ function scrollList(scrollpixels) {
     top: scrollpixels,
     behavior: "smooth",
   });
+}
+
+export async function filterListener() {
+  const filterButtons = getElements(".content__filters");
+  const fullMenu = await fetchMenu();
+  console.log(filterButtons.length);
+
+  for (let button of filterButtons) {
+    button.addEventListener("click", (event) => {
+      console.log(event.target);
+      const selectedFilter = event.target.dataset.filter;
+      console.log(selectedFilter);
+      let filteredMenu;
+
+      if (selectedFilter === "alla") {
+        filteredMenu = fullMenu;
+      } else {
+        filteredMenu = fullMenu.filter((item) => item.type === selectedFilter);
+      }
+
+      updateMenu(filteredMenu);
+    });
+  }
 }
 
 // Beställ knapp på food-menu.html
