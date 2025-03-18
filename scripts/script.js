@@ -80,6 +80,8 @@ async function createContent(heading, list) {
   const filterContainer = menuFilter();
 
   const scrollList = await createScrollList(await list, "menu");
+  console.log(content);
+
   appendChildren(content, contentHeading, filterContainer, scrollList);
   setupScrollBtn();
   filterListener();

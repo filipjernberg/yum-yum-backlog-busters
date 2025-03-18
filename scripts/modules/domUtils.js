@@ -97,6 +97,7 @@ function createListItem(item, mode) {
         { "aria-label": `Lägg till ${item.name} i varukorgen.` },
         "Add"
       );
+      setupQuantityBtnListener(quantityButton);
       break;
 
     case "receipt":

@@ -59,14 +59,25 @@ export async function setupQuantityBtnListener(button) {
   button.addEventListener("click", async (event) => {
     const product = await getClickedElement(event);
     console.log(product);
+    addProductToCart(event, product, button); // Lägg till i localStorage
+    updateCartAlert();
 
-    // console.log(button.classList.contains(`list-item__quantity-button`));
+    // if (button.id === `addToCartBtn` || button.id === `increaseQuantityBtn`) {
+    //   console.log(button.id);
 
-    if (button.classList.contains(`list-item__quantity-button`)) {
-      console.log(`hej`);
-      addProductToCart(product); // Lägg till i localStorage
-    }
+    //   console.log(`increase`);
+    //   addProductToCart(product, button); // Lägg till i localStorage
+    //   updateCartAlert();
+    // } else if (button.id === `decreaseQuantityBtn`) {
+    //   console.log(`decrease`);
+    // }
   });
+}
+
+export function getClickedElementTest(event) {
+  const productElement = event.target.closest(".list-item");
+  console.log("Klick på:", productElement);
+  return productElement;
 }
 
 export async function getClickedElement(event) {
@@ -75,6 +86,8 @@ export async function getClickedElement(event) {
 
   const menu = await fetchMenu();
   const product = isProductInCart(menu, productElement);
+  console.log(product);
+
   return product;
 
   // if (product) {

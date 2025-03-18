@@ -9,7 +9,13 @@ import {
   removeElement,
 } from "./domUtils.js";
 // import { fetchMenu } from "./api.js";
-import { removeOrderButton, setupCloseCartListerner, setupOrderButton, setupQuantityBtnListener } from "./eventHandlers.js";
+import {
+  removeOrderButton,
+  setupCloseCartListerner,
+  setupOrderButton,
+  setupQuantityBtnListener,
+  getClickedElementTest,
+} from "./eventHandlers.js";
 import { setLocalStorage, getFromLocalStorage, removeFromLocalStorage, getUserData, setUserData } from "./localStorageUtils.js";
 import { generateConfirmationNumber } from "./utils.js";
 
@@ -60,20 +66,50 @@ import { generateConfirmationNumber } from "./utils.js";
 //   }, 500);
 // }
 
-export function addProductToCart(product) {
+export function addProductToCart(event, product, button) {
   let userData = getUserData();
-  let cart = userData.cart;
+  let userCart = userData.cart;
 
-  let existingProduct = cart.find((item) => item.id === product.id);
-  if (existingProduct) {
+  let existingProduct = userCart.find((item) => item.id === product.id);
+  let clickedElement = getClickedElementTest(event);
+
+  if (
+    (existingProduct && button.classList.contains(`list-item__quantity-button`)) ||
+    (existingProduct && button.classList.contains(`list-item__increase`))
+  ) {
     existingProduct.quantity += 1;
-  } else {
-    cart.push({ ...product, quantity: 1 });
+  } else if (!existingProduct && button.classList.contains(`list-item__quantity-button`)) {
+    userCart.push({ ...product, quantity: 1 });
+  } else if (existingProduct && button.classList.contains(`list-item__decrease`)) {
+    existingProduct.quantity -= 1;
+
+    // Om antalet är 0 på en produkt filtreras den bort ur arrayen.
+    if (existingProduct.quantity === 0) {
+      userCart = userCart.filter((item) => item.id !== product.id);
+      removeElement(clickedElement);
+    }
   }
 
-  userData.cart = cart;
+  userData.cart = userCart;
   setUserData(userData);
+  updateCartAlert();
 }
+
+// Originalkod
+// export function addProductToCart(product) {
+//   let userData = getUserData();
+//   let cart = userData.cart;
+
+//   let existingProduct = cart.find((item) => item.id === product.id);
+//   if (existingProduct) {
+//     existingProduct.quantity += 1;
+//   } else {
+//     cart.push({ ...product, quantity: 1 });
+//   }
+
+//   userData.cart = cart;
+//   setUserData(userData);
+// }
 
 export function updateCartAlert() {
   const cartIcon = getElement("#cartAlert");
@@ -157,7 +193,7 @@ function resetCartList(element) {
 
 function createCartItem(item) {
   console.log(`createCartItem()`);
-  const listItem = createElement("li", ["list-item"], { "data-id": item.id });
+  const listItem = createElement("li", ["list-item"], { "data-id": item.id, id: `cartListItem` });
   const rowOne = createElement("div", ["list-item__row"]);
   const rowTwo = createElement("div", ["list-item__row"]);
 
@@ -182,17 +218,26 @@ function createCartQuantityBtns(item) {
   const decreaseBtn = createElement(`img`, [`list-item__decrease`], {
     role: `button`,
     src: `../../resources/icons/remove-minus-w300.svg`,
+    id: `decreaseQuantityBtn`,
   });
   const itemInfo = createElement("h4", ["list-item__info", "list-item__info--small"], { id: "listItemQuantity" }, item.quantity);
   const increaseBtn = createElement(`img`, [`list-item__increase`], {
     role: `button`,
     src: `../../resources/icons/add-plus-w300.svg`,
+    id: `increaseQuantityBtn`,
   });
 
   setupQuantityBtnListener(decreaseBtn);
   setupQuantityBtnListener(increaseBtn);
   appendChildren(quantityDiv, decreaseBtn, itemInfo, increaseBtn);
   return quantityDiv;
+}
+
+function removeCartListItem() {
+  console.log(`removeCartListItem()`);
+
+  const listItem = getElement(`#cartListItem`);
+  console.log(listItem);
 }
 
 export function orderCart() {
