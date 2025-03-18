@@ -8,7 +8,7 @@ import {
   getUserData,
   setUserData,
 } from "./localStorageUtils.js";
-import { displayErrorMessages, displaySuccessMessage, validateUserInput } from "./formUtils.js";
+import { displayErrorMessages, displaySuccessMessage, validateLogin, validateUserInput } from "./formUtils.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {
@@ -142,6 +142,41 @@ export function registerUser() {
       saveNewUser(username, email, hashedPassword);
 
       displaySuccessMessage();
+    } catch (error) {
+      console.error(`Fel vid registrering: ${error.message}`);
+      displayErrorMessages(errorMessages, [`Fel vid registrering: ${error.message}`]);
+    }
+  });
+}
+
+// login user
+export function loginUser() {
+  const loginFormRef = getElement(`#loginForm`);
+
+  console.log(`du har nått formuläret`);
+
+  loginFormRef.addEventListener(`submit`, async function (event) {
+    event.preventDefault();
+
+    const username = getElement(`#loginUsername`).value;
+    console.log(`mitt username:`, username);
+
+    const password = getElement(`#loginPassword`).value;
+
+    const errorMessages = getElement("#loginError");
+
+    styleElement(errorMessages, `color`, `red`);
+    errorMessages.innerHTML = ``;
+
+    try {
+      const allUsers = await getAllUsers();
+      const validationErrors = await validateLogin(username, password, allUsers);
+
+      if (validationErrors.length > 0) {
+        displayErrorMessages(errorMessages, validationErrors);
+        return;
+      }
+      console.log(`Du loggades in! `);
     } catch (error) {
       console.error(`Fel vid registrering: ${error.message}`);
       displayErrorMessages(errorMessages, [`Fel vid registrering: ${error.message}`]);

@@ -206,7 +206,7 @@ export async function hashPassword(password) {
 }
 
 // Senare funktion för att jämföra lösenord?
-// async function comparePasswords(inputPassword, storedHash) {
-//   const inputHash = await hashPassword(inputPassword);
-//   return inputHash === storedHash;
-// }
+export async function comparePasswords(inputPassword, storedHash) {
+  const inputHash = await hashPassword(inputPassword);
+  return inputHash === storedHash;
+}

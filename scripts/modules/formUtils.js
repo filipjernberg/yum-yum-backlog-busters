@@ -1,5 +1,5 @@
-import { getElement, styleElement } from "./domUtils.js";
-import { addClasses, removeClasses } from "./domUtils.js";
+import { getElement, styleElement, addClasses, removeClasses } from "./domUtils.js";
+import { comparePasswords } from "./utils.js";
 
 export function handleRegistrationForm() {
   const registrationWrapperRef = getElement(`#wrapperRegister`);
@@ -32,6 +32,27 @@ export function validateUserInput(username, email, password, confirmPassword, al
     errors.push(`Lösenorden matchar inte. Försök igen.`);
   }
 
+  return errors;
+}
+
+//validering av login
+export async function validateLogin(username, password, allUsers) {
+  let errors = [];
+  console.log(`All users: `, allUsers);
+  const user = allUsers.find((user) => user.username === username);
+
+  if (!user) {
+    errors.push(`Användarnamnet finns inte`);
+  } else {
+    if (user.password) {
+      const isPasswordValid = await comparePasswords(password, user.password);
+      if (!isPasswordValid) {
+        errors.push(`Fel lösenord`);
+      }
+    } else {
+      errors.push(`Användaren har inte sparat ett lösenord.`);
+    }
+  }
   return errors;
 }
 

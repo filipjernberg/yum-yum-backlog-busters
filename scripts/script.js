@@ -8,6 +8,7 @@ import {
   removeOrderButton,
   setupRegistrationBtn,
   registerUser,
+  loginUser,
 } from "./modules/eventHandlers.js";
 import { addToCartListener, latestOrder } from "./modules/cart.js";
 import { checkParams, getParams } from "./modules/utils.js";
@@ -47,6 +48,7 @@ function handleCurrentPage() {
       break;
     case "/pages/user-page.html":
       checkParams(getParams());
+      loginUser();
       setupRegistrationBtn();
       //Page specific code goes here
       break;
