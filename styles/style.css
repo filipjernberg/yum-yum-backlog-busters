@@ -474,7 +474,6 @@ p {
 .filter-button {
     border: none;
     width: 90px;
-    border-radius: 100px;
     padding: .5rem 1rem;
     margin: .15rem;
     background-color: var(--dark-grey);

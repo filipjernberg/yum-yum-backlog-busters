@@ -1,6 +1,11 @@
 import { getElement, getElements } from "./domUtils.js";
 import { saveUserData } from "./utils.js";
 import { getFromLocalStorage, setLocalStorage, removeFromLocalStorage, clearLocalStorage } from "./localStorageUtils.js";
+import { fetchMenu } from "./api.js";
+import { createList } from "./domUtils.js";
+import { appendChildren } from "./domUtils.js";
+import { addToCartListener } from "./cart.js";
+import { updateMenu } from "../script.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {
@@ -79,4 +84,27 @@ function scrollList(scrollpixels) {
     top: scrollpixels,
     behavior: "smooth",
   });
+}
+
+export async function filterListener() {
+  const filterButtons = getElements(".content__filters");
+  const fullMenu = await fetchMenu();
+  console.log(filterButtons.length);
+
+  for (let button of filterButtons) {
+    button.addEventListener("click", (event) => {
+      console.log(event.target);
+      const selectedFilter = event.target.dataset.filter;
+      console.log(selectedFilter);
+      let filteredMenu;
+
+      if (selectedFilter === "alla") {
+        filteredMenu = fullMenu;
+      } else {
+        filteredMenu = fullMenu.filter((item) => item.type === selectedFilter);
+      }
+
+      updateMenu(filteredMenu);
+    });
+  }
 }

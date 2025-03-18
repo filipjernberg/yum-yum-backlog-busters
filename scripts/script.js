@@ -10,7 +10,7 @@ import {
   menuFilter,
 } from "./modules/domUtils.js";
 import { fetchMenu } from "./modules/api.js";
-import { setupOrderButton, setupSingleReceipt, setupScrollBtn, removeOrderButton } from "./modules/eventHandlers.js";
+import { setupOrderButton, setupSingleReceipt, setupScrollBtn, removeOrderButton, filterListener } from "./modules/eventHandlers.js";
 import { addToCartListener, latestOrder } from "./modules/cart.js";
 import { checkParams, getParams } from "./modules/utils.js";
 import { createReceipts } from "./modules/receipts.js";
@@ -63,4 +63,14 @@ async function createContent(heading, list) {
   const scrollList = await createScrollList(await list, "menu");
   appendChildren(content, contentHeading, filterContainer, scrollList);
   setupScrollBtn();
+  filterListener();
+}
+
+export async function updateMenu(filter) {
+  const menuContainer = getElement(".list-section");
+  menuContainer.innerHTML = "";
+
+  const menuList = await createList(filter, "menu"); // Skapa en ny lista med filtrerade rätter
+  appendChildren(menuContainer, menuList);
+  addToCartListener();
 }
