@@ -30,9 +30,12 @@ export function checkParams(params) {
 }
 
 export function handleOrderConfirmation(confirmationSection) {
-  const orderWrapperRef = getElement(`#wrapperOrders`);
+  const orderWrapperRef = getElement(`#wrapperOrderConfirmation`);
+  const receiptsWrapper = getElement(`#wrapperReceipts`);
   const body = getElement(`body`);
 
+  addClasses(receiptsWrapper, [`d-none`]);
+  removeClasses(receiptsWrapper, [`flex`, `gap-1rem`]);
   addClasses(confirmationSection, [`flex`]);
   addClasses(orderWrapperRef, [`d-none`]);
   removeClasses(orderWrapperRef, ["flex"]);
