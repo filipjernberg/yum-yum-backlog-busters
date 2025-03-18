@@ -203,6 +203,7 @@ p {
 /* === Button Styling === */
 .button {
     width: 100%;
+    max-width: 350px;
     padding: 0.5rem 3rem;
     border-radius: 0.5rem;
     border-style: unset;
@@ -295,13 +296,17 @@ p {
 }
 
 /* === Receipts === */
-
 .receipt__container {
     width: 100%;
+    min-height: 100px;
+
+    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
+
+    margin-bottom: 2rem;
 }
 
 .receipt {
@@ -316,6 +321,10 @@ p {
     transition: all 0.3s ease-in-out;
 }
 
+.receipt:has(.receipt__details.open) {
+    padding: 60px;
+}
+
 .receipt__logo {
     width: 100px;
     margin-bottom: 10px;
@@ -323,7 +332,7 @@ p {
 
 .receipt__details {
     max-height: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     transition: max-height 0.3s ease-in-out;
 }
 
@@ -352,6 +361,7 @@ p {
     align-items: center;
     background-color: var(--light-grey);
     padding: 1rem;
+    border-radius: 0 0 10px 10px;
 }
 
 .receipt__total-amount {
@@ -568,6 +578,14 @@ i {
     padding-top: 1rem;
 
     transition: all 0.3s ease-in-out;
+}
+
+.list-item--receipt {
+    padding: 0.5rem 0rem;
+}
+
+.list-item--receipt:last-of-type {
+    margin-bottom: 1rem;
 }
 
 .list-item:hover {

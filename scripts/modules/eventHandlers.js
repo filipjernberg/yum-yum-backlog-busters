@@ -1,82 +1,87 @@
 import { getElement, getElements } from "./domUtils.js";
 import { saveUserData } from "./utils.js";
-import { getFromLocalStorage, setLocalStorage, removeFromLocalStorage, clearLocalStorage } from "./localStorageUtils.js";
+import {
+    getFromLocalStorage,
+    setLocalStorage,
+    removeFromLocalStorage,
+    clearLocalStorage,
+    getUserData,
+    setUserData,
+} from "./localStorageUtils.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {
-  const addOrderBtn = getElement(`#addOrder`);
-  console.log(addOrderBtn);
+    const addOrderBtn = getElement(`#addOrder`);
+    addOrderBtn.addEventListener(`click`, () => {
+        let userData = getUserData();
 
-  addOrderBtn.addEventListener(`click`, function () {
-    console.log(`Klick på beställning`);
-    const cart = getFromLocalStorage("cart");
+        const order = {
+            id: Date.now(),
+            items: userData.cart,
+            total: userData.cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+            timestamp: new Date().toISOString(),
+            timeRemaining: 600, // Timer in seconds (e.g., 10 min)
+        };
 
-    const order = {
-      id: Date.now(), // Unikt order-ID baserat på tid
-      items: cart,
-      total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Beräkna totalpris
-      timestamp: new Date().toISOString(), // sparar tidpunkten då ordern skapas i ett ISO-format (YYYY-MM-DDTHH:mm:ss.sssZ).
-    };
+        userData.pending.push(order);
+        userData.cart = [];
 
-    const orders = getFromLocalStorage("orderHistory") || [];
-    orders.push(order);
-    setLocalStorage("orderHistory", orders);
-
-    removeFromLocalStorage("cart");
-
-    window.location.href = "../pages/receipts.html?showConfirmation=true";
-  });
+        setUserData(userData);
+        window.location.href = "../pages/receipts.html?showConfirmation=true";
+    });
 }
 
 //Töm varukorgen knapp på food-menu.html
 export function removeOrderButton() {
-  const removeOrderBtn = getElement("#removeOrder");
+    const removeOrderBtn = getElement("#removeOrder");
 
-  removeOrderBtn.addEventListener("click", () => {
-    removeFromLocalStorage("cart");
-    location.reload();
-  });
+    removeOrderBtn.addEventListener("click", () => {
+        let userData = getUserData();
+        userData.cart = [];
+        setUserData(userData);
+        location.reload();
+    });
 }
 
 //Visa enskilt kvitto
 export function setupSingleReceipt() {
-  console.log(`singlereceipt function`);
+    console.log(`singlereceipt function`);
 
-  const singleReceiptBtn = getElement(`#seeReceipt`);
-  console.log(singleReceiptBtn);
+    const singleReceiptBtn = getElement(`#seeReceipt`);
+    console.log(singleReceiptBtn);
 
-  singleReceiptBtn.addEventListener(`click`, function () {
-    console.log(`Klick på visa kvitto`);
+    singleReceiptBtn.addEventListener(`click`, function () {
+        console.log(`Klick på visa kvitto`);
 
-    window.location.href = "../pages/receipts.html?showSingleReceipt=true";
-  });
+        window.location.href = "../pages/receipts.html?showSingleReceipt=true";
+    });
 }
 
 //Scrollknappar menylista
 export function setupScrollBtn() {
-  const buttons = getElements(`.scroll-container__button`);
+    const buttons = getElements(`.scroll-container__button`);
 
-  buttons.forEach((button) => {
-    button.addEventListener(`click`, (event) => {
-      upOrDown(event);
+    buttons.forEach((button) => {
+        button.addEventListener(`click`, (event) => {
+            upOrDown(event);
+        });
     });
-  });
 }
 
 //Tryckte anv. på upp- eller nedknappen?
 function upOrDown(event) {
-  if (event.currentTarget.id === `scrollButtonUp`) {
-    scrollList(-100);
-  } else if (event.currentTarget.id === `scrollButtonDown`) {
-    scrollList(100);
-  }
+    if (event.currentTarget.id === `scrollButtonUp`) {
+        scrollList(-100);
+    } else if (event.currentTarget.id === `scrollButtonDown`) {
+        scrollList(100);
+    }
 }
 
 function scrollList(scrollpixels) {
-  const scrollDiv = getElement(`.list-section`);
+    const scrollDiv = getElement(`.list-section`);
 
-  scrollDiv.scrollBy({
-    top: scrollpixels,
-    behavior: "smooth",
-  });
+    scrollDiv.scrollBy({
+        top: scrollpixels,
+        behavior: "smooth",
+    });
 }

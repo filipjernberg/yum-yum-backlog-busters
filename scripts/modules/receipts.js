@@ -1,14 +1,25 @@
 import { appendChildren, createElement, createList } from "./domUtils.js";
-import { getFromLocalStorage } from "./localStorageUtils.js";
+import { getUserData } from "./localStorageUtils.js";
+import { startCountdown } from "./utils.js";
 
 export async function createReceipts() {
-    const orderHistory = getFromLocalStorage("orderHistory") || [];
-    const cart = getFromLocalStorage("cart") || [];
+    const userData = getUserData();
+    const orderHistory = userData.orderHistory || [];
+    const pendingOrders = userData.pending || [];
+    const cart = userData.cart || [];
 
     let firstReceipt;
 
     if (cart.length > 0) {
         firstReceipt = await createReceipt(cart, "new");
+    }
+
+    if (Array.isArray(pendingOrders) && pendingOrders.length > 0) {
+        for (const pendingOrder of pendingOrders) {
+            const receipt = await createReceipt(pendingOrder, "pending");
+
+            startCountdown(new Date(pendingOrder.timestamp).getTime(), "#timerForReceipt", pendingOrder.id);
+        }
     }
 
     if (Array.isArray(orderHistory) && orderHistory.length > 0) {
@@ -22,27 +33,24 @@ export async function createReceipts() {
 
 export async function createReceipt(order, type) {
     const receipt = createElement("div", ["receipt", "flex"], {});
-
     let formattedDate, formattedTime, totalAmount;
 
-    //Fix total for "cart", then remove this?
     if (type === "new") {
         formattedDate = "I din kundvagn";
         formattedTime = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         totalAmount = order.reduce((sum, item) => sum + item.price * item.quantity, 0);
     } else {
         const timestamp = new Date(order.timestamp);
-        formattedDate = timestamp.toLocaleDateString();
+        formattedDate = type === "pending" ? "Beställning under behandling" : timestamp.toLocaleDateString();
         formattedTime = timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         totalAmount = order.total || 0;
     }
 
     const date = createElement("h2", [], {}, formattedDate);
     const time = createElement("h5", [], {}, formattedTime);
-
     const cartItems = type === "new" ? order : order.items;
-    const details = await createList(cartItems, "receipt");
 
+    const details = await createList(cartItems, "receipt");
     if (!details) {
         console.error("Error: createList did not return a valid element");
         return;
@@ -57,35 +65,57 @@ export async function createReceipt(order, type) {
     const totalInfo = createElement("p", ["receipt__total-info"], {}, "inkl 20% moms");
 
     appendChildren(leftcolumn, totalText, totalInfo);
-
     appendChildren(totalContainer, leftcolumn, totalAmountEl);
-
     appendChildren(details, totalContainer);
 
     receipt.addEventListener("click", () => toggleReceipt(receipt));
-
     appendChildren(receipt, date, time, details);
 
-    if (type === "new") {
-        appendChildren(newReceiptContainer, receipt);
-    } else {
-        appendChildren(previousReceiptContainer, receipt);
-    }
+    const container = type === "previous" ? "#previousReceiptContainer" : "#newReceiptContainer";
+    appendChildren(document.querySelector(container), receipt);
 
     return receipt;
 }
 
+//Improved functionality with some help from a friend (chatGPT). Advanced way to make the UI less "jumpy".
 function toggleReceipt(selectedReceipt, forceOpen = false) {
-    document.querySelectorAll(".receipt__details").forEach((details) => {
-        if (details !== selectedReceipt.querySelector(".receipt__details")) {
+    const selectedDetails = selectedReceipt.querySelector(".receipt__details");
+
+    // Step 1: Collapse all other receipts
+    const allDetails = document.querySelectorAll(".receipt__details");
+    let collapsePromises = [];
+
+    allDetails.forEach((details) => {
+        if (details !== selectedDetails && details.style.maxHeight && details.style.maxHeight !== "0px") {
             details.style.maxHeight = "0px";
+
+            // Wait for transition to complete (assuming 0.5s in CSS)
+            collapsePromises.push(
+                new Promise((resolve) => {
+                    details.addEventListener("transitionend", function handler() {
+                        details.removeEventListener("transitionend", handler);
+                        resolve();
+                    });
+                })
+            );
         }
     });
 
-    const details = selectedReceipt.querySelector(".receipt__details");
-    if (forceOpen || details.style.maxHeight === "0px" || !details.style.maxHeight) {
-        details.style.maxHeight = details.scrollHeight + 800 + "px";
-    } else {
-        details.style.maxHeight = "0px";
+    // Step 2: After others collapse, expand selected one
+    Promise.all(collapsePromises).then(() => {
+        if (forceOpen || selectedDetails.style.maxHeight === "0px" || !selectedDetails.style.maxHeight) {
+            selectedDetails.style.maxHeight = selectedDetails.scrollHeight + "px";
+        } else {
+            selectedDetails.style.maxHeight = "0px";
+        }
+    });
+
+    // Edge case: if no other receipts were open, still toggle immediately
+    if (collapsePromises.length === 0) {
+        if (forceOpen || selectedDetails.style.maxHeight === "0px" || !selectedDetails.style.maxHeight) {
+            selectedDetails.style.maxHeight = selectedDetails.scrollHeight + "px";
+        } else {
+            selectedDetails.style.maxHeight = "0px";
+        }
     }
 }
