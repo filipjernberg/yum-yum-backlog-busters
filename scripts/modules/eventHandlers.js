@@ -1,4 +1,8 @@
-import { getElement, getElements, styleElement } from "./domUtils.js";
+import { addClasses, getElement, getElements, removeClasses, toggleClasses, styleElement } from "./domUtils.js";
+import { fetchMenu } from "./api.js";
+
+import { showCart, addProductToCart, updateCartAlert, updateCartAlertTest } from "./cart.js";
+
 import { saveUserData, saveNewUser, hashPassword, getAllUsers } from "./utils.js";
 import {
   getFromLocalStorage,
@@ -10,7 +14,6 @@ import {
 } from "./localStorageUtils.js";
 import { displayErrorMessages, displaySuccessMessage, validateUserInput, validateLogin } from "./formUtils.js";
 import { updateMenu } from "../script.js";
-import { fetchMenu } from "./api.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {
@@ -50,6 +53,56 @@ export function removeOrderButton() {
     setUserData(userData);
     location.reload();
   });
+}
+
+export async function setupQuantityBtnListener(button) {
+  button.addEventListener("click", async (event) => {
+    const product = await getClickedElement(event);
+    console.log(product);
+    addProductToCart(event, product, button); // Lägg till i localStorage
+    updateCartAlert();
+
+    // if (button.id === `addToCartBtn` || button.id === `increaseQuantityBtn`) {
+    //   console.log(button.id);
+
+    //   console.log(`increase`);
+    //   addProductToCart(product, button); // Lägg till i localStorage
+    //   updateCartAlert();
+    // } else if (button.id === `decreaseQuantityBtn`) {
+    //   console.log(`decrease`);
+    // }
+  });
+}
+
+export function getClickedElementTest(event) {
+  const productElement = event.target.closest(".list-item");
+  console.log("Klick på:", productElement);
+  return productElement;
+}
+
+export async function getClickedElement(event) {
+  const productElement = event.target.closest(".list-item");
+  console.log("Klick på:", productElement);
+
+  const menu = await fetchMenu();
+  const product = isProductInCart(menu, productElement);
+  console.log(product);
+
+  return product;
+
+  // if (product) {
+  //   addProductToCart(product); // Lägg till i localStorage
+  //   updateCartAlert(); // Uppdatera siffran i varukorgen
+  //   // updateCartAlertTest(product);
+  // } else {
+  //   // console.error("Kunde inte hitta rätten med ID:", productId);
+  // }
+}
+
+//Letar upp ett element i en arrayen
+function isProductInCart(data, element) {
+  const product = data.find((item) => item.id === Number(element.dataset.id));
+  return product;
 }
 
 //Visa enskilt kvitto
@@ -92,6 +145,20 @@ function scrollList(scrollpixels) {
   scrollDiv.scrollBy({
     top: scrollpixels,
     behavior: "smooth",
+  });
+}
+
+//Lyssnare på cart-knappen
+export function setupCartBtnListener() {
+  console.log(`setupCartBtnListener()`);
+  getElement(`#cartBtn`).addEventListener(`click`, showCart);
+}
+
+export function setupCloseCartListerner() {
+  console.log(`setupCloseCartListerner()`);
+  getElement(`#cartCloseButton`).addEventListener(`click`, () => {
+    addClasses(getElement(`#cartModal`), [`d-none`]);
+    removeClasses(getElement(`#bodyPage`), [`page--black-white-opacity`]);
   });
 }
 

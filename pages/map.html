@@ -4,31 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yum Yum Gimmie Sum</title>
-    <script type="module" src="./script.js"></script>
+    <script type="module" src="../scripts/script.js"></script>
     <link rel="stylesheet" href="../styles/style.css" />
   </head>
 
-  <body class="page page--light">
+  <body id="bodyPage" class="page page--light">
     <div id="wrapperMap" class="wrapper">
       <header class="header">
-        <img class="logo--small" src="../resources/logo-outline-dark-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
-        <button id="cart" class="cart button button--light button--small" aria-label="Öppna varukorgen">
+        <img class="logo--small" src="../resources/logo-outline-white-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+        <button id="cartBtn" class="cart button button--light button--small" aria-label="Öppna varukorgen"><img src="../resources/icons/shopping-bag-w300.svg" aria-hidden="true" class="footer__icon"></button></header>
+            <h5 id="cartAlert" class="alert" aria-live="polite">0</h5>
+                <section id="cartModal" class="cart__modal d-none" role="dialog" aria-hidden="true" aria-labelledby="cartTitle">
+                    <!--Temp d-none until done. -->
+                    <!-- <img class="" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+                    <h2 class="cart__title">Din beställning</h2>
+                    <h4 class="cart__subtitle">tidigare beställningar ></h4>
+                    <p class="cart__paragraph">din varukorg är tom</p> -->
+                    <!-- tillfällig button -->
+                    <h2 class="cart__title">Din beställning</h2>
+                    <img src="../resources/icons/close-w300.svg" role="button" alt="Stäng varukorgen" id="cartCloseButton" class="cart__close">
+   <!-- <button class="button button--margin-bottom" id="addOrder">bekräfta order</button>
+                <button class="button button--margin-bottom" id="removeOrder">töm varukorgen</button> -->
+                </section>
+             
+            </button>
+        <!-- <button id="cart" class="cart button button--light button--small" aria-label="Öppna varukorgen">
           <img src="../resources/icons/shopping-bag-w300.svg" alt="" aria-hidden="true" class="footer__icon" />
         </button>
       </header>
 
       <h5 id="cartAlert" class="alert" aria-live="polite">0</h5>
-      <section id="cartModal" class="cart__modal d-none" role="dialog" aria-hidden="true" aria-labelledby="cartTitle">
+      <section id="cartModal" class="cart__modal d-none" role="dialog" aria-hidden="true" aria-labelledby="cartTitle"> -->
         <!--Temp d-none until done. -->
-        <img class="" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
+        <!-- <img class="" src="../resources/logo-color-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
         <h2 class="cart__title">Din beställning</h2>
         <h4 class="cart__subtitle">tidigare beställningar ></h4>
-        <p class="cart__paragraph">din varukorg är tom</p>
+        <p class="cart__paragraph">din varukorg är tom</p> -->
         <!-- tillfällig button -->
-      </section>
+      <!-- </section>
 
       <button class="button button--margin-bottom" id="addOrder" aria-label="Lägg till order">beställ order</button>
-      <button class="button button--margin-bottom" id="removeOrder" aria-label="Töm varukorg">töm varukorgen</button>
+      <button class="button button--margin-bottom" id="removeOrder" aria-label="Töm varukorg">töm varukorgen</button> -->
 
       <!-- <img class="logo--small" src="../resources/logo-outline-white-yygs.svg" alt="Yum Yum Gimmie Sum logotyp" />
       <button id="cart" class="cart"> -->
