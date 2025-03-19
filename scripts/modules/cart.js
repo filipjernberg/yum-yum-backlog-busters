@@ -15,9 +15,11 @@ import {
   setupOrderButton,
   setupQuantityBtnListener,
   getClickedElementTest,
+  loginUser,
 } from "./eventHandlers.js";
 import { setLocalStorage, getFromLocalStorage, removeFromLocalStorage, getUserData, setUserData } from "./localStorageUtils.js";
 import { generateConfirmationNumber } from "./utils.js";
+import { createTotalContainer } from "./receipts.js";
 
 //Lyssnare på add-knappen ligger nu i eventHandlers och anropas samtidigt som knappen skapas.
 
@@ -72,16 +74,26 @@ export function addProductToCart(event, product, button) {
 
   let existingProduct = userCart.find((item) => item.id === product.id);
   let clickedElement = getClickedElementTest(event);
+  let quantityElement = clickedElement.querySelector("#listItemQuantity");
+  console.log(quantityElement);
+  let totalElement = clickedElement.querySelector(`.list-item__total`);
+  console.log(totalElement);
+  let totalPriceElement = getElement(`.receipt__total-amount`);
 
-  if (
-    (existingProduct && button.classList.contains(`list-item__quantity-button`)) ||
-    (existingProduct && button.classList.contains(`list-item__increase`))
-  ) {
+  if (existingProduct && button.classList.contains(`list-item__quantity-button`)) {
     existingProduct.quantity += 1;
+  } else if (existingProduct && button.classList.contains(`list-item__increase`)) {
+    existingProduct.quantity += 1;
+    quantityElement.textContent = existingProduct.quantity;
+    totalElement.textContent = `Totalt ${existingProduct.quantity * existingProduct.price} SEK`;
+    totalPriceElement.textContent = `${calcTotalPrice(userCart)} SEK`;
   } else if (!existingProduct && button.classList.contains(`list-item__quantity-button`)) {
     userCart.push({ ...product, quantity: 1 });
   } else if (existingProduct && button.classList.contains(`list-item__decrease`)) {
     existingProduct.quantity -= 1;
+    quantityElement.textContent = existingProduct.quantity;
+    totalElement.textContent = `Totalt ${existingProduct.quantity * existingProduct.price} SEK`;
+    totalPriceElement.textContent = `${calcTotalPrice(userCart)} SEK`;
 
     // Om antalet är 0 på en produkt filtreras den bort ur arrayen.
     if (existingProduct.quantity === 0) {
@@ -180,7 +192,15 @@ async function createCart() {
   appendChildren(modal, listSection);
   const confirmOrderBtn = createElement("button", ["button", "button--margin-bottom"], { id: "addOrder" }, "bekräfta order");
   const deleteCartBtn = createElement("button", ["button", "button--margin-bottom"], { id: "removeOrder" }, "töm varukorgen");
-  appendChildren(modal, confirmOrderBtn, deleteCartBtn);
+  appendChildren(modal, createTotalContainer(calcTotalPrice(cart)), confirmOrderBtn, deleteCartBtn);
+}
+
+function calcTotalPrice(cart) {
+  let total = 0;
+  cart.forEach((cartItem) => {
+    total += cartItem.price * cartItem.quantity;
+  });
+  return total;
 }
 
 function resetCartList(element) {
@@ -188,6 +208,7 @@ function resetCartList(element) {
     removeElement(element);
     removeElement(getElement(`#addOrder`));
     removeElement(getElement(`#removeOrder`));
+    removeElement(getElement(`.receipt__total`));
   }
 }
 
