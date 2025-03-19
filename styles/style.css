@@ -483,21 +483,21 @@ p {
 
 /*Filter button*/
 .content__filters {
-    gap: .5rem;
+  gap: 0.5rem;
 }
 
 .filter-button {
-    border: none;
-    width: 90px;
-    padding: .5rem 1rem;
-    margin: .15rem;
-    background-color: var(--dark-grey);
-    color: var(--off-white);
-    cursor: pointer;
+  border: none;
+  width: 90px;
+  padding: 0.5rem 1rem;
+  margin: 0.15rem;
+  background-color: var(--dark-grey);
+  color: var(--off-white);
+  cursor: pointer;
 }
 
 .filter-button:hover {
-    background-color: var(--light-grey);
+  background-color: var(--light-grey);
 }
 
 /* === Icon Styling === */
