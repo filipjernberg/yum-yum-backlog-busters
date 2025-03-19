@@ -694,12 +694,11 @@ i {
 
 /* === form styling === */
 
-/* .user-container {
-  padding: 1rem;
-} */
+.user-container {
+  padding-top: 1rem;
+}
 
-.register-form,
-.login-form {
+.form {
   margin: 2rem 0 1.5rem;
 }
 .register-form__logo {

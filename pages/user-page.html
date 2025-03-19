@@ -18,7 +18,7 @@
 
       <section id="userContainer" class="user-container flex">
         <h1 id="userTitle" class="heading-one">Hej gäst!</h1>
-        <form id="loginForm" class="login-form">
+        <form id="loginForm" class="form">
           <figure><!-- ikon för användare--></figure>
           <label class="form__label">
             <img src="../resources/icons/user-unfilled-w300.svg" class="register-form__logo" alt="ange användarnamn" />
@@ -46,7 +46,7 @@
               required
             />
           </label>
-          <button id="loginSubmit" class="button button--dark">Logga in</button>
+          <button id="loginSubmit" class="button button--dark button--margin-bottom">Logga in</button>
           <div id="loginError" class="error-message"></div>
         </form>
       </section>
@@ -65,7 +65,7 @@
 
       <section id="userContainer" class="user-container flex">
         <h1 id="createAccountTitle" class="heading-one heading-one--dark">Skapa konto</h1>
-        <form id="registerForm" class="register-form">
+        <form id="registerForm" class="form">
           <label class="form__label">
             <img src="../resources/icons/user-unfilled-w300.svg" class="register-form__logo" alt="ange användarnamn" />
             <input
@@ -138,8 +138,9 @@
       <section id="userContainer" class="user-container">
         <h1 id="changeAccountTitle" class="heading-one">Hej gäst!</h1>
         <form id="changeForm" class="form">
-          <figure><!-- ikon för användare--></figure>
-          <label>
+          <label class="form__label">
+            <img src="../resources/icons/user-unfilled-w300.svg" class="register-form__logo" alt="ange användarnamn" />
+
             <input
               id="changeUsername"
               class="input-field"
@@ -151,7 +152,9 @@
             />
           </label>
           <figure><!-- ikon för email--></figure>
-          <label>
+          <label class="form__label">
+            <img src="../resources/icons/mail-w300.svg" class="register-form__logo" alt="mejl" />
+
             <input
               id="changeMail"
               class="input-field"
@@ -163,8 +166,9 @@
             />
           </label>
 
-          <figure><!-- ikon för telefon--></figure>
-          <label>
+          <label class="form__label">
+            <img src="../resources/icons/phone-w300.svg" class="register-form__logo" alt="ange användarnamn" />
+
             <input
               id="changePhone"
               class="input-field"
@@ -175,8 +179,8 @@
             />
           </label>
 
-          <figure><!-- ikon för lösenord--></figure>
-          <label>
+          <label class="form__label">
+            <img src="../resources/icons/lock-password-w300.svg" class="register-form__logo" alt="ange lösenord" />
             <input
               id="changePasswordOne"
               class="input-field"
@@ -187,8 +191,8 @@
               required
             />
           </label>
-          <figure><!-- ikon för lösenord--></figure>
-          <label>
+          <label class="form__label">
+            <img src="../resources/icons/lock-password-w300.svg" class="register-form__logo" alt="ange lösenord" />
             <input
               id="changePasswordTwo"
               class="input-field"
@@ -206,8 +210,8 @@
       <a id="linkContact" class="link" href="">KONTAKTA OSS ></a>
 
       <!-- Egentligen vill man kanske ha button inuti form, men nu har vi logga ut i anslutning och andra länkar innan -->
-      <button id="changeSubmit" class="button button--dark">Spara ändringar</button>
-      <button id="logout" class="button button--dark">Logga ut</button>
+      <button id="changeSubmit" class="button button--dark button--margin-bottom">Spara ändringar</button>
+      <button id="logout" class="button button--dark button--margin-bottom">Logga ut</button>
     </section>
 
     <!-- admin view -->

@@ -125,10 +125,14 @@ export function containerBasedOnRole() {
     if (currentUser.role === `admin`) {
       addClasses(getElement(`#wrapperAdmin`), [`flex`]);
       removeClasses(getElement(`#wrapperAdmin`), [`d-none`]);
+      getElement("#changeAccountTitle").textContent = `Hej, ${currentUser.username}!`;
+      getElement(".profile__title").textContent = currentUser.username;
       console.log("role: admin inloggad");
     } else {
       addClasses(getElement(`#wrapperProfile`), [`flex`]);
       removeClasses(getElement(`#wrapperProfile`), [`d-none`]);
+      getElement("#changeAccountTitle").textContent = `Hej ${currentUser.username}!`;
+      getElement(".profile__title").textContent = currentUser.username;
       console.log("role: user inloggad");
     }
   } else {
