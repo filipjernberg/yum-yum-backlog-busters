@@ -677,69 +677,87 @@ i {
   position: absolute;
   z-index: 1; /* Sit on top */
   width: 80%;
+}
+/* === user styling === */
 
-  /* === user styling === */
+.user__paragraph {
+  text-align: center;
+  color: var(--dark-grey);
+}
 
-  .user__paragraph {
-    text-align: center;
-    color: var(--dark-grey);
-  }
+.user__link {
+  text-decoration: none;
+  text-align: center;
+  color: var(--dark-grey);
+  font-family: var(--font-fira-sans-text);
+}
 
-  .user__link {
-    text-decoration: none;
-    text-align: center;
-    color: var(--dark-grey);
-    font-family: var(--font-fira-sans-text);
-  }
+/* === form styling === */
 
-  /* === form styling === */
-
-  /* .user-container {
+/* .user-container {
   padding: 1rem;
 } */
 
-  .register-form,
-  .login-form {
-    margin: 2rem 0 1.5rem;
-  }
-  .register-form__logo {
-    width: 35px;
-    margin-right: 1rem;
-  }
+.register-form,
+.login-form {
+  margin: 2rem 0 1.5rem;
+}
+.register-form__logo {
+  width: 35px;
+  margin-right: 1rem;
+}
 
-  .form__label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.3rem;
-  }
+.form__label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.3rem;
+}
 
-  .input-field {
-    /* margin-bottom: 1.2rem; */
-    border: none;
-    border-bottom: var(--light-grey) solid 2px;
-    font-family: var(--font-fira-sans-text);
-  }
+.input-field {
+  /* margin-bottom: 1.2rem; */
+  border: none;
+  border-bottom: var(--light-grey) solid 2px;
+  font-family: var(--font-fira-sans-text);
+}
 
-  .input-field::placeholder {
-    color: var(--medium-grey);
-  }
+.input-field::placeholder {
+  color: var(--medium-grey);
+}
 
-  .error-message {
-    color: red;
-    margin-top: 0.2rem;
-    font-size: var(--font-fira-sans-error);
+.error-message {
+  color: red;
+  margin-top: 0.2rem;
+  font-size: var(--font-fira-sans-error);
+  text-align: center;
+}
+.error-message p {
+  font-size: var(--font-fira-sans-error);
+}
+
+/*---- profile styling ------*/
+.profile {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  width: 4rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-img {
+  width: 3.5rem; /* Sätt en exakt bredd */
+  border-radius: 50%; /* Gör den rund */
+  overflow: hidden; /* Se till att inget går utanför */
+}
+
+@media screen and (min-width: 600px) {
+  .map__container {
     text-align: center;
   }
-  .error-message p {
-    font-size: var(--font-fira-sans-error);
-  }
-
-  @media screen and (min-width: 600px) {
-    .map__container {
-      text-align: center;
-    }
-    .map__img-div {
-      max-width: 500px;
-    }
+  .map__img-div {
+    max-width: 500px;
   }
 }

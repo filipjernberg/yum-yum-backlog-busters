@@ -3,7 +3,7 @@ import { getFromLocalStorage, setLocalStorage, getUserData, setUserData } from "
 import { registerUser } from "./eventHandlers.js";
 import { fetchUsers } from "./api.js";
 import { startCountdown } from "./timer.js";
-import { handleRegistrationForm } from "./formUtils.js";
+import { handleRegistrationForm, saveUsers, getUsers } from "./formUtils.js";
 import { orderCart } from "./cart.js";
 
 export function getParams() {
@@ -187,12 +187,16 @@ export async function getAllUsers() {
 // sparar ny användare, anropas när valideringen av formuläret för registrering lyckats. Användare sparas under "users"
 // Hashedpassword är krypterade tecken
 export function saveNewUser(username, email, hashedPassword) {
-  const usersFromLocalStorage = getFromLocalStorage(`users`);
-  const newUser = { username, email, password: hashedPassword };
+  const usersData = getUsers();
+  usersData.allUsers = usersData.allUsers || [];
 
-  usersFromLocalStorage.push(newUser);
-  setLocalStorage(`users`, usersFromLocalStorage);
-  console.log(`ny användare sparad`);
+  const newUser = { username, email, password: hashedPassword, role: `user` };
+
+  usersData.allUsers.push(newUser);
+
+  saveUsers(usersData);
+
+  console.log(`Ny användare "${username}" har sparats.`);
 }
 
 //funktion för att ändra lösenordet till krypterad när det sparas i localstorage. Behövs liknande för att kunna jämföra i login senare

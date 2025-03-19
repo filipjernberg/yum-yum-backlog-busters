@@ -27,12 +27,14 @@ import { checkParams, getParams } from "./modules/utils.js";
 import { createReceipts } from "./modules/receipts.js";
 import { getFromLocalStorage } from "./modules/localStorageUtils.js";
 import { updateCartAlert } from "./modules/cart.js";
+import { containerBasedOnRole, initializeUsers } from "./modules/formUtils.js";
 
 // displayOrderHistory
 //-----------------------------------------------
 
 //Run
 handleCurrentPage();
+initializeUsers();
 //-----------------------------------------------
 
 function handleCurrentPage() {
@@ -66,6 +68,7 @@ function handleCurrentPage() {
       // displayOrderHistory();
       break;
     case "/pages/user-page.html":
+      containerBasedOnRole();
       checkParams(getParams());
       loginUser();
       setupRegistrationBtn();

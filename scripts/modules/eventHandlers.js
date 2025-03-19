@@ -12,7 +12,7 @@ import {
   getUserData,
   setUserData,
 } from "./localStorageUtils.js";
-import { displayErrorMessages, displaySuccessMessage, validateUserInput, validateLogin } from "./formUtils.js";
+import { displayErrorMessages, displaySuccessMessage, validateUserInput, validateLogin, containerBasedOnRole } from "./formUtils.js";
 import { updateMenu } from "../script.js";
 
 // Beställ knapp på food-menu.html
@@ -268,6 +268,7 @@ export function loginUser() {
         return;
       }
       console.log(`Du loggades in! `);
+      containerBasedOnRole();
 
       //Vad ska hända när vi loggats in? ändra role?
     } catch (error) {
