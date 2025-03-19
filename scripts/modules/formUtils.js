@@ -2,6 +2,7 @@ import { getElement, styleElement, addClasses, removeClasses } from "./domUtils.
 import { comparePasswords } from "./utils.js";
 import { fetchUsers } from "./api.js";
 import { getFromLocalStorage, setLocalStorage } from "./localStorageUtils.js";
+import { logout } from "./eventHandlers.js";
 
 export function handleRegistrationForm() {
   const registrationWrapperRef = getElement(`#wrapperRegister`);
@@ -103,7 +104,7 @@ export function saveCurrentUser(user) {
   console.log(`Current user '${user.username}' har sparats.`);
 }
 
-export function updateCurrentUser(updateduser) {
+export function updateCurrentUser(updatedUser) {
   let users = getUsers();
 
   // Uppdatera `allUsers`
@@ -119,28 +120,64 @@ export function containerBasedOnRole() {
   const usersData = getUsers();
   const currentUser = usersData.currentUser;
 
-  if (currentUser) {
-    removeClasses(getElement(`#wrapperGuest`), [`flex`]);
-    addClasses(getElement(`#wrapperGuest`), [`d-none`]);
-    if (currentUser.role === `admin`) {
-      addClasses(getElement(`#wrapperAdmin`), [`flex`]);
-      removeClasses(getElement(`#wrapperAdmin`), [`d-none`]);
-      getElement("#changeAccountTitle").textContent = `Hej, ${currentUser.username}!`;
-      getElement(".profile__title").textContent = currentUser.username;
+  hideAllContainers();
+
+  if (!currentUser) {
+    console.log("Inget användarkonto hittades.");
+    return;
+  }
+
+  let wrapperId;
+  let welcomeText = `Hej ${currentUser.username}!`;
+
+  switch (currentUser.role) {
+    case `admin`:
+      wrapperId = "#wrapperAdmin";
       console.log("role: admin inloggad");
-    } else {
-      addClasses(getElement(`#wrapperProfile`), [`flex`]);
-      removeClasses(getElement(`#wrapperProfile`), [`d-none`]);
-      getElement("#changeAccountTitle").textContent = `Hej ${currentUser.username}!`;
-      getElement(".profile__title").textContent = currentUser.username;
+      logout(`#logoutAdmin`);
+      break;
+    case `user`:
+      wrapperId = "#wrapperProfile";
       console.log("role: user inloggad");
-    }
+      logout(`#logoutUser`);
+      break;
+    case `guest`:
+      wrapperId = "#wrapperGuest";
+      welcomeText = "Välkommen gäst!";
+      getElement("#loginPassword").value = "";
+      console.log("role: guest");
+      break;
+  }
+
+  showContainer(wrapperId);
+
+  const titleElement = getElement("#changeAccountTitle");
+  if (titleElement) titleElement.textContent = welcomeText;
+
+  // Uppdatera profilnamn om det finns
+  const profileTitle = getElement(".profile__title");
+  if (profileTitle) profileTitle.textContent = currentUser.username;
+}
+
+export function hideAllContainers() {
+  ["#wrapperGuest", "#wrapperProfile", "#wrapperAdmin"].forEach((id) => {
+    showContainer(id, false);
+  });
+}
+
+export function showContainer(selector, show = true) {
+  const element = getElement(selector);
+  if (!element) return;
+  if (show) {
+    addClasses(element, ["flex"]);
+    removeClasses(element, ["d-none"]);
   } else {
-    console.log("Inget inloggat användarkonto hittades.");
+    removeClasses(element, ["flex"]);
+    addClasses(element, ["d-none"]);
   }
 }
 
-export function logout() {
+export function logoutToGuest() {
   let users = getUsers();
   users.currentUser = users.guest;
   saveUsers(users);
@@ -150,7 +187,7 @@ export function getUsers() {
   return (
     JSON.parse(localStorage.getItem("users")) || {
       allUsers: [],
-      currentUser: null,
+      currentUser: { username: "guest", role: "guest" },
       guest: { username: "guest", role: "guest" },
     }
   );
@@ -166,7 +203,7 @@ export function initializeUsers() {
   if (!localStorage.getItem("users")) {
     saveUsers({
       allUsers: [],
-      currentUser: null,
+      currentUser: { username: "guest", role: "guest" },
       guest: { username: "guest", role: "guest" },
     });
   }

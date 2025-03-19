@@ -171,13 +171,18 @@ export function getCurrentUser() {
 export async function getAllUsers() {
   try {
     const usersFromAPI = await fetchUsers();
-    const usersFromLocalStorage = getFromLocalStorage(`users`);
+    const usersFromLocalStorage = await getFromLocalStorage(`users`);
 
     console.log("Users from API:", usersFromAPI);
     console.log("Users from Local Storage:", usersFromLocalStorage);
 
+    const allUsersFromLocalStorage = usersFromLocalStorage?.users ?? [];
+
     // Se till att vi alltid har arrayer
-    return [...(Array.isArray(usersFromAPI) ? usersFromAPI : []), ...(Array.isArray(usersFromLocalStorage) ? usersFromLocalStorage : [])];
+    return [
+      ...(Array.isArray(usersFromAPI) ? usersFromAPI : []),
+      ...(Array.isArray(allUsersFromLocalStorage) ? allUsersFromLocalStorage : []),
+    ];
   } catch (error) {
     console.error("Fel vid hämtning av användare:", error);
     return [];

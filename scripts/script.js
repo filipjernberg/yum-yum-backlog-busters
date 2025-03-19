@@ -21,6 +21,7 @@ import {
   filterListener,
   setupCartBtnListener,
   setupQuantityBtnListener,
+  logout,
 } from "./modules/eventHandlers.js";
 import { latestOrder } from "./modules/cart.js";
 import { checkParams, getParams } from "./modules/utils.js";
@@ -72,6 +73,7 @@ function handleCurrentPage() {
       checkParams(getParams());
       loginUser();
       setupRegistrationBtn();
+
       //Page specific code goes here
       break;
     default:

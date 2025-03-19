@@ -12,7 +12,14 @@ import {
   getUserData,
   setUserData,
 } from "./localStorageUtils.js";
-import { displayErrorMessages, displaySuccessMessage, validateUserInput, validateLogin, containerBasedOnRole } from "./formUtils.js";
+import {
+  displayErrorMessages,
+  displaySuccessMessage,
+  validateUserInput,
+  validateLogin,
+  containerBasedOnRole,
+  logoutToGuest,
+} from "./formUtils.js";
 import { updateMenu } from "../script.js";
 
 // Beställ knapp på food-menu.html
@@ -223,6 +230,8 @@ export function registerUser() {
 
     try {
       const allUsers = await getAllUsers();
+      console.log(allUsers, `var det här alla?`);
+
       const validationErrors = validateUserInput(username, email, password, confirmPassword, allUsers);
 
       if (validationErrors.length > 0) {
@@ -275,5 +284,14 @@ export function loginUser() {
       console.error(`Fel vid registrering: ${error.message}`);
       displayErrorMessages(errorMessages, [`Fel vid registrering: ${error.message}`]);
     }
+  });
+}
+
+export function logout(btn) {
+  const logoutBtn = getElement(btn);
+
+  logoutBtn.addEventListener(`click`, () => {
+    logoutToGuest();
+    containerBasedOnRole();
   });
 }
