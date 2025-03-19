@@ -20,6 +20,7 @@ import {
   setupRegistrationBtn,
   filterListener,
   setupCartBtnListener,
+  setupQuantityBtnListener,
 } from "./modules/eventHandlers.js";
 import { latestOrder } from "./modules/cart.js";
 import { checkParams, getParams } from "./modules/utils.js";
@@ -92,8 +93,10 @@ export async function updateMenu(filter) {
   menuContainer.innerHTML = "";
 
   const menuList = await createList(filter, "menu"); // Skapa en ny lista med filtrerade rätter
+  await setupQuantityBtnListener(getElement(`.filter-button`));
   appendChildren(menuContainer, menuList);
-  addToCartListener();
+  //addToCartListener();
+
   //   const scrollList = await createScrollList(await list, "menu");
   //   appendChildren(content, contentHeading, scrollList);
   //   setupScrollBtn();

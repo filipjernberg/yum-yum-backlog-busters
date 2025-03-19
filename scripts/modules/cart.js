@@ -74,10 +74,8 @@ export function addProductToCart(event, product, button) {
 
   let existingProduct = userCart.find((item) => item.id === product.id);
   let clickedElement = getClickedElementTest(event);
-  let quantityElement = clickedElement.querySelector("#listItemQuantity");
-  console.log(quantityElement);
+  let quantityElement = clickedElement.querySelector(".list-item__info");
   let totalElement = clickedElement.querySelector(`.list-item__total`);
-  console.log(totalElement);
   let totalPriceElement = getElement(`.receipt__total-amount`);
 
   if (existingProduct && button.classList.contains(`list-item__quantity-button`)) {
@@ -131,7 +129,7 @@ export function updateCartAlert() {
 }
 
 export async function updateCartAlertTest(item) {
-  const cartIcon = await getElement(`#listItemQuantity`);
+  const cartIcon = await getElement(`.list-item__info`);
   console.log(cartIcon);
 
   const userData = getUserData();
@@ -241,7 +239,7 @@ function createCartQuantityBtns(item) {
     src: `../../resources/icons/remove-minus-w300.svg`,
     id: `decreaseQuantityBtn`,
   });
-  const itemInfo = createElement("h4", ["list-item__info", "list-item__info--small"], { id: "listItemQuantity" }, item.quantity);
+  const itemInfo = createElement("h4", ["list-item__info", "list-item__info--small"], {}, item.quantity);
   const increaseBtn = createElement(`img`, [`list-item__increase`], {
     role: `button`,
     src: `../../resources/icons/add-plus-w300.svg`,
