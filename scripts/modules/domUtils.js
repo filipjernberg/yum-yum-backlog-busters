@@ -17,10 +17,6 @@ export function removeElement(element) {
   element.remove();
 }
 
-export function removeAttribute(element, attribute) {
-  element.removeAttribute(attribute);
-}
-
 export function removeClasses(element, classNames) {
   if (classNames.length) element.classList.remove(...classNames);
 }
