@@ -12,7 +12,7 @@ import {
   getUserData,
   setUserData,
 } from "./localStorageUtils.js";
-import { displayErrorMessages, displaySuccessMessage, validateUserInput } from "./formUtils.js";
+import { displayErrorMessages, displaySuccessMessage, validateUserInput, validateLogin } from "./formUtils.js";
 import { updateMenu } from "../script.js";
 
 // Beställ knapp på food-menu.html
