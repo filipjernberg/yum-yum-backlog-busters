@@ -1,0 +1,56 @@
+# Mötesprotokoll (dagens datum)
+
+Sätt en timer på 15 minuter
+
+## Närvarande
+
+-   Filip
+-   Robin
+-   Klara
+-   Annelie
+
+## Protokoll
+
+Var och en svarar på frågorna nedan, 1 person antecknar
+
+-   Vad gjorde du igår?
+-   Vad ska du göra idag?
+-   Finns det några hinder?
+
+### Robin
+
+-   Funktionalitet menyfilter.
+-   Felmeddelanden. Hjälper Klara vid behov.
+-   Inga specifika och tydliga hinder för dagen.
+
+### Klara
+
+-   Kundvagnens modal; funktionalitet inte färdig styling.
+-   Buggfix och ökad funktionalitet i kundvagns-modal.
+-   Inga specifika och tydliga hinder för dagen.
+
+### Annelie
+
+-   Login-formulär. Funkar funktionellt tillsammans med API. Krånglade lite med lösenord - nu funkar det!
+-   Local Storage. Få allt att bli enhetligt och fungera med login/registrering + ordrar.
+-   Möjligt att nya buggar uppstår.
+
+### Filip
+
+-   Tillgänglighetsanpassning (och vård av barn).
+-   Styling av kundvagns-modal och kvitton (eventuell övrig styling.) Hjälpa Annelie vid behov.
+-   Inga specifika och tydliga hinder för dagen.
+
+### Övrigt
+
+Gemensamma hinder:
+
+-   För få user stories / större projekt?
+-   Allt flätas ihop. Svårare att dela upp arbete mellan personer.
+
+Vad kan vi fortsätta jobba med?:
+
+-   Inleda reflektion för arbetet.
+-   Buggfixar.
+-   Styling (kvitton, formulär, map.html).
+-   Förenkla/städa kod.
