@@ -20,6 +20,7 @@ import {
 import { setLocalStorage, getFromLocalStorage, removeFromLocalStorage, getUserData, setUserData } from "./localStorageUtils.js";
 import { generateConfirmationNumber } from "./utils.js";
 import { createTotalContainer } from "./receipts.js";
+import { getUsers, saveUsers } from "./formUtils.js";
 
 //Lyssnare på add-knappen ligger nu i eventHandlers och anropas samtidigt som knappen skapas.
 
@@ -69,8 +70,12 @@ import { createTotalContainer } from "./receipts.js";
 // }
 
 export function addProductToCart(event, product, button) {
-  let userData = getUserData();
-  let userCart = userData.cart;
+  let userData = getUsers();
+  // getUserData();
+  let currentUser = userData.currentUser;
+
+  let userCart = currentUser.cart || [];
+  // let userCart = userData.cart;
 
   let existingProduct = userCart.find((item) => item.id === product.id);
   let clickedElement = getClickedElementTest(event);
@@ -100,8 +105,16 @@ export function addProductToCart(event, product, button) {
     }
   }
 
-  userData.cart = userCart;
-  setUserData(userData);
+  currentUser.cart = userCart;
+  // userData.cart = userCart;
+
+  let allUsers = userData.allUsers.map((user) => (user.username === currentUser.username ? { ...user, cart: userCart } : user));
+
+  userData.allUsers = allUsers;
+  userData.currentUser = currentUser;
+
+  setLocalStorage(`users`, userData);
+  // setUserData(userData);
   updateCartAlert();
 }
 
@@ -176,7 +189,10 @@ async function createCart() {
   const modal = getElement(`#cartModal`);
   // const user = getFromLocalStorage(`usersData`);
   //Kontrollfunktion för att se om varukorgen finns hos usersData eller userName
-  const cart = getFromLocalStorage(`usersData`).guest.cart;
+  // const cart = getFromLocalStorage(`usersData`).guest.cart;
+  let userData = getUsers(`users`);
+  let currentUser = userData.currentUser;
+  let cart = currentUser.cart || [];
 
   resetCartList(getElement(`.cart__list`));
 
@@ -191,6 +207,10 @@ async function createCart() {
   const confirmOrderBtn = createElement("button", ["button", "button--margin-bottom"], { id: "addOrder" }, "bekräfta order");
   const deleteCartBtn = createElement("button", ["button", "button--margin-bottom"], { id: "removeOrder" }, "töm varukorgen");
   appendChildren(modal, createTotalContainer(calcTotalPrice(cart)), confirmOrderBtn, deleteCartBtn);
+
+  userData.allUsers = userData.allUsers.map((user) => (user.username === currentUser.username ? { ...user, cart: cart } : user));
+
+  saveUsers(userData);
 }
 
 function calcTotalPrice(cart) {
