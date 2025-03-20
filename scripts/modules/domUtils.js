@@ -36,6 +36,10 @@ export function getElement(selector) {
 export function getElements(selector) {
     return document.querySelectorAll(selector);
 }
+
+export function styleElement(element, property, value) {
+    element.style[property] = value;
+}
 //-----------------------------------------------
 
 //List Utilities
@@ -174,21 +178,3 @@ export function menuFilter() {
 // }
 
 //-----------------------------------------------
-
-//Food Menu
-
-function checkType() {
-    //check item.type to sort by dish, dip or drink etc.
-}
-
-function filterButtons() {
-    //create buttons for food menu filtering
-}
-//-----------------------------------------------
-// h1 id="menuTitle" class="heading-one heading-one--light">Meny</h1
-
-//style utilities
-
-export function styleElement(element, property, value) {
-    element.style[property] = value;
-}
