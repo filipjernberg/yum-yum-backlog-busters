@@ -5,274 +5,287 @@ import { showCart, addProductToCart, updateCartAlert, updateCartAlertTest } from
 
 import { saveUserData, saveNewUser, hashPassword, getAllUsers } from "./utils.js";
 import {
-  getFromLocalStorage,
-  setLocalStorage,
-  removeFromLocalStorage,
-  clearLocalStorage,
-  getUserData,
-  setUserData,
+    getFromLocalStorage,
+    setLocalStorage,
+    removeFromLocalStorage,
+    clearLocalStorage,
+    getUserData,
+    setUserData,
 } from "./localStorageUtils.js";
 import { displayErrorMessages, displaySuccessMessage, validateUserInput, validateLogin } from "./formUtils.js";
 import { updateMenu } from "../script.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {
-  const addOrderBtn = getElement(`#addOrder`);
-  console.log(addOrderBtn);
+    const addOrderBtn = getElement(`#addOrder`);
+    console.log(addOrderBtn);
 
-  addOrderBtn.addEventListener(`click`, function () {
-    //utkommenterat för har flyttats till egen funktion
-    //
-    // console.log(`Klick på beställning`);
-    // const cart = getFromLocalStorage("cart");
+    addOrderBtn.addEventListener(`click`, function () {
+        //utkommenterat för har flyttats till egen funktion
+        //
+        // console.log(`Klick på beställning`);
+        // const cart = getFromLocalStorage("cart");
 
-    // const order = {
-    //   id: Date.now(), // Unikt order-ID baserat på tid
-    //   items: cart,
-    //   total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Beräkna totalpris
-    //   timestamp: new Date().toISOString(), // sparar tidpunkten då ordern skapas i ett ISO-format (YYYY-MM-DDTHH:mm:ss.sssZ).
-    // };
+        // const order = {
+        //   id: Date.now(), // Unikt order-ID baserat på tid
+        //   items: cart,
+        //   total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Beräkna totalpris
+        //   timestamp: new Date().toISOString(), // sparar tidpunkten då ordern skapas i ett ISO-format (YYYY-MM-DDTHH:mm:ss.sssZ).
+        // };
 
-    // const orders = getFromLocalStorage("orderHistory") || [];
-    // orders.push(order);
-    // setLocalStorage("orderHistory", orders);
+        // const orders = getFromLocalStorage("orderHistory") || [];
+        // orders.push(order);
+        // setLocalStorage("orderHistory", orders);
 
-    // removeFromLocalStorage("cart");
+        // removeFromLocalStorage("cart");
 
-    window.location.href = "../pages/receipts.html?showConfirmation=true";
-  });
+        window.location.href = "../pages/receipts.html?showConfirmation=true";
+    });
 }
 
 //Töm varukorgen knapp på food-menu.html
 export function removeOrderButton() {
-  const removeOrderBtn = getElement("#removeOrder");
+    const removeOrderBtn = getElement("#removeOrder");
 
-  removeOrderBtn.addEventListener("click", () => {
-    let userData = getUserData();
-    userData.cart = [];
-    setUserData(userData);
-    location.reload();
-  });
+    removeOrderBtn.addEventListener("click", () => {
+        let userData = getUserData();
+        userData.cart = [];
+        setUserData(userData);
+        location.reload();
+    });
 }
 
 export async function setupQuantityBtnListener(button) {
-  button.addEventListener("click", async (event) => {
-    const product = await getClickedElement(event);
-    console.log(product);
-    addProductToCart(event, product, button); // Lägg till i localStorage
-    updateCartAlert();
+    button.addEventListener("click", async (event) => {
+        const product = await getClickedElement(event);
+        console.log(product);
+        addProductToCart(event, product, button); // Lägg till i localStorage
+        updateCartAlert();
 
-    // if (button.id === `addToCartBtn` || button.id === `increaseQuantityBtn`) {
-    //   console.log(button.id);
+        // if (button.id === `addToCartBtn` || button.id === `increaseQuantityBtn`) {
+        //   console.log(button.id);
 
-    //   console.log(`increase`);
-    //   addProductToCart(product, button); // Lägg till i localStorage
-    //   updateCartAlert();
-    // } else if (button.id === `decreaseQuantityBtn`) {
-    //   console.log(`decrease`);
-    // }
-  });
+        //   console.log(`increase`);
+        //   addProductToCart(product, button); // Lägg till i localStorage
+        //   updateCartAlert();
+        // } else if (button.id === `decreaseQuantityBtn`) {
+        //   console.log(`decrease`);
+        // }
+    });
 }
 
 export function getClickedElementTest(event) {
-  const productElement = event.target.closest(".list-item");
-  console.log("Klick på:", productElement);
-  return productElement;
+    const productElement = event.target.closest(".list-item");
+    console.log("Klick på:", productElement);
+    return productElement;
 }
 
 export async function getClickedElement(event) {
-  const productElement = event.target.closest(".list-item");
-  console.log("Klick på:", productElement);
+    const productElement = event.target.closest(".list-item");
+    console.log("Klick på:", productElement);
 
-  const menu = await fetchMenu();
-  const product = isProductInCart(menu, productElement);
-  console.log(product);
+    const menu = await fetchMenu();
+    const product = isProductInCart(menu, productElement);
+    console.log(product);
 
-  return product;
+    return product;
 
-  // if (product) {
-  //   addProductToCart(product); // Lägg till i localStorage
-  //   updateCartAlert(); // Uppdatera siffran i varukorgen
-  //   // updateCartAlertTest(product);
-  // } else {
-  //   // console.error("Kunde inte hitta rätten med ID:", productId);
-  // }
+    // if (product) {
+    //   addProductToCart(product); // Lägg till i localStorage
+    //   updateCartAlert(); // Uppdatera siffran i varukorgen
+    //   // updateCartAlertTest(product);
+    // } else {
+    //   // console.error("Kunde inte hitta rätten med ID:", productId);
+    // }
 }
 
 //Letar upp ett element i en arrayen
 function isProductInCart(data, element) {
-  const product = data.find((item) => item.id === Number(element.dataset.id));
-  return product;
+    const product = data.find((item) => item.id === Number(element.dataset.id));
+    return product;
 }
 
 //Visa enskilt kvitto
 export function setupSingleReceipt() {
-  console.log(`singlereceipt function`);
+    console.log(`singlereceipt function`);
 
-  const singleReceiptBtn = getElement(`#seeReceipt`);
-  console.log(singleReceiptBtn);
+    const singleReceiptBtn = getElement(`#seeReceipt`);
+    console.log(singleReceiptBtn);
 
-  singleReceiptBtn.addEventListener(`click`, function () {
-    console.log(`Klick på visa kvitto`);
+    singleReceiptBtn.addEventListener(`click`, function () {
+        console.log(`Klick på visa kvitto`);
 
-    window.location.href = "../pages/receipts.html?showSingleReceipt=true";
-  });
+        window.location.href = "../pages/receipts.html?showSingleReceipt=true";
+    });
 }
 
 //Scrollknappar menylista
 export function setupScrollBtn() {
-  const buttons = getElements(`.scroll-container__button`);
+    const buttons = getElements(`.scroll-container__button`);
 
-  buttons.forEach((button) => {
-    button.addEventListener(`click`, (event) => {
-      upOrDown(event);
+    buttons.forEach((button) => {
+        button.addEventListener(`click`, (event) => {
+            upOrDown(event);
+        });
     });
-  });
 }
 
 //Tryckte anv. på upp- eller nedknappen?
 function upOrDown(event) {
-  if (event.currentTarget.id === `scrollButtonUp`) {
-    scrollList(-100);
-  } else if (event.currentTarget.id === `scrollButtonDown`) {
-    scrollList(100);
-  }
+    if (event.currentTarget.id === `scrollButtonUp`) {
+        scrollList(-100);
+    } else if (event.currentTarget.id === `scrollButtonDown`) {
+        scrollList(100);
+    }
 }
 
 function scrollList(scrollpixels) {
-  const scrollDiv = getElement(`.list-section`);
+    const scrollDiv = getElement(`.list-section`);
 
-  scrollDiv.scrollBy({
-    top: scrollpixels,
-    behavior: "smooth",
-  });
+    scrollDiv.scrollBy({
+        top: scrollpixels,
+        behavior: "smooth",
+    });
 }
 
 //Lyssnare på cart-knappen
 export function setupCartBtnListener() {
-  console.log(`setupCartBtnListener()`);
-  getElement(`#cartBtn`).addEventListener(`click`, showCart);
+    console.log(`setupCartBtnListener()`);
+    getElement(`#cartBtn`).addEventListener(`click`, showCart);
 }
 
 export function setupCloseCartListerner() {
-  console.log(`setupCloseCartListerner()`);
-  getElement(`#cartCloseButton`).addEventListener(`click`, () => {
-    addClasses(getElement(`#cartModal`), [`d-none`]);
-    removeClasses(getElement(`#bodyPage`), [`page--black-white-opacity`]);
-  });
+    console.log(`setupCloseCartListerner()`);
+    getElement(`#cartCloseButton`).addEventListener(`click`, () => {
+        addClasses(getElement(`#cartModal`), [`d-none`]);
+        removeClasses(getElement(`#bodyPage`), [`page--black-white-opacity`]);
+    });
 }
 
 export async function filterListener() {
-  const filterButtons = getElements(".content__filters");
-  const fullMenu = await fetchMenu();
-  console.log(filterButtons.length);
+    try {
+        const filterButtons = getElements(".content__filters");
+        const fullMenu = await fetchMenu();
 
-  for (let button of filterButtons) {
-    button.addEventListener("click", (event) => {
-      console.log(event.target);
-      const selectedFilter = event.target.dataset.filter;
-      console.log(selectedFilter);
-      let filteredMenu;
+        for (let button of filterButtons) {
+            button.addEventListener("click", (event) => {
+                try {
+                    const selectedFilter = event.target.dataset.filter;
+                    let filteredMenu = selectedFilter === "alla" ? fullMenu : fullMenu.filter((item) => item.type === selectedFilter);
 
-      if (selectedFilter === "alla") {
-        filteredMenu = fullMenu;
-      } else {
-        filteredMenu = fullMenu.filter((item) => item.type === selectedFilter);
-      }
+                    if (!filteredMenu.length) {
+                        displayError("Inga produkter hittades för detta filter.", ".content__filters");
+                        return;
+                    }
 
-      updateMenu(filteredMenu);
-    });
-  }
+                    updateMenu(filteredMenu);
+                } catch (error) {
+                    displayError("Något gick fel vid filtreringen.", ".content__filters");
+                    console.error(error);
+                }
+            });
+        }
+    } catch (error) {
+        displayError("Kunde inte hämta menyn. Försök igen senare.", ".content__filters");
+        console.error(error);
+    }
+}
+
+function displayError(message, container) {
+    const errorContainer = getElement(container);
+    if (errorContainer) {
+        errorContainer.innerHTML = `<p class="error-message">${message}</p>`;
+    }
 }
 
 // Beställ knapp på food-menu.html
 export function setupRegistrationBtn() {
-  const registerUserBtn = getElement(`#registerUser`);
-  console.log(`här är registreringsknappen: ${registerUserBtn}`);
+    const registerUserBtn = getElement(`#registerUser`);
+    console.log(`här är registreringsknappen: ${registerUserBtn}`);
 
-  registerUserBtn.addEventListener(`click`, function (event) {
-    event.preventDefault();
+    registerUserBtn.addEventListener(`click`, function (event) {
+        event.preventDefault();
 
-    let originalUrl = this.href;
-    let newUrl = new URL(originalUrl, window.location.origin);
+        let originalUrl = this.href;
+        let newUrl = new URL(originalUrl, window.location.origin);
 
-    newUrl.searchParams.set("registrationForm", "true");
+        newUrl.searchParams.set("registrationForm", "true");
 
-    window.location.href = newUrl;
-  });
+        window.location.href = newUrl;
+    });
 }
 
 export function registerUser() {
-  const registerFormRef = getElement(`#registerForm`);
-  const submitUserBtn = getElement(`#registerSubmit`);
+    const registerFormRef = getElement(`#registerForm`);
+    const submitUserBtn = getElement(`#registerSubmit`);
 
-  console.log(`du har nått formuläret`);
+    console.log(`du har nått formuläret`);
 
-  registerFormRef.addEventListener(`submit`, async function (event) {
-    event.preventDefault();
+    registerFormRef.addEventListener(`submit`, async function (event) {
+        event.preventDefault();
 
-    const username = getElement(`#registerUsername`).value;
-    const email = getElement(`#registerMail`).value;
-    const password = getElement(`#registerPasswordOne`).value;
-    const confirmPassword = getElement(`#registerPasswordtwo`).value;
+        const username = getElement(`#registerUsername`).value;
+        const email = getElement(`#registerMail`).value;
+        const password = getElement(`#registerPasswordOne`).value;
+        const confirmPassword = getElement(`#registerPasswordtwo`).value;
 
-    const errorMessages = getElement("#registrationError");
+        const errorMessages = getElement("#registrationError");
 
-    styleElement(errorMessages, `color`, `red`);
-    errorMessages.innerHTML = ``;
+        styleElement(errorMessages, `color`, `red`);
+        errorMessages.innerHTML = ``;
 
-    try {
-      const allUsers = await getAllUsers();
-      const validationErrors = validateUserInput(username, email, password, confirmPassword, allUsers);
+        try {
+            const allUsers = await getAllUsers();
+            const validationErrors = validateUserInput(username, email, password, confirmPassword, allUsers);
 
-      if (validationErrors.length > 0) {
-        displayErrorMessages(errorMessages, validationErrors);
-        return;
-      }
+            if (validationErrors.length > 0) {
+                displayErrorMessages(errorMessages, validationErrors);
+                return;
+            }
 
-      const hashedPassword = await hashPassword(password);
-      saveNewUser(username, email, hashedPassword);
+            const hashedPassword = await hashPassword(password);
+            saveNewUser(username, email, hashedPassword);
 
-      displaySuccessMessage();
-    } catch (error) {
-      console.error(`Fel vid registrering: ${error.message}`);
-      displayErrorMessages(errorMessages, [`Fel vid registrering: ${error.message}`]);
-    }
-  });
+            displaySuccessMessage();
+        } catch (error) {
+            console.error(`Fel vid registrering: ${error.message}`);
+            displayErrorMessages(errorMessages, [`Fel vid registrering: ${error.message}`]);
+        }
+    });
 }
 
 // login user
 export function loginUser() {
-  const loginFormRef = getElement(`#loginForm`);
+    const loginFormRef = getElement(`#loginForm`);
 
-  console.log(`du har nått formuläret`);
+    console.log(`du har nått formuläret`);
 
-  loginFormRef.addEventListener(`submit`, async function (event) {
-    event.preventDefault();
+    loginFormRef.addEventListener(`submit`, async function (event) {
+        event.preventDefault();
 
-    const username = getElement(`#loginUsername`).value;
-    console.log(`mitt username:`, username);
+        const username = getElement(`#loginUsername`).value;
+        console.log(`mitt username:`, username);
 
-    const password = getElement(`#loginPassword`).value;
+        const password = getElement(`#loginPassword`).value;
 
-    const errorMessages = getElement("#loginError");
+        const errorMessages = getElement("#loginError");
 
-    styleElement(errorMessages, `color`, `red`);
-    errorMessages.innerHTML = ``;
+        styleElement(errorMessages, `color`, `red`);
+        errorMessages.innerHTML = ``;
 
-    try {
-      const validationErrors = await validateLogin(username, password);
+        try {
+            const validationErrors = await validateLogin(username, password);
 
-      if (validationErrors.length > 0) {
-        displayErrorMessages(errorMessages, validationErrors);
-        return;
-      }
-      console.log(`Du loggades in! `);
+            if (validationErrors.length > 0) {
+                displayErrorMessages(errorMessages, validationErrors);
+                return;
+            }
+            console.log(`Du loggades in! `);
 
-      //Vad ska hända när vi loggats in? ändra role?
-    } catch (error) {
-      console.error(`Fel vid registrering: ${error.message}`);
-      displayErrorMessages(errorMessages, [`Fel vid registrering: ${error.message}`]);
-    }
-  });
+            //Vad ska hända när vi loggats in? ändra role?
+        } catch (error) {
+            console.error(`Fel vid registrering: ${error.message}`);
+            displayErrorMessages(errorMessages, [`Fel vid registrering: ${error.message}`]);
+        }
+    });
 }
