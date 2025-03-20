@@ -61,9 +61,11 @@ export function removeOrderButton() {
 
 export async function setupQuantityBtnListener(button) {
   button.addEventListener("click", async (event) => {
+    // const product = await getClickedElementTest(event);
     const product = await getClickedElement(event);
     console.log(product);
     addProductToCart(event, product, button); // Lägg till i localStorage
+    filterListener();
     updateCartAlert();
 
     // if (button.id === `addToCartBtn` || button.id === `increaseQuantityBtn`) {
@@ -163,7 +165,26 @@ export function setupCloseCartListerner() {
   getElement(`#cartCloseButton`).addEventListener(`click`, () => {
     addClasses(getElement(`#cartModal`), [`d-none`]);
     removeClasses(getElement(`#bodyPage`), [`page--black-white-opacity`]);
+    location.reload();
   });
+}
+
+//Lyssnar efter klick utanför modalen. Anropas i showCart när modalen är öppen
+export function setupClickOutsideModalListener() {
+  console.log(`setupClickOutsideModalListener()`);
+  getElement(`#bodyPage`).addEventListener(`click`, (event) => clickOutsideModal(event));
+}
+
+function clickOutsideModal(event) {
+  console.log(getElement(`#cartModal`));
+  const modal = getElement(`#cartModal`);
+  const cartBtn = getElement(`#cartBtn`);
+  console.log(event.target);
+
+  if (!modal.contains(event.target) && !cartBtn.contains(event.target)) {
+    console.log(`klick utanför modal`);
+    location.reload();
+  }
 }
 
 export async function filterListener() {

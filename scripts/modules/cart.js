@@ -16,6 +16,7 @@ import {
   setupQuantityBtnListener,
   getClickedElementTest,
   loginUser,
+  setupClickOutsideModalListener,
 } from "./eventHandlers.js";
 import { setLocalStorage, getFromLocalStorage, removeFromLocalStorage, getUserData, setUserData } from "./localStorageUtils.js";
 import { generateConfirmationNumber } from "./utils.js";
@@ -208,6 +209,18 @@ export function showCart() {
   createCart();
   removeOrderButton();
   setupOrderButton();
+  cartModalState();
+}
+
+function cartModalState() {
+  if (getElement(`#cartModal`).classList.contains(`d-none`)) {
+    location.reload();
+  } else if (!getElement(`#cartModal`).classList.contains(`d-none`)) {
+    getElement(`#cartModal`).setAttribute("aria-hidden", "false");
+    getElement(`#cartModal`).setAttribute("aria-modal", "true");
+
+    setupClickOutsideModalListener();
+  }
 }
 
 async function createCart() {
