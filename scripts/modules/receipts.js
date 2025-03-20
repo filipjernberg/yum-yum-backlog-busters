@@ -1,12 +1,21 @@
 import { appendChildren, createElement, createList, getElement } from "./domUtils.js";
 import { getFromLocalStorage, getUserData } from "./localStorageUtils.js";
 import { startCountdown } from "./timer.js";
+import { getUsers } from "./users.js";
 
 export async function createReceipts() {
-  const userData = getUserData();
-  const orderHistory = userData.orderHistory || [];
-  const pendingOrders = userData.pending || [];
-  const cart = userData.cart || [];
+  const userData = getUsers();
+  let currentUser = userData.currentUser;
+  const cart = currentUser.cart || [];
+  const orderHistory = currentUser.orderHistory || [];
+  const pendingOrders = currentUser.pending || [];
+
+  //om vi skapar pending order, när ska den flytta sig ut därifrån?
+
+  // const userData = getUserData();
+  // const orderHistory = userData.orderHistory || [];
+  // const pendingOrders = userData.pending || [];
+  // const cart = userData.cart || [];
 
   let firstReceipt;
 

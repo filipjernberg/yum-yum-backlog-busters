@@ -3,7 +3,8 @@ import { getFromLocalStorage, setLocalStorage, getUserData, setUserData } from "
 import { registerUser } from "./eventHandlers.js";
 import { fetchUsers } from "./api.js";
 import { startCountdown } from "./timer.js";
-import { handleRegistrationForm, saveUsers, getUsers } from "./formUtils.js";
+import { handleRegistrationForm } from "./formUtils.js";
+import { saveUsers, getUsers } from "./users.js";
 import { orderCart } from "./cart.js";
 
 export function getParams() {

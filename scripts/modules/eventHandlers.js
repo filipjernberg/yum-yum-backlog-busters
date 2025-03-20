@@ -12,15 +12,9 @@ import {
   getUserData,
   setUserData,
 } from "./localStorageUtils.js";
-import {
-  displayErrorMessages,
-  displaySuccessMessage,
-  validateUserInput,
-  validateLogin,
-  containerBasedOnRole,
-  logoutToGuest,
-} from "./formUtils.js";
+import { displayErrorMessages, displaySuccessMessage, validateUserInput, validateLogin } from "./formUtils.js";
 import { updateMenu } from "../script.js";
+import { getUsers, saveUsers, containerBasedOnRole, logoutToGuest } from "./users.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {
@@ -52,12 +46,15 @@ export function setupOrderButton() {
 
 //Töm varukorgen knapp på food-menu.html
 export function removeOrderButton() {
-  const removeOrderBtn = getElement("#removeOrder");
+  const removeOrderBtn = getElement(`#removeOrder`);
 
   removeOrderBtn.addEventListener("click", () => {
-    let userData = getUserData();
-    userData.cart = [];
-    setUserData(userData);
+    // let userData = getUserData();
+    let userData = getUsers();
+    let currentUser = userData.currentUser;
+    currentUser.cart = [];
+    saveUsers(userData);
+    // setUserData(userData);
     location.reload();
   });
 }
@@ -170,25 +167,38 @@ export function setupCloseCartListerner() {
 }
 
 export async function filterListener() {
-  const filterButtons = getElements(".content__filters");
-  const fullMenu = await fetchMenu();
-  console.log(filterButtons.length);
+  try {
+    const filterButtons = getElements(".content__filters");
+    const fullMenu = await fetchMenu();
 
-  for (let button of filterButtons) {
-    button.addEventListener("click", (event) => {
-      console.log(event.target);
-      const selectedFilter = event.target.dataset.filter;
-      console.log(selectedFilter);
-      let filteredMenu;
+    for (let button of filterButtons) {
+      button.addEventListener("click", (event) => {
+        try {
+          const selectedFilter = event.target.dataset.filter;
+          let filteredMenu = selectedFilter === "alla" ? fullMenu : fullMenu.filter((item) => item.type === selectedFilter);
 
-      if (selectedFilter === "alla") {
-        filteredMenu = fullMenu;
-      } else {
-        filteredMenu = fullMenu.filter((item) => item.type === selectedFilter);
-      }
+          if (!filteredMenu.length) {
+            displayError("Inga produkter hittades för detta filter.", ".content__filters");
+            return;
+          }
 
-      updateMenu(filteredMenu);
-    });
+          updateMenu(filteredMenu);
+        } catch (error) {
+          displayError("Något gick fel vid filtreringen.", ".content__filters");
+          console.error(error);
+        }
+      });
+    }
+  } catch (error) {
+    displayError("Kunde inte hämta menyn. Försök igen senare.", ".content__filters");
+    console.error(error);
+  }
+}
+
+function displayError(message, container) {
+  const errorContainer = getElement(container);
+  if (errorContainer) {
+    errorContainer.innerHTML = `<p class="error-message">${message}</p>`;
   }
 }
 
