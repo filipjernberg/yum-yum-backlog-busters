@@ -1,7 +1,7 @@
 import { getElement, styleElement, addClasses, removeClasses } from "./domUtils.js";
 import { comparePasswords } from "./utils.js";
 import { fetchUsers } from "./api.js";
-import { getFromLocalStorage } from "./localStorageUtils.js";
+import { getUsers, saveCurrentUser } from "./users.js";
 
 export function handleRegistrationForm() {
   const registrationWrapperRef = getElement(`#wrapperRegister`);
@@ -44,8 +44,9 @@ export async function validateLogin(username, password) {
   const usersFromAPI = await fetchUsers(); // Hämta från API
   const userFromAPI = usersFromAPI.find((user) => user.username === username);
 
-  const usersFromLocalStorage = getFromLocalStorage("users");
-  const userFromLocalStorage = usersFromLocalStorage.find((user) => user.username === username);
+  const usersFromLocalStorage = getUsers();
+  const allUsersLocalStorage = usersFromLocalStorage.allUsers || [];
+  const userFromLocalStorage = allUsersLocalStorage.find((user) => user.username === username);
 
   if (!userFromAPI && !userFromLocalStorage) {
     errors.push("Användarnamnet är inte registrerat.");
@@ -59,6 +60,7 @@ export async function validateLogin(username, password) {
       console.log("Fel lösenord från API.");
     } else {
       console.log("Inloggning lyckades från API!");
+      saveCurrentUser(userFromAPI);
       return []; // Ingen anledning att fortsätta om lösenordet är korrekt
     }
   }
@@ -69,6 +71,7 @@ export async function validateLogin(username, password) {
       console.log("Fel lösenord från LocalStorage.");
     } else {
       console.log("Inloggning lyckades från LocalStorage!");
+      saveCurrentUser(userFromLocalStorage);
       return []; // Ingen anledning att fortsätta om lösenordet är korrekt
     }
   }

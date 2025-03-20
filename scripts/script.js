@@ -21,18 +21,21 @@ import {
     filterListener,
     setupCartBtnListener,
     setupQuantityBtnListener,
+    logout,
 } from "./modules/eventHandlers.js";
 import { latestOrder } from "./modules/cart.js";
 import { checkParams, getParams } from "./modules/utils.js";
 import { createReceipts } from "./modules/receipts.js";
 import { getFromLocalStorage } from "./modules/localStorageUtils.js";
 import { updateCartAlert } from "./modules/cart.js";
+import { initializeUsers, containerBasedOnRole } from "./modules/users.js";
 
 // displayOrderHistory
 //-----------------------------------------------
 
 //Run
 handleCurrentPage();
+initializeUsers();
 //-----------------------------------------------
 
 function handleCurrentPage() {
@@ -66,9 +69,11 @@ function handleCurrentPage() {
             // displayOrderHistory();
             break;
         case "/pages/user-page.html":
+            containerBasedOnRole();
             checkParams(getParams());
             loginUser();
             setupRegistrationBtn();
+
             //Page specific code goes here
             break;
         default:
@@ -76,6 +81,18 @@ function handleCurrentPage() {
     }
 }
 //-----------------------------------------------
+// async function createContent(heading, list) {
+//   const contentHeading = createElement("h1", ["content__title"], {}, heading);
+//   const filterContainer = menuFilter();
+
+//   const scrollList = await createScrollList(await list, "menu");
+//   console.log(content);
+
+//   appendChildren(content, contentHeading, filterContainer, scrollList);
+//   setupScrollBtn();
+//   filterListener();
+// }
+
 async function createContent(heading, list) {
     try {
         const contentHeading = createElement("h1", ["content__title"], {}, heading);
@@ -131,8 +148,17 @@ export async function updateMenu(filter) {
         console.error(error);
     }
 }
-//addToCartListener();
 
-//   const scrollList = await createScrollList(await list, "menu");
-//   appendChildren(content, contentHeading, scrollList);
-//   setupScrollBtn();
+// export async function updateMenu(filter) {
+//   const menuContainer = getElement(".list-section");
+//   menuContainer.innerHTML = "";
+
+//   const menuList = await createList(filter, "menu"); // Skapa en ny lista med filtrerade rätter
+//   await setupQuantityBtnListener(getElement(`.filter-button`));
+//   appendChildren(menuContainer, menuList);
+//   //addToCartListener();
+
+//   //   const scrollList = await createScrollList(await list, "menu");
+//   //   appendChildren(content, contentHeading, scrollList);
+//   //   setupScrollBtn();
+// }

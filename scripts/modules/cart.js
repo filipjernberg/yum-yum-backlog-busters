@@ -16,10 +16,12 @@ import {
     setupQuantityBtnListener,
     getClickedElementTest,
     loginUser,
+    setupClickOutsideModalListener,
 } from "./eventHandlers.js";
 import { setLocalStorage, getFromLocalStorage, removeFromLocalStorage, getUserData, setUserData } from "./localStorageUtils.js";
 import { generateConfirmationNumber } from "./utils.js";
 import { createTotalContainer } from "./receipts.js";
+import { getUsers, saveUsers } from "./users.js";
 
 //Lyssnare på add-knappen ligger nu i eventHandlers och anropas samtidigt som knappen skapas.
 
@@ -69,8 +71,16 @@ import { createTotalContainer } from "./receipts.js";
 // }
 
 export function addProductToCart(event, product, button) {
-    let userData = getUserData();
-    let userCart = userData.cart;
+    let userData = getUsers();
+    // getUserData();
+    let currentUser = userData.currentUser;
+
+    //annelie
+    if (!currentUser) return;
+    let userCart = currentUser.cart || [];
+    console.log(`cart inuti addProducttoCart`, userCart);
+
+    // let userCart = userData.cart;
 
     let existingProduct = userCart.find((item) => item.id === product.id);
     let clickedElement = getClickedElementTest(event);
@@ -100,8 +110,17 @@ export function addProductToCart(event, product, button) {
         }
     }
 
-    userData.cart = userCart;
-    setUserData(userData);
+    currentUser.cart = userCart;
+    // userData.cart = userCart;
+
+    // let allUsers = userData.allUsers.map((user) => (user.username === currentUser.username ? { ...user, cart: userCart } : user));
+
+    // userData.allUsers = allUsers;
+    userData.currentUser = currentUser;
+    console.log(`sparar currentuser ner i users:`, userData.currentUser);
+    saveUsers(userData);
+    // setLocalStorage(`users`, userData);
+    // setUserData(userData);
     updateCartAlert();
 }
 
@@ -123,10 +142,30 @@ export function addProductToCart(event, product, button) {
 
 export function updateCartAlert() {
     const cartIcon = getElement("#cartAlert");
-    const userData = getUserData();
-    let totalItems = userData.cart.reduce((sum, item) => sum + item.quantity, 0);
+    let userData = getUsers();
+    console.log(`users localstorage:`, userData);
+
+    const currentUser = userData.currentUser || [];
+    console.log(`currentuser localstorage:`, currentUser);
+    const cart = currentUser.cart || [];
+    console.log(`cart localstorage:`, cart);
+    let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartIcon.textContent = totalItems;
 }
+// const cartIcon = getElement("#cartAlert");
+// let userData = getUsers();
+// console.log(`det här är userdata:`, userData);
+
+// let currentUser = userData.currentUser;
+// console.log(`det här är currentuser:`, currentUser);
+// let cart = currentUser.cart || [];
+// console.log(`det här är cart:`, cart);
+
+// let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+// // let totalItems = currentUser.cart.reduce((sum, item) => sum + item.quantity, 0);
+// cartIcon.textContent = totalItems;
+//}
 
 export async function updateCartAlertTest(item) {
     const cartIcon = await getElement(`.list-item__info`);
@@ -171,13 +210,28 @@ export function showCart() {
     createCart();
     removeOrderButton();
     setupOrderButton();
+    cartModalState();
+}
+
+function cartModalState() {
+    if (getElement(`#cartModal`).classList.contains(`d-none`)) {
+        location.reload();
+    } else if (!getElement(`#cartModal`).classList.contains(`d-none`)) {
+        getElement(`#cartModal`).setAttribute("aria-hidden", "false");
+        getElement(`#cartModal`).setAttribute("aria-modal", "true");
+
+        setupClickOutsideModalListener();
+    }
 }
 
 async function createCart() {
     const modal = getElement(`#cartModal`);
     // const user = getFromLocalStorage(`usersData`);
     //Kontrollfunktion för att se om varukorgen finns hos usersData eller userName
-    const cart = getFromLocalStorage(`usersData`).guest.cart;
+    // const cart = getFromLocalStorage(`usersData`).guest.cart;
+    let userData = getUsers(`users`);
+    let currentUser = userData.currentUser;
+    let cart = currentUser.cart || [];
 
     resetCartList(getElement(`.cart__list`));
 
@@ -197,6 +251,10 @@ async function createCart() {
     );
     const deleteCartBtn = createElement("button", ["cart__clear-button"], { id: "removeOrder" }, "Töm varukorgen?");
     appendChildren(modal, confirmOrderBtn, deleteCartBtn, createTotalContainer(calcTotalPrice(cart)));
+
+    userData.allUsers = userData.allUsers.map((user) => (user.username === currentUser.username ? { ...user, cart: cart } : user));
+
+    saveUsers(userData);
 }
 
 function calcTotalPrice(cart) {
@@ -266,8 +324,17 @@ function removeCartListItem() {
 }
 
 export function orderCart() {
-    const cart = getFromLocalStorage("cart");
-    const confirmationNumber = generateConfirmationNumber();
+    // const cart = getFromLocalStorage("cart");
+    // const confirmationNumber = generateConfirmationNumber();
+
+    const userData = getUsers();
+    let currentUser = userData.currentUser;
+    let cart = currentUser.cart || [];
+
+    if (cart.length === 0) {
+        console.warn(`varukorgen är tom, ingen order skapad.`);
+        return;
+    }
 
     const orders = {
         ConfirmationNumber: confirmationNumber,

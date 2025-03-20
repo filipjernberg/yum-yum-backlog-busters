@@ -14,6 +14,7 @@ import {
 } from "./localStorageUtils.js";
 import { displayErrorMessages, displaySuccessMessage, validateUserInput, validateLogin } from "./formUtils.js";
 import { updateMenu } from "../script.js";
+import { getUsers, saveUsers, containerBasedOnRole, logoutToGuest } from "./users.js";
 
 // Beställ knapp på food-menu.html
 export function setupOrderButton() {
@@ -45,21 +46,26 @@ export function setupOrderButton() {
 
 //Töm varukorgen knapp på food-menu.html
 export function removeOrderButton() {
-    const removeOrderBtn = getElement("#removeOrder");
+    const removeOrderBtn = getElement(`#removeOrder`);
 
     removeOrderBtn.addEventListener("click", () => {
-        let userData = getUserData();
-        userData.cart = [];
-        setUserData(userData);
+        // let userData = getUserData();
+        let userData = getUsers();
+        let currentUser = userData.currentUser;
+        currentUser.cart = [];
+        saveUsers(userData);
+        // setUserData(userData);
         location.reload();
     });
 }
 
 export async function setupQuantityBtnListener(button) {
     button.addEventListener("click", async (event) => {
+        // const product = await getClickedElementTest(event);
         const product = await getClickedElement(event);
         console.log(product);
         addProductToCart(event, product, button); // Lägg till i localStorage
+        filterListener();
         updateCartAlert();
 
         // if (button.id === `addToCartBtn` || button.id === `increaseQuantityBtn`) {
@@ -159,7 +165,26 @@ export function setupCloseCartListerner() {
     getElement(`#cartCloseButton`).addEventListener(`click`, () => {
         addClasses(getElement(`#cartModal`), [`d-none`]);
         removeClasses(getElement(`#bodyPage`), [`page--black-white-opacity`]);
+        location.reload();
     });
+}
+
+//Lyssnar efter klick utanför modalen. Anropas i showCart när modalen är öppen
+export function setupClickOutsideModalListener() {
+    console.log(`setupClickOutsideModalListener()`);
+    getElement(`#bodyPage`).addEventListener(`click`, (event) => clickOutsideModal(event));
+}
+
+function clickOutsideModal(event) {
+    console.log(getElement(`#cartModal`));
+    const modal = getElement(`#cartModal`);
+    const cartBtn = getElement(`#cartBtn`);
+    console.log(event.target);
+
+    if (!modal.contains(event.target) && !cartBtn.contains(event.target)) {
+        console.log(`klick utanför modal`);
+        location.reload();
+    }
 }
 
 export async function filterListener() {
@@ -236,6 +261,8 @@ export function registerUser() {
 
         try {
             const allUsers = await getAllUsers();
+            console.log(allUsers, `var det här alla?`);
+
             const validationErrors = validateUserInput(username, email, password, confirmPassword, allUsers);
 
             if (validationErrors.length > 0) {
@@ -281,11 +308,21 @@ export function loginUser() {
                 return;
             }
             console.log(`Du loggades in! `);
+            containerBasedOnRole();
 
             //Vad ska hända när vi loggats in? ändra role?
         } catch (error) {
             console.error(`Fel vid registrering: ${error.message}`);
             displayErrorMessages(errorMessages, [`Fel vid registrering: ${error.message}`]);
         }
+    });
+}
+
+export function logout(btn) {
+    const logoutBtn = getElement(btn);
+
+    logoutBtn.addEventListener(`click`, () => {
+        logoutToGuest();
+        containerBasedOnRole();
     });
 }
