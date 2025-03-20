@@ -172,13 +172,13 @@ export function createTotalContainer(text) {
 function toggleReceipt(selectedReceipt, forceOpen = false) {
     const selectedDetails = selectedReceipt.querySelector(".receipt__details");
 
-    // Collapse all other receipts
     const allDetails = document.querySelectorAll(".receipt__details");
     let collapsePromises = [];
 
     allDetails.forEach((details) => {
         if (details !== selectedDetails && details.style.maxHeight && details.style.maxHeight !== "0px") {
             details.style.maxHeight = "0px";
+            details.closest(".receipt").style.paddingBottom = ""; // Återställ padding när en annan stängs
 
             collapsePromises.push(
                 new Promise((resolve) => {
@@ -191,22 +191,20 @@ function toggleReceipt(selectedReceipt, forceOpen = false) {
         }
     });
 
-    // Expand selected after others collapse
-    Promise.all(collapsePromises).then(() => {
+    const expand = () => {
         if (forceOpen || selectedDetails.style.maxHeight === "0px" || !selectedDetails.style.maxHeight) {
             selectedDetails.style.maxHeight = selectedDetails.scrollHeight + "px";
+            selectedReceipt.style.paddingBottom = "0"; // Sätt padding-bottom till 0 när kvittot är öppet
         } else {
             selectedDetails.style.maxHeight = "0px";
+            selectedReceipt.style.paddingBottom = ""; // Återställ padding när kvittot stängs
         }
-    });
+    };
 
-    // If no others were open, toggle immediately
-    if (collapsePromises.length === 0) {
-        if (forceOpen || selectedDetails.style.maxHeight === "0px" || !selectedDetails.style.maxHeight) {
-            selectedDetails.style.maxHeight = selectedDetails.scrollHeight + "px";
-        } else {
-            selectedDetails.style.maxHeight = "0px";
-        }
+    if (collapsePromises.length > 0) {
+        Promise.all(collapsePromises).then(expand);
+    } else {
+        expand();
     }
 }
 
