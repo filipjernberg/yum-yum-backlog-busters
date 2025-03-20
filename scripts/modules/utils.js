@@ -23,9 +23,9 @@ export function checkParams(params) {
 
     orderCart();
   }
-  if (params.get(`showSingleReceipt`) === `true`) {
-    handleSingleReceipt();
-  }
+  // if (params.get(`showSingleReceipt`) === `true`) {
+  //   handleSingleReceipt();
+  // }
   if (params.get(`registrationForm`) === `true`) {
     handleRegistrationForm();
     registerUser();
