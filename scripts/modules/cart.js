@@ -243,12 +243,7 @@ async function createCart() {
     });
 
     appendChildren(modal, listSection);
-    const confirmOrderBtn = createElement(
-        "button",
-        ["button", "button--margin-bottom", "cart__confirm-button"],
-        { id: "addOrder" },
-        "Bekräfta order"
-    );
+    const confirmOrderBtn = createElement("button", ["button", "cart__confirm-button"], { id: "addOrder" }, "Bekräfta order");
     const deleteCartBtn = createElement("button", ["cart__clear-button"], { id: "removeOrder" }, "Töm varukorgen?");
     appendChildren(modal, confirmOrderBtn, deleteCartBtn, createTotalContainer(calcTotalPrice(cart)));
 
@@ -276,7 +271,7 @@ function resetCartList(element) {
 
 function createCartItem(item) {
     console.log(`createCartItem()`);
-    const listItem = createElement("li", ["list-item"], { "data-id": item.id, id: `cartListItem` });
+    const listItem = createElement("li", ["list-item", "list-item--receipt"], { "data-id": item.id, id: `cartListItem` });
     const rowOne = createElement("div", ["list-item__row"]);
     const rowTwo = createElement("div", ["list-item__row"]);
 
