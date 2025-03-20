@@ -28,7 +28,7 @@ export async function createReceipts() {
   if (Array.isArray(pendingOrders) && pendingOrders.length > 0) {
     for (const pendingOrder of pendingOrders) {
       const receipt = await createReceipt(pendingOrder, "pending");
-      startCountdown(new Date(pendingOrder.timestamp).getTime(), "#timerForReceipt", pendingOrder.id);
+      startCountdown(new Date(pendingOrder.timestamp).getTime(), pendingOrder.id);
     }
   }
 
