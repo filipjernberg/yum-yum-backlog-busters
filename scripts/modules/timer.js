@@ -31,12 +31,8 @@ import { getUsers } from "./users.js";
 //   }, 1000);
 // }
 
-export function startCountdown(startTime, orderId = null) {
-  const container1 = document.querySelector("#timerConfirmation");
-  // const container2 = document.querySelector("#timerForReceipt");
-
-  // Sätt countdownElement till den första containern som finns
-  let countdownElement = container1 || container2;
+export function startCountdown(startTime, confirmationNumber = null) {
+  let countdownElement = document.querySelector("#timerConfirmation");
 
   console.log(`timer`);
   console.log(startTime);
@@ -54,7 +50,7 @@ export function startCountdown(startTime, orderId = null) {
       countdownElement.textContent = `Maten är klar`;
       console.log(`hit?`);
       // Move order from pending to orderHistory if orderId provided
-      if (orderId !== null) {
+      if (confirmationNumber !== null) {
         let userData = getUsers();
         if (!userData || !userData.currentUser) {
           console.error("Ingen användardata hittades.");
@@ -65,15 +61,15 @@ export function startCountdown(startTime, orderId = null) {
         if (!currentUser.pending) currentUser.pending = [];
         if (!currentUser.orderHistory) currentUser.orderHistory = [];
 
-        const orderIndex = currentUser.pending.findIndex((order) => order.id === orderId);
+        const orderIndex = currentUser.pending.findIndex((order) => order.confirmationNumber === confirmationNumber);
         if (orderIndex !== -1) {
           const completedOrder = currentUser.pending.splice(orderIndex, 1)[0];
           currentUser.orderHistory.push(completedOrder);
           saveUsers(userData);
           // setUserData(userData);
-          console.log(`Order ${orderId} flyttades till orderhistorik.`);
+          console.log(`Order ${confirmationNumber} flyttades till orderhistorik.`);
         } else {
-          console.warn(`Order ${orderId} hittades inte i pending.`);
+          console.warn(`Order ${confirmationNumber} hittades inte i pending.`);
         }
       }
 

@@ -357,7 +357,7 @@ export function orderCart(element) {
   console.log("Order lagd i pending:", newOrder);
 
   saveUsers(userData); // Spara den tomma varukorgen för den aktuella användaren
-  startCountdown(newOrder.startTime, element, newOrder.id);
+  startCountdown(newOrder.startTime, element, newOrder.ConfirmationNumber);
 
   return newOrder;
 }
