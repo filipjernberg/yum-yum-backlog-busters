@@ -11,8 +11,6 @@ export function startCountdown(startTime, confirmationNumber = null) {
   if (getElement(`#timerconfirmation`));
   writeConfirmationNumber(startTime);
   const duration = 10 * 60 * 1000;
-  // kortare timer för tester, 5sek
-  // const duration = 5 * 1000;
 
   const timerInterval = setInterval(() => {
     const elapsedTime = Date.now() - startTime;

@@ -184,8 +184,6 @@ h1 {
   font: var(--font-fira-sans-h1);
   text-transform: uppercase;
   letter-spacing: 0.1rem;
-
-  /* filter: drop-shadow(2px 2px 0px #00000030); */
 }
 
 h2 {
@@ -355,7 +353,6 @@ p {
 
 .receipt__details {
   max-height: 0;
-  /* overflow: hidden; */
   transition: max-height 0.3s ease-in-out;
 }
 
@@ -427,14 +424,6 @@ p {
   margin-bottom: 0.25rem;
 }
 
-/* .map__container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-} */
-
 .map {
   width: 100%;
 }
@@ -474,10 +463,6 @@ p {
     flex-direction: column;
     padding: 0rem 2rem;
 }
-
-/* .heading-two {
-  text-align: center;
-} */
 
 .about__img {
   align-self: center;
@@ -661,10 +646,6 @@ i {
   padding: 0.5rem 0rem;
 }
 
-/* .list-item--receipt:last-of-type {
-    margin-bottom: 1rem;
-} */
-
 .list-item:hover {
   background-color: var(--light-grey);
 }
@@ -805,10 +786,6 @@ i {
 }
 
 /* === Form Styling === */
-
-/* .user-container {
-  padding: 1rem;
-} */
 
 .register-form,
 .login-form {

@@ -24,64 +24,13 @@ import { createTotalContainer } from "./receipts.js";
 import { getUsers, saveUsers } from "./users.js";
 import { startCountdown } from "./timer.js";
 
-//Lyssnare på add-knappen ligger nu i eventHandlers och anropas samtidigt som knappen skapas.
-
-//Originalkod addToCartListener.
-// export async function addToCartListener() {
-//   console.log("addToCartListener()");
-
-//   const menu = await fetchMenu();
-
-//   setTimeout(() => {
-//     const menuButtons = getElements(".list-item__quantity-button");
-
-//     menuButtons.forEach((button) => {
-//       button.addEventListener("click", (event) => {
-//         console.log("Klick på:", event.target.closest(".list-item"));
-
-//         const productElement = event.target.closest(".list-item");
-//         const productId = Number(productElement.dataset.id); // Konvertera till nummer
-
-//                 if (product) {
-//                     addProductToCart(product); // Lägg till i localStorage
-//                     updateCartAlert(); // Uppdatera siffran i varukorgen
-//                 } else {
-//                     console.error("Kunde inte hitta rätten med ID:", productId);
-//                 }
-//             });
-
-//             button.addEventListener("keydown", (e) => {
-//                 if (e.key === "Enter" || e.key === " ") {
-//                     e.preventDefault();
-//                     button.click();
-//                 }
-//             });
-//         });
-//     }, 500);
-// }
-
-//         if (product) {
-//           addProductToCart(product); // Lägg till i localStorage
-//           updateCartAlert(); // Uppdatera siffran i varukorgen
-//         } else {
-//           console.error("Kunde inte hitta rätten med ID:", productId);
-//         }
-//       });
-//     });
-//   }, 500);
-// }
-
 export function addProductToCart(event, product, button) {
   let userData = getUsers();
-  // getUserData();
   let currentUser = userData.currentUser;
 
-  //annelie
   if (!currentUser) return;
   let userCart = currentUser.cart || [];
   console.log(`cart inuti addProducttoCart`, userCart);
-
-  // let userCart = userData.cart;
 
   let existingProduct = userCart.find((item) => item.id === product.id);
   let clickedElement = getClickedElementTest(event);
@@ -112,34 +61,12 @@ export function addProductToCart(event, product, button) {
   }
 
   currentUser.cart = userCart;
-  // userData.cart = userCart;
 
-  // let allUsers = userData.allUsers.map((user) => (user.username === currentUser.username ? { ...user, cart: userCart } : user));
-
-  // userData.allUsers = allUsers;
   userData.currentUser = currentUser;
   console.log(`sparar currentuser ner i users:`, userData.currentUser);
   saveUsers(userData);
-  // setLocalStorage(`users`, userData);
-  // setUserData(userData);
   updateCartAlert();
 }
-
-// Originalkod
-// export function addProductToCart(product) {
-//   let userData = getUserData();
-//   let cart = userData.cart;
-
-//   let existingProduct = cart.find((item) => item.id === product.id);
-//   if (existingProduct) {
-//     existingProduct.quantity += 1;
-//   } else {
-//     cart.push({ ...product, quantity: 1 });
-//   }
-
-//   userData.cart = cart;
-//   setUserData(userData);
-// }
 
 export function updateCartAlert() {
   const cartIcon = getElement("#cartAlert");
@@ -153,20 +80,6 @@ export function updateCartAlert() {
   let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   cartIcon.textContent = totalItems;
 }
-// const cartIcon = getElement("#cartAlert");
-// let userData = getUsers();
-// console.log(`det här är userdata:`, userData);
-
-// let currentUser = userData.currentUser;
-// console.log(`det här är currentuser:`, currentUser);
-// let cart = currentUser.cart || [];
-// console.log(`det här är cart:`, cart);
-
-// let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-// // let totalItems = currentUser.cart.reduce((sum, item) => sum + item.quantity, 0);
-// cartIcon.textContent = totalItems;
-//}
 
 export async function updateCartAlertTest(item) {
   const cartIcon = await getElement(`.list-item__info`);
@@ -180,14 +93,6 @@ export async function updateCartAlertTest(item) {
 
   cartIcon.textContent = totalItems;
 }
-
-//Originalkod
-// export function updateCartAlert() {
-//   const cartIcon = getElement("#cartAlert");
-//   const userData = getUserData();
-//   let totalItems = userData.cart.reduce((sum, item) => sum + item.quantity, 0);
-//   cartIcon.textContent = totalItems;
-// }
 
 //Om man vill läsa in senaste ordern från local Storage
 export function latestOrder() {
@@ -226,11 +131,7 @@ function cartModalState() {
 }
 
 async function createCart() {
-
   const modal = getElement(`#cartModal`);
-  // const user = getFromLocalStorage(`usersData`);
-  //Kontrollfunktion för att se om varukorgen finns hos usersData eller userName
-  // const cart = getFromLocalStorage(`usersData`).guest.cart;
   let userData = getUsers(`users`);
   let currentUser = userData.currentUser;
   let cart = currentUser.cart || [];
@@ -257,35 +158,6 @@ async function createCart() {
   userData.allUsers = userData.allUsers.map((user) => (user.username === currentUser.username ? { ...user, cart: cart } : user));
 
   saveUsers(userData);
-
-  
-  //Merge conflict
-   // const modal = getElement(`#cartModal`);
-    // const user = getFromLocalStorage(`usersData`);
-    //Kontrollfunktion för att se om varukorgen finns hos usersData eller userName
-    // const cart = getFromLocalStorage(`usersData`).guest.cart;
-    //let userData = getUsers(`users`);
-    //let currentUser = userData.currentUser;
-    //let cart = currentUser.cart || [];
-
-    //resetCartList(getElement(`.cart__list`));
-
-    //const listSection = createElement("ul", ["list-section", "cart__list"]);
-
-    //cart.forEach((item) => {
-      //  const listItem = createCartItem(item);
-        //appendChildren(listSection, listItem);
-    //});
-
-    //appendChildren(modal, listSection);
-    //const confirmOrderBtn = createElement("button", ["button", "cart__confirm-button"], { id: "addOrder" }, "Bekräfta order");
-    //const deleteCartBtn = createElement("button", ["cart__clear-button"], { id: "removeOrder" }, "Töm varukorgen?");
-    //appendChildren(modal, confirmOrderBtn, deleteCartBtn, createTotalContainer(calcTotalPrice(cart)));
-
-    //userData.allUsers = userData.allUsers.map((user) => (user.username === currentUser.username ? { ...user, cart: cart } : user));
-
-    //saveUsers(userData);
-
 }
 
 function calcTotalPrice(cart) {
@@ -306,12 +178,10 @@ function resetCartList(element) {
 }
 
 function createCartItem(item) {
-
-    console.log(`createCartItem()`);
-    const listItem = createElement("li", ["list-item", "list-item--receipt"], { "data-id": item.id, id: `cartListItem` });
-    const rowOne = createElement("div", ["list-item__row"]);
-    const rowTwo = createElement("div", ["list-item__row"]);
-
+  console.log(`createCartItem()`);
+  const listItem = createElement("li", ["list-item", "list-item--receipt"], { "data-id": item.id, id: `cartListItem` });
+  const rowOne = createElement("div", ["list-item__row"]);
+  const rowTwo = createElement("div", ["list-item__row"]);
 
   let itemName, itemPrice, itemTotalPrice, itemInfo;
 
@@ -394,35 +264,6 @@ export function orderCart(element) {
   return newOrder;
 }
 
-// export function orderCart() {
-//     // const cart = getFromLocalStorage("cart");
-//     // const confirmationNumber = generateConfirmationNumber();
-
-//     const userData = getUsers();
-//     let currentUser = userData.currentUser;
-//     let cart = currentUser.cart || [];
-
-//     if (cart.length === 0) {
-//         console.warn(`varukorgen är tom, ingen order skapad.`);
-//         return;
-//     }
-
-//     const orders = {
-//         ConfirmationNumber: confirmationNumber,
-//         startTime: Date.now(),
-//         items: cart,
-//         total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Beräkna totalpris
-//         timestamp: new Date().toISOString(), // sparar tidpunkten då ordern skapas i ett ISO-format (YYYY-MM-DDTHH:mm:ss.sssZ).
-//     };
-
-//     adminOrderHistory(confirmationNumber, orders.items, orders.total, orders.timestamp);
-
-//     removeFromLocalStorage("cart");
-
-//     return orders;
-// }
-
-// Försök till att rädda Robins funktion till adminpage...
 // funktion för att spara en egen local storage till admin innehållande confirmationnumber, varor, totala summan och klockslag.
 export function adminOrderHistory(number, items, total, timestamp) {
   const orderHistory = getFromLocalStorage(`orderhistory`);
