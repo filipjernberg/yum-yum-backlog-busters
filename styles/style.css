@@ -920,3 +920,16 @@ i {
         flex-wrap: wrap;
     }
 }
+
+@media screen and (max-height: 650px) {
+    .order__img {
+        margin-top: -5rem;
+        margin-bottom: -2rem;
+    }
+}
+
+@media screen and (max-height: 540px) {
+    .order__img {
+        display: none;
+    }
+}
