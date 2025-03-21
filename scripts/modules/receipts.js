@@ -214,6 +214,7 @@ export function createTotalContainer(text) {
 // }
 
 function toggleReceipt(selectedReceipt, forceOpen = false) {
+<<<<<<< HEAD
     // Merge conflict
     //  const selectedDetails = selectedReceipt.querySelector(".receipt__details");
 
@@ -251,12 +252,52 @@ function toggleReceipt(selectedReceipt, forceOpen = false) {
     //selectedDetails.style.maxHeight = selectedDetails.scrollHeight + "px";
     //} else {
     //selectedDetails.style.maxHeight = "0px";
+=======
+  // Merge conflict
+  //  const selectedDetails = selectedReceipt.querySelector(".receipt__details");
 
-    const selectedDetails = selectedReceipt.querySelector(".receipt__details");
+  // Collapse all other receipts
+  //const allDetails = document.querySelectorAll(".receipt__details");
+  //let collapsePromises = [];
 
-    const allDetails = document.querySelectorAll(".receipt__details");
-    let collapsePromises = [];
+  //allDetails.forEach((details) => {
+  //if (details !== selectedDetails && details.style.maxHeight && details.style.maxHeight !== "0px") {
+  //details.style.maxHeight = "0px";
 
+  //collapsePromises.push(
+  // new Promise((resolve) => {
+  // details.addEventListener("transitionend", function handler() {
+  // details.removeEventListener("transitionend", handler);
+  // resolve();
+  //  });
+  // })
+  //);
+  // }
+  //});
+
+  // Expand selected after others collapse
+  // Promise.all(collapsePromises).then(() => {
+  // if (forceOpen || selectedDetails.style.maxHeight === "0px" || !selectedDetails.style.maxHeight) {
+  // selectedDetails.style.maxHeight = selectedDetails.scrollHeight + "px";
+  //} else {
+  // selectedDetails.style.maxHeight = "0px";
+  //}
+  //});
+
+  // If no others were open, toggle immediately
+  //if (collapsePromises.length === 0) {
+  //if (forceOpen || selectedDetails.style.maxHeight === "0px" || !selectedDetails.style.maxHeight) {
+  //selectedDetails.style.maxHeight = selectedDetails.scrollHeight + "px";
+  //} else {
+  //selectedDetails.style.maxHeight = "0px";
+>>>>>>> origin/dev
+
+  const selectedDetails = selectedReceipt.querySelector(".receipt__details");
+
+  const allDetails = document.querySelectorAll(".receipt__details");
+  let collapsePromises = [];
+
+<<<<<<< HEAD
     allDetails.forEach((details) => {
         if (details !== selectedDetails && details.style.maxHeight && details.style.maxHeight !== "0px") {
             details.style.maxHeight = "0px";
@@ -296,6 +337,39 @@ function toggleReceipt(selectedReceipt, forceOpen = false) {
     } else {
         expand();
     }
+=======
+  allDetails.forEach((details) => {
+    if (details !== selectedDetails && details.style.maxHeight && details.style.maxHeight !== "0px") {
+      details.style.maxHeight = "0px";
+      details.closest(".receipt").style.paddingBottom = ""; // Återställ padding när en annan stängs
+
+      collapsePromises.push(
+        new Promise((resolve) => {
+          details.addEventListener("transitionend", function handler() {
+            details.removeEventListener("transitionend", handler);
+            resolve();
+          });
+        })
+      );
+    }
+  });
+
+  const expand = () => {
+    if (forceOpen || selectedDetails.style.maxHeight === "0px" || !selectedDetails.style.maxHeight) {
+      selectedDetails.style.maxHeight = selectedDetails.scrollHeight + "px";
+      selectedReceipt.style.paddingBottom = "0"; // Sätt padding-bottom till 0 när kvittot är öppet
+    } else {
+      selectedDetails.style.maxHeight = "0px";
+      selectedReceipt.style.paddingBottom = ""; // Återställ padding när kvittot stängs
+    }
+  };
+
+  if (collapsePromises.length > 0) {
+    Promise.all(collapsePromises).then(expand);
+  } else {
+    expand();
+  }
+>>>>>>> origin/dev
 }
 
 // Display all orders on the admin page
