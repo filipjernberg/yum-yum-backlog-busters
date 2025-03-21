@@ -22,24 +22,6 @@ export function setupOrderButton() {
   console.log(addOrderBtn);
 
   addOrderBtn.addEventListener(`click`, function () {
-    //utkommenterat för har flyttats till egen funktion
-    //
-    // console.log(`Klick på beställning`);
-    // const cart = getFromLocalStorage("cart");
-
-    // const order = {
-    //   id: Date.now(), // Unikt order-ID baserat på tid
-    //   items: cart,
-    //   total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Beräkna totalpris
-    //   timestamp: new Date().toISOString(), // sparar tidpunkten då ordern skapas i ett ISO-format (YYYY-MM-DDTHH:mm:ss.sssZ).
-    // };
-
-    // const orders = getFromLocalStorage("orderHistory") || [];
-    // orders.push(order);
-    // setLocalStorage("orderHistory", orders);
-
-    // removeFromLocalStorage("cart");
-
     window.location.href = "../pages/receipts.html?showConfirmation=true";
   });
 }
@@ -49,34 +31,21 @@ export function removeOrderButton() {
   const removeOrderBtn = getElement(`#removeOrder`);
 
   removeOrderBtn.addEventListener("click", () => {
-    // let userData = getUserData();
     let userData = getUsers();
     let currentUser = userData.currentUser;
     currentUser.cart = [];
     saveUsers(userData);
-    // setUserData(userData);
     location.reload();
   });
 }
 
 export async function setupQuantityBtnListener(button) {
   button.addEventListener("click", async (event) => {
-    // const product = await getClickedElementTest(event);
     const product = await getClickedElement(event);
     console.log(product);
     addProductToCart(event, product, button); // Lägg till i localStorage
     filterListener();
     updateCartAlert();
-
-    // if (button.id === `addToCartBtn` || button.id === `increaseQuantityBtn`) {
-    //   console.log(button.id);
-
-    //   console.log(`increase`);
-    //   addProductToCart(product, button); // Lägg till i localStorage
-    //   updateCartAlert();
-    // } else if (button.id === `decreaseQuantityBtn`) {
-    //   console.log(`decrease`);
-    // }
   });
 }
 
@@ -95,14 +64,6 @@ export async function getClickedElement(event) {
   console.log(product);
 
   return product;
-
-  // if (product) {
-  //   addProductToCart(product); // Lägg till i localStorage
-  //   updateCartAlert(); // Uppdatera siffran i varukorgen
-  //   // updateCartAlertTest(product);
-  // } else {
-  //   // console.error("Kunde inte hitta rätten med ID:", productId);
-  // }
 }
 
 //Letar upp ett element i en arrayen
@@ -122,8 +83,6 @@ export function setupSingleReceipt() {
     console.log(`Klick på visa kvitto`);
 
     window.location.href = "../pages/receipts.html";
-    //lägga till params senare?
-    // window.location.href = "../pages/receipts.html?showSingleReceipt=true";
   });
 }
 
@@ -311,8 +270,6 @@ export function loginUser() {
       }
       console.log(`Du loggades in! `);
       containerBasedOnRole();
-
-      //Vad ska hända när vi loggats in? ändra role?
     } catch (error) {
       console.error(`Fel vid registrering: ${error.message}`);
       displayErrorMessages(errorMessages, [`Fel vid registrering: ${error.message}`]);

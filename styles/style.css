@@ -441,14 +441,6 @@ p {
     margin-bottom: 0.25rem;
 }
 
-/* .map__container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-} */
-
 .map {
     width: 100%;
 }
@@ -488,10 +480,6 @@ p {
     flex-direction: column;
     padding: 0rem 2rem;
 }
-
-/* .heading-two {
-  text-align: center;
-} */
 
 .about__img {
     align-self: center;
@@ -837,10 +825,6 @@ i {
 }
 
 /* === Form Styling === */
-
-/* .user-container {
-  padding: 1rem;
-} */
 
 .register-form,
 .login-form,

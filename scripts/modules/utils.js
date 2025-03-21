@@ -43,8 +43,6 @@ export function handleOrderConfirmation(confirmationSection) {
   addClasses(orderWrapperRef, [`flex`]);
   removeClasses(orderWrapperRef, ["d-none"]);
   styleElement(body, `backgroundColor`, `#605858`);
-
-  // saveOrder(`#timerConfirmation`);
 }
 
 function handleSingleReceipt() {
