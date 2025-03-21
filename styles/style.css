@@ -851,6 +851,7 @@ i {
   border-bottom: var(--light-grey) solid 2px;
   /* font-family: var(--font-fira-sans-text); */
 }
+
 .input-field:focus {
   border-bottom: var(--dark-green) solid 2px;
 

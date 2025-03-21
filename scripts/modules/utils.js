@@ -20,10 +20,12 @@ export function checkParams(params) {
 
   if (params.get(`showConfirmation`) === `true`) {
     handleOrderConfirmation(confirmationSectionRef);
+
+    orderCart();
   }
-  if (params.get(`showSingleReceipt`) === `true`) {
-    handleSingleReceipt();
-  }
+  // if (params.get(`showSingleReceipt`) === `true`) {
+  //   handleSingleReceipt();
+  // }
   if (params.get(`registrationForm`) === `true`) {
     handleRegistrationForm();
     registerUser();
