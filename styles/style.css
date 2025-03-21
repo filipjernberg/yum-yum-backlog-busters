@@ -847,8 +847,17 @@ i {
 .input-field {
   /* margin-bottom: 1.2rem; */
   border: none;
+
   border-bottom: var(--light-grey) solid 2px;
   /* font-family: var(--font-fira-sans-text); */
+}
+.input-field:focus {
+  border-bottom: var(--dark-green) solid 2px;
+
+  outline: none;
+  outline: var(--light-grey) solid 2px;
+
+  transition: all 0.3s ease-in-out;
 }
 
 .input-field::placeholder {
