@@ -853,12 +853,12 @@ i {
 }
 
 .input-field:focus {
-  border-bottom: var(--dark-green) solid 2px;
-
+  border-bottom: var(--dark-grey) solid 2px;
   outline: none;
-  outline: var(--light-grey) solid 2px;
-
   transition: all 0.3s ease-in-out;
+}
+.input-field:focus::placeholder {
+  color: transparent;
 }
 
 .input-field::placeholder {
