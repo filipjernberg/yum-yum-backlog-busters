@@ -226,6 +226,7 @@ function cartModalState() {
 }
 
 async function createCart() {
+
   const modal = getElement(`#cartModal`);
   // const user = getFromLocalStorage(`usersData`);
   //Kontrollfunktion för att se om varukorgen finns hos usersData eller userName
@@ -256,6 +257,35 @@ async function createCart() {
   userData.allUsers = userData.allUsers.map((user) => (user.username === currentUser.username ? { ...user, cart: cart } : user));
 
   saveUsers(userData);
+
+  
+  //Merge conflict
+   // const modal = getElement(`#cartModal`);
+    // const user = getFromLocalStorage(`usersData`);
+    //Kontrollfunktion för att se om varukorgen finns hos usersData eller userName
+    // const cart = getFromLocalStorage(`usersData`).guest.cart;
+    //let userData = getUsers(`users`);
+    //let currentUser = userData.currentUser;
+    //let cart = currentUser.cart || [];
+
+    //resetCartList(getElement(`.cart__list`));
+
+    //const listSection = createElement("ul", ["list-section", "cart__list"]);
+
+    //cart.forEach((item) => {
+      //  const listItem = createCartItem(item);
+        //appendChildren(listSection, listItem);
+    //});
+
+    //appendChildren(modal, listSection);
+    //const confirmOrderBtn = createElement("button", ["button", "cart__confirm-button"], { id: "addOrder" }, "Bekräfta order");
+    //const deleteCartBtn = createElement("button", ["cart__clear-button"], { id: "removeOrder" }, "Töm varukorgen?");
+    //appendChildren(modal, confirmOrderBtn, deleteCartBtn, createTotalContainer(calcTotalPrice(cart)));
+
+    //userData.allUsers = userData.allUsers.map((user) => (user.username === currentUser.username ? { ...user, cart: cart } : user));
+
+    //saveUsers(userData);
+
 }
 
 function calcTotalPrice(cart) {
@@ -276,10 +306,12 @@ function resetCartList(element) {
 }
 
 function createCartItem(item) {
-  console.log(`createCartItem()`);
-  const listItem = createElement("li", ["list-item"], { "data-id": item.id, id: `cartListItem` });
-  const rowOne = createElement("div", ["list-item__row"]);
-  const rowTwo = createElement("div", ["list-item__row"]);
+
+    console.log(`createCartItem()`);
+    const listItem = createElement("li", ["list-item", "list-item--receipt"], { "data-id": item.id, id: `cartListItem` });
+    const rowOne = createElement("div", ["list-item__row"]);
+    const rowTwo = createElement("div", ["list-item__row"]);
+
 
   let itemName, itemPrice, itemTotalPrice, itemInfo;
 
