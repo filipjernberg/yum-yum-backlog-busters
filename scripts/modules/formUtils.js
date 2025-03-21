@@ -43,6 +43,7 @@ export async function validateLogin(username, password) {
 
   const usersFromAPI = await fetchUsers(); // Hämta från API
   const userFromAPI = usersFromAPI.find((user) => user.username === username);
+  console.log(userFromAPI);
 
   const usersFromLocalStorage = getUsers();
   const allUsersLocalStorage = usersFromLocalStorage.allUsers || [];
